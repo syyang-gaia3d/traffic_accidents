@@ -1,0 +1,1294 @@
+@charset "utf-8";
+@font-face {
+font-family: "hyundaibold";
+src: url(/css/fonts/hyundaibold.eot);
+src: url(/css/fonts/hyundaibold.eot?#iefix) format('embedded-opentype'),
+url(/css/fonts/hyundaibold.ttf) format('truetype'),
+url(/css/fonts/hyundaibold.otf) format('opentype'),
+url(/css/fonts/hyundaibold.woff) format('woff');
+font-weight: bold;
+font-style: bold;
+}
+@font-face {
+font-family: "hyundaimedium";
+src: url(/css/fonts/hyundaimedium.eot);
+src: url(/css/fonts/hyundaimedium.eot?#iefix) format('embedded-opentype'),
+url(/css/fonts/hyundaimedium.ttf) format('truetype'),
+url(/css/fonts/hyundaimedium.otf) format('opentype'),
+url(/css/fonts/hyundaimedium.woff) format('woff');
+font-weight: normal;
+font-style: normal;
+}
+
+@font-face {
+font-family: "hyundailight";
+src: url(/css/fonts/hyundailight.eot);
+src: url(/css/fonts/hyundailight.eot?#iefix) format('embedded-opentype'),
+url(/css/fonts/hyundailight.ttf) format('truetype'),
+url(/css/fonts/hyundailight.otf) format('opentype'),
+url(/css/fonts/hyundailight.woff) format('woff');
+font-weight: normal;
+font-style: normal;
+}
+
+
+/* RESET CSS */
+* { margin:0; padding:0; outline:0; vertical-align:top; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu nav, section { display:block; }
+ul, ol, dl { list-style:none; }
+img, video { max-width:100%; border:0; vertical-align:top; }
+a {vertical-align:top; text-decoration:none; color:#000; }
+table { border-collapse:collapse; border-spacing:0; }
+input, select { vertical-align:middle; }
+html, body { margin:0; padding:0; height:100%; }
+body, th, td, input, select, textarea { color:#333; font-family: /* hyundai,'현대체', */'Noto Sans KR', 'Malgun Gothic','Dotum','Apple SD Gothic Neo', sans-serif; font-size:13px; line-height:1.5em;}
+button { cursor:pointer;}
+
+
+/* ///// LAYOUT ///// */
+body {
+overflow: hidden;
+}
+#wrap {
+display: flex;
+flex-direction: column;
+height: 100%;
+}
+#header {
+flex: auto;
+display: flex;
+min-width: 1000px;
+height: 48px;
+border-bottom: 2px solid #2e309c;
+box-shadow: 3px 3px 3px #666;
+box-sizing: border-box;
+background: #4648bf;
+}
+
+#mapWrap {
+flex: auto;
+position: relative;
+height: 100%;
+}
+.contentsWrap {
+position: absolute;
+bottom: 0;
+width: 100%;
+overflow: hidden;
+box-sizing: border-box;
+z-index: 100;
+}
+
+
+/* ///// HEADER ///// */
+h1 {
+flex: 0 0 200px;
+padding: 5px 0 5px 130px;
+font-weight: normal;
+font-size: 1.5em;
+line-height: 1.8em;
+color: #fff;
+cursor: pointer;
+background: url(../images/logo.png) no-repeat 10px 15px;
+}
+.nav {
+flex: 1 0 auto;
+margin-top: 7px;
+text-align: left;
+}
+.nav li {
+display: inline-block;
+padding: 3px 18px 3px;
+font-size: 1.2em;
+line-height: 1.8em;
+cursor: pointer;
+color: #fff;
+border-radius: 20px;
+}
+.nav li:hover {
+background-color: #3b3dad;
+}
+.nav li.on {
+background: url(../images/nav_bg.png) no-repeat bottom
+}
+.gnb {
+flex: 1 1 50px;
+padding-right: 20px;
+text-align: right;
+}
+.gnb * {
+vertical-align: middle;
+}
+.gnb > span {
+display: inline-block;
+margin-top: 5px;
+padding: 10px 10px 10px 40px;
+color: #fff;
+font-size: 13px;
+background: url(../images/ico_btn.png) no-repeat 0 -295px;
+}
+.logout {
+margin-top: 7px;
+color: #fff;
+border: none;
+font-size: 11px;
+border-bottom: 1px solid #fff;
+background-color: transparent;
+}
+.mode {
+margin: 4px 0 0 7px;
+padding: 3px;
+color: #4648bf;
+border: none;
+border-radius: 3px;
+font-size: 11px;
+border-bottom: 1px solid #fff;
+background-color: #fff;
+}
+
+/* ///// MAP ///// */
+.map {
+height: 100%;
+background-color: #eee;
+/* background-image: url(../images/@map.png); */
+z-index: 10;
+}
+
+/* 사업장이동, 지도 */
+.setupNav {
+position: absolute;
+top: 3px;
+right: 725px;
+display: inline-block;
+padding: 3px 7px 2px;
+font-size: 1.1em;
+border-radius: 20px;
+color: #fff;
+background: #292c3b;
+}
+.setupNav > select {
+padding: 4px;
+color: #fff;
+border: none;
+background-color: #292c3b;
+}
+div.setup {
+position: absolute;
+top: 39px;
+right: 825px;
+}
+button.setup {
+width: 30px;
+height: 30px;
+margin-right: 10px;
+border: none;
+text-indent: -999em;
+background: url(../images/ico_btn.png) 5px -343px;
+}
+
+/* CTRLWRAP */
+.ctrlWrap {
+position: absolute;
+top: 3px;
+/* left: 50%; */
+right: 180px;
+margin-left: -300px;
+z-index: 50;
+}
+.ctrlWrap div {
+display: inline-block;
+color: #fff;
+border-radius: 20px;
+background-color: #292c3b;
+}
+.ctrlWrap div > button {
+width: 34px;
+height: 34px;
+text-indent: -999em;
+border: none;
+border-radius: 20px;
+cursor: pointer;
+background-color: transparent;
+background-image: url(../images/ico_map_ctrl.png);
+background-repeat: no-repeat;
+}
+.ctrlWrap div button:hover {
+background-color: #3b3e4f;
+}
+.ctrlWrap div button.on {
+background-color: #00b356;
+}
+.ctrlWrap div > button.reset {
+background-position: 7px -5px;
+}
+.ctrlWrap div > button.zoomall {
+background-position: -44px -5px;
+}
+.ctrlWrap div > button.zoomin {
+background-position: -92px -5px;
+}
+.ctrlWrap div > button.zoomout {
+background-position: -142px -5px;
+}
+.ctrlWrap div > button.distance {
+background-position: -193px -3px;
+}
+/* .ctrlWrap div > button.distance.on {
+background-position: -193px -53px;
+} */
+.ctrlWrap div > button.area {
+background-position: -247px -3px;
+}
+/* .ctrlWrap div > button.area.on {
+background-position: -247px -53px;
+} */
+.ctrlWrap div > button.oinfo {
+background-position: -662px -6px;
+}  
+.ctrlWrap div > button.rotateReset {
+background-position: -292px -3px;
+}
+/* .ctrlWrap div > button.rotateReset.on {
+background-position: -292px -55px;
+} */
+.ctrlWrap div > button.rotateLeft {
+background-position: -343px -5px;
+}
+.ctrlWrap div > button.rotateRight {
+background-position: -402px -5px;
+}
+.ctrlWrap div > input {
+width: 30px;
+padding: 3px;
+font-size: 17px;
+color: #fff;
+text-align: center;
+border: none;
+border-bottom: 2px solid #fff;
+background-color: transparent;
+}
+.ctrlWrap div > button.save {
+background-position: -509px -5px;
+}
+.ctrlWrap div > button.print {
+background-position: -458px -5px;
+}
+.ctrlWrap div > button.before {
+background-position: -557px -5px;
+}
+.ctrlWrap div > button.next {
+background-position: -607px -5px;
+}
+
+.ctrlWrap div > button.drawing {
+background-position: -955px -5px;
+}
+/* 그리기도구 */
+.draw {
+width: 34px;
+height: 34px;
+text-indent: -999em;
+border: none;
+border-radius: 20px;
+cursor: pointer;
+background-image: url(../images/ico_map_ctrl.png);
+background-repeat: no-repeat;
+}
+.draw.on {
+    
+}
+.face {
+    background-color: transparent;
+background-position: -709px -7px;
+}
+.face.on {
+    background-position: -709px -57px;
+    background-color: #4648bf;
+    }
+.point {
+    background-color: transparent;
+background-position: -759px -7px;
+}
+.point.on {
+    background-position: -759px -57px;
+    background-color: #4648bf;
+    }
+.line {
+    background-color: transparent;
+background-position: -809px -7px;
+}
+.line.on {
+    background-position: -809px -57px;
+    background-color: #4648bf;
+    }
+.text {
+    background-color: transparent;
+background-position: -859px -7px;
+}
+.text.on {
+    background-position: -859px -57px;
+    background-color: #4648bf;
+    }
+.select {
+    background-color: transparent;
+background-position: -909px -7px;
+}
+.select.on {
+    background-position: -909px -57px;
+    background-color: #4648bf;
+    }
+.reset {
+    background-color: transparent;
+background-position: 5px -55px;
+}
+
+
+/* ///// LAYERS  ///// */
+/* button.layers {
+position: absolute;
+top: 3px;
+left: 3px;
+width: 100px;
+height: 35px;
+padding: 0 0 0 25px;
+font-size: 14px;
+border-radius: 20px;
+color: #fff;
+background: #292c3b url(../images/ico_nav.png) no-repeat 10px 7px;
+}
+button.layers.on {
+background-color: #4648bf;
+} */
+.layersHead {
+position: absolute;
+top: 3px;
+left: 3px;
+/* height: calc(100% - 300px); */
+height: 35px;
+box-sizing: content-box;
+z-index: 30;
+}
+.layersHead li {
+display: inline-block;
+margin: 0 -5px 0 0;
+padding: 8px 15px;
+cursor: pointer;
+color: #fff;
+border-left: 1px dotted #fff;
+background-color: #292c3b;
+}
+.layersHead li:first-child {
+border-left: 0px dotted #fff;
+}
+.layersHead li.on {
+color: #fff;
+background-color: #4648bf;
+}
+.layerClose {
+position: absolute;
+top: 5px;
+right: 5px;
+width: 20px;
+height: 20px;
+border: none;
+text-indent: -999em;
+background: transparent url(../images/ico_btn.png) no-repeat 5px 5px;
+}
+.layersContain.on {
+display: block;
+}
+.layersContain {
+display: none;
+position: absolute;
+top: 40px;
+left: 0;
+overflow-y: auto;
+padding: 3px 5px 5px;
+border-radius: 0px;
+box-sizing: border-box;
+border: 1px solid #999;
+text-align: left;
+background-color: #eee;
+}
+.layers {
+padding: 10px;
+border: 1px solid #e0e0e0;
+box-sizing: border-box;
+background-color: #fff;
+}
+
+/* ///// SECTION ///// */
+.sectionHead {
+position: absolute;
+top: 3px;
+right: 3px;
+/* height: calc(100% - 300px); */
+height: 35px;
+box-sizing: content-box;
+z-index: 30;
+}
+.sectionHead li {
+display: inline-block;
+margin: 0 -5px 0 0;
+padding: 8px 15px;
+cursor: pointer;
+color: #fff;
+border-left: 1px dotted #fff;
+background-color: #292c3b;
+}
+.sectionHead li:first-child {
+border-left: 0px dotted #fff;
+}
+.sectionHead li.on {
+color: #fff;
+background-color: #4648bf;
+}
+.sectionContain {
+display: none;
+position: absolute;
+top: 39px;
+right: 0px;
+padding: 5px;
+box-sizing: border-box;
+border: 1px solid #999;
+background-color: #eee;
+}
+.sectionContain.on {
+display: block;
+}
+.section {
+overflow-y: auto;
+border: 1px solid #e0e0e0;
+background-color: #fff;
+}
+
+.sectionGroup {
+margin: 0;
+padding: 10px 0;
+border-bottom: 1px dotted #ccc;
+}
+.sectionGroup:last-child {
+border-bottom: none;
+}
+.sectionGroup > :nth-child(2) {
+margin-left: 50px;
+}
+.sectionGroup > div {
+display: inline-block;
+margin-right: 10px;
+}
+.sectionGroup > div  > div * {
+vertical-align: middle;
+}
+.sectionGroup > div > label {
+display: inline-block;
+font-size: 12px;
+vertical-align: middle;
+}
+.scale {
+display: none;
+}
+.scale.on {
+display: block;
+}
+.scale > div {
+display: inline-block;
+margin-right: 10px;
+}
+
+
+
+/* ///// CONTENTS ///// */
+.resize {
+height: 5px;
+/* cursor: row-resize; */
+background: #292c3b url(../images/resize_bar.png) no-repeat top center;
+}
+.contentsHead {
+display: flex;
+position: relative;
+min-width: 1000px;
+overflow: hidden;
+height: 30px;
+}
+.contentsHead li {
+display: inline-block;
+padding: 5px 15px;
+cursor: pointer;
+font-weight: 500;
+box-sizing: border-box;
+border-bottom: 1px dotted #222;
+background-color: #fff;
+}
+.contentsHead li.on {
+color: #fff;
+border-bottom: 1px solid #3537a9;
+background-color: #4648bf;
+}
+.contentsContain {
+padding: 0 5px 5px;
+box-sizing: border-box;
+background-color: #292c3b;
+}
+.contents {
+overflow-y: auto;
+padding: 10px 10px 5px;
+box-sizing: border-box;
+background-color: #fff;
+}
+
+.contentsHead > button.close {
+position: absolute;
+top: -3px;
+right: 0;
+width: 30px;
+height: 30px;
+border: none;
+color: #fff;
+text-indent: -999em;
+border-radius: 0;
+background: url(../images/ico_btn.png) no-repeat 10px 8px ;
+}
+
+/* 편집버튼 */
+.editWrap {
+margin: 0 20px;
+padding: 2px;
+}
+.editWrap.off .editBtn {
+display: none;
+}
+.editWrap.on {
+border-radius: 3px;
+background-color: #00c26d;
+}
+.editWrap > button {
+margin: 0;
+padding: 2px 10px;
+color: #fff;
+border-radius: 3px;
+border:2px solid #00b356;
+background-color: #00b356;
+}
+.editWrap.on > button {
+margin: 0;
+padding: 2px 10px;
+color: #4648bf;
+border: 2px solid #4648bf;
+background-color: #fff;
+}
+.editBtn  {
+display: inline-block;
+margin: 1px 10px 0;
+}
+.editBtn:last-child {
+margin: 1px 3px 0 10px;
+}
+.editBtn > button {
+padding: 2px 5px;
+color: #fff;
+border: 1px solid #00a95f;
+border-radius: 2px;
+background-color: transparent;
+}
+.editBtn > button:hover {
+color: #00a95f;
+border: 1px solid #fff;
+background-color: #fff;
+}
+.editBtn > button.on {
+color: #00a95f;
+border: 1px solid #fff;
+background-color: #fff;
+}
+
+
+
+/* 검색 */
+.searchWrap {
+margin-bottom: 5px;
+padding: 5px;
+border: 2px solid #333;
+/* box-shadow: 1px 1px 1px #999 ; */
+}
+.searchWrap > ul {
+}
+.searchWrap > ul li {
+display: inline-block;
+margin-right: 30px;
+padding: 3px;
+}
+.searchWrap > ul li * {
+vertical-align: middle;
+}
+.searchWrap > ul li > label.tit {
+margin-right: 7px;
+padding-left: 10px;
+background: url(../images/ico_bullet.png) no-repeat left -592px;
+}
+.searchWrap > ul li > input {
+padding: 5px;
+border: none;
+border-bottom: 2px solid #333;
+}
+.searchWrap select {
+padding: 3px 5px;
+border-radius: 5px;
+}
+button.search {
+width: 30px;
+height: 30px;
+border: none;
+border-radius: 50%;
+text-indent: -999em;
+background: #292c3b url(../images/ico_btn.png) no-repeat 7px -143px;
+}
+button.search:hover {
+background: #4648bf url(../images/ico_btn.png) no-repeat 7px -143px;
+}
+
+
+/* /// 게시판 /// */
+/* 게시판 컨트롤 */
+.boardCtrl {
+display: flex;
+margin: 5px 0 0;
+}
+.boardCtrl > div {
+flex: auto;
+}
+.boardCtrl > div:last-child {
+text-align: right;
+}
+.boardCtrl > div > button {
+display: inline-block;
+padding: 5px 10px;
+border-radius: 3px;
+border: 1px solid #4648bf;
+color: #fff;
+background-color: #4648bf;
+}
+.boardCtrl > div > button:hover {
+color: #4648bf;
+border: 1px solid #4648bf;
+background-color: #fff;
+}
+
+/* 정보입력 폼 */
+.boardForm {
+margin-bottom: 5px;
+border: 1px solid #666;
+}
+.boardForm > table {
+width: 100%;
+}
+.boardForm th {
+padding: 2px 5px;
+text-align: center;
+word-break: keep-all;
+text-align: left;
+font-weight: 400;
+border-left: 1px dotted #ccc;
+border-bottom: 1px dotted #999;
+}
+.boardForm th * {
+vertical-align: middle;
+}
+.boardForm td {
+padding: 3px;
+word-break: keep-all;
+border-left: 1px dotted #ccc;
+border-bottom: 1px dotted #999;
+}
+.boardForm tr:last-child th {
+border-bottom: 0px dotted #999;
+}
+.boardForm tr:last-child td {
+border-bottom: 0px dotted #999;
+}
+.boardFormBtn {
+margin: 5px;
+text-align: center;
+}
+
+
+
+/* 게시판 */
+.boardList {
+width: calc ( 100% - 50px );
+overflow-x: auto;
+}
+.boardList table {
+width: 100%;
+}
+.boardList table thead {
+border: 1px solid #444;
+}
+.boardList table thead th {
+padding: 0px 2px;
+border-right: 1px dotted #444;
+border-bottom: 1px dotted #444;
+vertical-align: middle;
+color: #333;
+font-weight: 500;
+background-color: #eee;
+}
+.boardList table tbody tr:hover {
+cursor: pointer;
+background-color: #f0f5ff;
+}
+.boardList table tbody tr:odd  {
+background-color: tomato;
+}
+.boardList td {
+padding: 2px;
+text-align: center;
+word-break: keep-all;
+line-height: 2.0em;
+border: 1px dotted #ccc;
+border-bottom: 1px solid #666;
+}
+.boardList td:first-child {
+border-left: 1px solid #666;
+}
+.boardList td:last-child {
+border-right: 1px solid #666;
+}
+.boardList tr.on {
+background-color: #ebeff8;
+}
+.boardList tr.selected {
+background-color: #d6dcf2;
+}
+.boardList td * {
+vertical-align: middle;
+}
+
+/* PAGINATION */
+.pager {
+margin: 0px 0 0 0;
+text-align: center;
+}
+.pager > a {
+display: inline-block;
+margin: 0 3px;
+padding: 4px 2px 0;
+color: #222;
+cursor: pointer;
+font-size: 1.0em;
+line-height: 1.3em;
+}
+.pager > a * {
+vertical-align: middle;
+}
+.pager > a:hover {
+border-bottom: 1px solid #333;
+}
+.pager > a.on {
+font-weight: 300;
+border-bottom: 1px solid #333;
+}
+.ico {
+display: inline-block;
+width: 20px;
+height: 20px;
+padding: 0;
+text-indent: -999em;
+background-image: url(../images/pager.png);
+background-repeat: no-repeat;
+}
+.pager .ico:hover {
+border-bottom: 0px solid #333;
+}
+.pager .first {
+margin-right: -10px;
+background-position: 10px center;
+}
+.pager .forward {
+margin-right: -0px;
+background-position: -40px center;
+}
+.pager .back {
+margin-right: -10px;
+background-position: -90px center;
+}
+.pager .end {
+background-position: -140px center;
+}
+
+
+
+
+/* ///// LAYER ///// */
+.layerWrap {
+position: absolute;
+border-radius: 5px;
+box-shadow: 1px 1px 2px 0 #333;
+background-color: #fff;
+z-index: 500;
+}
+.layerHead {
+padding: 7px 5px 5px 15px;
+cursor: pointer;
+font-size: 1.2em;
+font-weight: normal;
+font-weight: 300;
+color: #fff;
+border-radius: 5px 5px 0 0;
+border-bottom: 1px solid #e0e0e0;
+background-color: #00b356;
+}
+.layerContents {
+overflow-y: auto;
+margin: 10px;
+}
+
+/* ///// COMMON ///// */
+/* color
+point color #4648bf
+*/
+.img {
+margin-bottom: 7px;
+/* 	border: 1px solid #666; */
+background-size: 100%;
+}
+.hide {
+display: none;
+}
+.mr20 {
+margin-right: 20px;
+}
+.mr10 {
+margin-right: 10px;
+}
+.ml20 {
+margin-left: 20px;
+}
+.w80 {
+width: 80px;
+}
+.w100 {
+width: 100px;
+}
+.w150 {
+width: 150px;
+}
+.w200 {
+width: 200px;
+}
+
+
+/* h */
+h3 {
+font-size: 16px;
+font-weight: 500;
+}
+h4 {
+margin: 0;
+font-size: 15px;
+font-weight: 500;
+/* background: url(../images/ico_bullet.png) no-repeat 7px -592px; */
+}
+h5 {
+margin-bottom: 5px;
+padding-left: 10px;
+font-size: 13px;
+font-weight: 300;
+background: url(../images/ico_bullet.png) no-repeat 0 -192px;
+}
+
+/* ///// FORM ///// */
+input.hhi {
+border: none;
+border-bottom: 2px solid #666;
+padding-left: 10px;
+}
+.calendar {
+background: url(../images/ico_btn.png) no-repeat right -248px;
+}
+.hhiNo {
+width: 40px;
+border: none;
+border-bottom: 2px solid #666;
+}
+input.color {
+width: 25px;
+height: 25px;
+border: none;
+background-color: transparent;
+}
+select.hhi {
+border: 1px solid #999;
+}
+
+
+
+/* ///// BTN ///// */
+.btnsFlex {
+display: flex;
+margin: 5px 0;
+}
+.btns {
+margin: 5px 0;
+}
+button.close {
+width: 30px;
+height: 30px;
+margin-top: 3px;
+border-radius: 50%;
+border: none;
+color: #fff;
+text-indent: -999em;
+background: #6b6e80 url(../images/ico_btn.png) no-repeat 9px 9px ;
+}
+button.icoAdd {
+width: 25px;
+height: 25px;
+border: none;
+text-indent: -999em;
+background:  url(../images/ico_btn.png) no-repeat 5px -444px ;
+}
+button.icoDel {
+width: 25px;
+height: 25px;
+border: none;
+text-indent: -999em;
+background:  url(../images/ico_btn.png) no-repeat 5px -397px ;
+}
+button.icoApply {
+width: 25px;
+height: 25px;
+border: none;
+text-indent: -999em;    
+background: url(../images/ico_btn.png) no-repeat 5px -493px;
+}
+button.icoSave {
+width: 25px;
+height: 25px;
+border: none;
+text-indent: -999em;
+background:  url(../images/ico_btn.png) no-repeat 5px -495px ;
+}
+button.icoStar {
+width: 25px;
+height: 25px;
+border: none;
+text-indent: -999em;
+background:  url(../images/ico_btn.png) no-repeat 5px -597px ;
+}
+button.icoStarline {
+width: 25px;
+height: 25px;
+border: none;
+text-indent: -999em;
+background:  url(../images/ico_btn.png) no-repeat 5px -547px ;
+}
+
+/* 페이지 중요버튼 */
+button.hhiA {
+flex: auto;
+margin: 2px;
+padding: 5px;
+color: #4648bf;
+border-radius: 20px;
+border: 2px solid #4648bf;
+background-color: #fff;
+}
+button.hhiA:hover {
+color: #fff;
+border: 2px solid #4648bf;
+background-color: #4648bf;
+}
+
+/* 페이지 중요버튼 100%안됨 */
+button.hhiB {
+padding: 5px;
+color: #4648bf;
+border: 2px solid #4648bf;
+background-color: #fff;
+}
+
+/* 테이블 아래 서브 버튼 */
+button.hhiC {
+display: inline-block;
+padding: 3px 10px;
+border-radius: 3px;
+color: #4648bf;
+border: 1px solid #4648bf;
+background-color: #fff;
+}
+button.hhiC:hover {
+border: 1px solid #4648bf;
+color: #fff;
+background-color: #4648bf;
+}
+
+/* 테이블내 버튼 */
+button.hhiD {
+display: inline-block;
+padding: 3px 7px;
+border-radius: 3px;
+border: 1px solid #6b6e80;
+color: #fff;
+font-size: 12px;
+background-color: #6b6e80;
+}
+button.hhiD:hover {
+color: #333;
+border: 1px solid #666;
+background-color: #fff;
+}
+
+/* 폼 내 검색 아이콘 버튼 */
+button.hhiE  {
+width: 22px;
+height: 22px;
+border: none;
+text-indent: -999em;
+background: url(../images/ico_btn.png) no-repeat 1px -98px;
+}
+button.hhiE :hover {
+background: #4648bf url(../images/ico_btn.png) no-repeat 7px -143px;
+}
+
+/* 바로가기 버튼 */
+button.goto {
+width: 30px;
+height: 30px;
+text-indent: -999em;
+border: none;
+background: transparent url(../images/ico_btn.png) no-repeat 5px -195px;
+}
+
+
+/* 투명도 */
+.slidecontainer {
+display: inline-block;
+vertical-align: middle;
+}
+/* .slidecontainer div > input[type="range"]{ */
+/* height: 5px; */
+/* } */
+.slidecontainer >  div {
+display: inline-block;
+}
+.slidecontainer >  div * {
+vertical-align: middle;
+}
+.slidecontainer > span {
+display: inline-block;
+font-size: 10px;
+color: #888484;
+}
+.slidecontainer > div:first-child {
+margin-right: 10px;
+}
+
+/**** 슬라이더 css *****/
+.slider{
+-webkit-appearance: none;
+width: 100px;
+border: 1px solid white; 
+opacity: 0.7;
+-webkit-transition: .2s;
+transition: opacity .2s;
+}
+.slider:hover {
+opacity: 1;
+}
+
+/* chrome */
+.slider::-webkit-slider-runnable-track {
+height: 5px;
+background: #ddd;
+border: none;
+border-radius: 3px;
+}
+
+.slider::-webkit-slider-thumb {
+-webkit-appearance: none;
+border: none;
+height: 16px;
+width: 16px;
+border-radius: 50%;
+background: #4648bf;
+margin-top: -4px;
+}
+
+.slider:focus {
+outline: none;
+}
+
+.slider:focus::-webkit-slider-runnable-track {
+background: #ccc;
+}
+
+/* IE */
+.slider::-ms-track {
+height: 5px;
+background: transparent;
+border-color: transparent;
+border-width: 6px 0;
+color: transparent;
+}
+.slider::-ms-fill-lower {
+background: #777;
+border-radius: 10px;
+}
+.slider::-ms-fill-upper {
+background: #ddd;
+border-radius: 10px;
+}
+.slider::-ms-thumb {
+border: none;
+height: 16px;
+width: 16px;
+border-radius: 50%;
+background: #4648bf;
+}
+.slider:focus::-ms-fill-lower {
+background: #888;
+}
+.slider:focus::-ms-fill-upper {
+background: #ccc;
+}
+
+/* FireFox */
+.slider::-moz-range-track {
+height: 5px;
+background: #ddd;
+border: none;
+border-radius: 3px;
+}
+
+.slider::-moz-range-thumb {
+border: none;
+height: 16px;
+width: 16px;
+border-radius: 50%;
+background: #4648bf;
+}
+
+/*hide the outline behind the border*/
+.slider:-moz-focusring{
+outline: 1px solid white;
+outline-offset: -1px;
+}
+
+.slider:focus::-moz-range-track {
+background: #ccc;
+}
+
+input.line {
+padding-left: 3px;
+border: none;
+border-bottom: 2px solid #555;
+width: 50px;
+}
+.sectionGroup input[type="number"].scale {
+width: 100px;
+margin-left: 10px;
+text-align: center;
+display: inline-block;
+}
+
+/* 선 타입 */
+.solid {
+display:inline-block;
+width:60px;
+height:20px;
+text-indent: -999em;
+z-index: 150;
+background-image: url(../images/ico_line.png);
+background-repeat: no-repeat;
+background-position: -375px -262px;
+}
+.dot {
+display:inline-block;
+width:60px;
+height:20px;
+text-indent: -999em;
+z-index: 150;
+background-image: url(../images/ico_line.png);
+background-repeat: no-repeat;
+background-position: -375px -277px;
+}
+.dashdot {
+display:inline-block;
+width:60px;
+height:20px;
+text-indent: -999em;
+z-index: 150;
+background-image: url(../images/ico_line.png);
+background-repeat: no-repeat;
+background-position: -375px -307px;
+}
+.dash {
+display:inline-block;
+width:60px;
+height:20px;
+text-indent: -999em;
+z-index: 150;
+background-image: url(../images/ico_line.png);
+background-repeat: no-repeat;
+background-position: -375px -292px;
+}
+.longdash {
+display:inline-block;
+width:60px;
+height:20px;
+text-indent: -999em;
+z-index: 150;
+background-image: url(../images/ico_line.png);
+background-repeat: no-repeat;
+background-position: -375px -322px;
+}
+
+/* 레이어 표출 속성 변경 */
+#layerStyleDiv input, 
+#layerStyleDiv select, 
+#layerStyleDiv .lineType {
+height: 30px;
+}
+
+/* 맵 우클릭 */
+.rClick {
+position: absolute;
+color: #fff;
+border-radius: 7px;
+background-color: #6B6E80;
+box-shadow: 1px 1px 2px #888;       
+z-index: 999;   
+}
+.rClick li {
+padding: 5px 8px;
+font-size: 0.9em;
+border-bottom: 1px dotted #8e91a1;
+}
+.rClick li:hover {
+cursor: pointer;
+background-color: #8e91a1;
+}
+.rClick li:first-child {
+border-radius: 7px 7px 0 0;
+}
+.rClick li:last-child {
+border-radius: 0 0 7px 7px;
+}
+
+/* 노드편집 */
+.ulList {
+overflow-y: auto;
+min-height: 100px;
+max-height: 150px;
+margin: 5px 0;
+border: 1px solid #555;   
+}
+.ulList li {
+padding: 3px;
+cursor: pointer;
+border-bottom: 1px dotted #ccc;
+}
+.ulList li.on {
+background-color: #d6dcf2;
+}
