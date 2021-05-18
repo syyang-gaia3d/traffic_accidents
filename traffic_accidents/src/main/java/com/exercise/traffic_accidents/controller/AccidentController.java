@@ -28,6 +28,6 @@ public class AccidentController {
 
         model.addAttribute("result", trafficAccidentList);
 
-        return "/main";
+        return "/map";
     }
 }
