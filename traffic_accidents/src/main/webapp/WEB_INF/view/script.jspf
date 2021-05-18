@@ -3,13 +3,13 @@
 <%@ taglib prefix="fmt"    uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn"     uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<link rel="stylesheet" href="<c:url value='/css/jquery-ui/jquery-ui.min.css?v=${JS_CSS_VERSION}'>" />
-<link rel="stylesheet" href="<c:url value='/css/ol/ol.css?v=${JS_CSS_VERSION}'/>" />
-<link rel="stylesheet" href="<c:url value='/css/map.css?v=${JS_CSS_VERSION}'/>" />
-<link rel="stylesheet" href="<c:url value='/css/style.css?v=${JS_CSS_VERSION}'/>" />
+<link rel="stylesheet" href="<c:url value="/css/jquery-ui/jquery-ui.min.css?v=${JS_CSS_VERSION}"/>" />
+<link rel="stylesheet" href="<c:url value="/css/ol/ol.css?v=${JS_CSS_VERSION}"/>" />
+<link rel="stylesheet" href="<c:url value="/css/map.css?v=${JS_CSS_VERSION}"/>" />
+<link rel="stylesheet" href="<c:url value="/css/style.css?v=${JS_CSS_VERSION}"/>" />
 
-<script src="<c:url value='/js/extranlib/jquery/jquery-3.5.1.min.js?v=${JS_CSS_VERSION}' />"></script>
-<script src="<c:url value='/js/extranlib/jquery/jquery.paging.js?v=${JS_CSS_VERSION}' />"></script>
-<script src="<c:url value='/js/extranlib/jquery-ui/jquery-ui.min.js?v=${JS_CSS_VERSION}' />"></script>
-<script src="<c:url value='/js/extranlib/jquery-ui/jquery-ui.datepicker-ko.js' />"></script>
-<script src="<c:url value='/js/extranlib/ol/ol-6.5.0.js?v=${JS_CSS_VERSION}' />"></script>
+<script src="<c:url value="/js/extranlib/jquery/jquery-3.5.1.min.js?v=${JS_CSS_VERSION}" />"></script>
+<script src="<c:url value="/js/extranlib/jquery/jquery.paging.js?v=${JS_CSS_VERSION}" />"></script>
+<script src="<c:url value="/js/extranlib/jquery-ui/jquery-ui.min.js?v=${JS_CSS_VERSION}" />"></script>
+<script src="<c:url value="/js/extranlib/jquery-ui/jquery-ui.datepicker-ko.js"/>"></script>
+<script src="<c:url value="/js/extranlib/ol/ol-6.5.0.js?v=${JS_CSS_VERSION}" />"></script>

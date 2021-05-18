@@ -9,7 +9,7 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible">
 <title>교통사고현황</title>
 <%-- <link rel="stylesheet" href="../css/map.css"> --%>
-<script src="<c:url value='/js/traffic_accident.js?v=${JS_CSS_VERSION}' />"></script>
+<script src="<c:url value="/js/traffic_accident.js?v=${JS_CSS_VERSION}" />"></script>
 </head>
 
 <body>
