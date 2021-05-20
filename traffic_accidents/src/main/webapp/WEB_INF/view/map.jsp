@@ -9,8 +9,6 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible">
 <title>교통사고현황</title>
 <%-- <link rel="stylesheet" href="../css/map.css"> --%>
-<script src="<c:url value='/js/traffic_accident.js?v=${JS_CSS_VERSION}' />"></script>
-<script type="module" src="<c:url value='/js/main_map.js?v=${JS_CSS_VERSION}' />"></script>
 </head>
 
 <body>
@@ -29,13 +27,13 @@
 
 		<!-- LAYERS -->
         <ul class="layersHead">
-			<li class="on">검색</li>
-			<li>레이어</li>
-			<li>클러스터</li>
+			<li class="on" id="layersBtn">검색</li>
+			<li id="layers">레이어</li>
+			<li id="cluster">클러스터</li>
 		</ul>
-		<div class="layersContain on">
+		<div class="layersContain on" id="searchLayer">
 			<div class="btnsFlex">
-				<button type="button" class="hhiA" title="Import Layer">그래프</button>
+				<button type="button" class="hhiA" title="graph" id="graphBtn">그래프</button>
 				<!-- <button type="button" class="hhiA" title="Export Layer">Export Layer</button> -->
 				<button type="button" class="close" title="닫기">x</button>
 			</div>
@@ -44,7 +42,7 @@
 			</div>
 			<div class="layers boardList" style="height: 400px;">
 				레이어
-				<table>
+				<table id="accidentList">
 					<thead>
 						<th>사고일시</th>
 						<th>사고형태</th>
@@ -251,7 +249,7 @@
 		<!-- // 노드편집 -->
 
 		<!-- 그래프 -->
-		<div class="layerWrap setup" style="top: 36px; left: 300px;">
+		<div class="layerWrap setup" style="top: 36px; left: 400px;" id="graphLayerWrap">
 			<div class="layerHead">
 				<h4>그래프</h4>
 				<button type="button" class="layerClose" title="닫기">닫기</button>
@@ -265,7 +263,7 @@
 		<!-- // 그래프 -->
 
 		<!-- 사고 상세 -->
-		<div class="layerWrap" style="top: 50px; left: 400px;">
+		<div class="layerWrap" style="top: 50px; left: 400px;" id="accidentDetailWrap">
 			<div class="layerHead">
 				<h4>사고 상세</h4>
 				<button type="button" class="layerClose" title="닫기">닫기</button>
@@ -425,6 +423,7 @@
 	<!-- //MAPWRAP  -->
 </div>
 <!-- // WRAP -->
-
+<script src="<c:url value='/js/traffic_accident.js?v=${JS_CSS_VERSION}' />"></script>
+<script type="module" src="<c:url value='/js/main_map.js?v=${JS_CSS_VERSION}' />"></script>
 </body>
 </html>
