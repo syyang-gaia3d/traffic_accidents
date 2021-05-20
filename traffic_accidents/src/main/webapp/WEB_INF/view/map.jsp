@@ -10,13 +10,14 @@
 <title>교통사고현황</title>
 <%-- <link rel="stylesheet" href="../css/map.css"> --%>
 <script src="<c:url value='/js/traffic_accident.js?v=${JS_CSS_VERSION}' />"></script>
+<script type="module" src="<c:url value='/js/main_map.js?v=${JS_CSS_VERSION}' />"></script>
 </head>
 
 <body>
 <div id="wrap">
 
 	<div id="mapWrap">
-		<div class="map"></div>
+		<div class="map" id="map"></div>
 		<!-- //MAP  -->
 
         <!-- 마우스 우클릭 -->
