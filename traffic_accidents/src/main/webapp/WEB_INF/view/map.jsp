@@ -36,8 +36,8 @@
 							<tr>
 								<th>발생일</th>
 								<td>
-									<input type="text" name="" size="10" class="hhi calendar"> ~
-									<input type="text" name="" size="10" class="hhi calendar">
+									<input type="text" name="" size="14" class="hhi calendar"> ~
+									<input type="text" name="" size="14" class="hhi calendar">
 								</td>
 							</tr>
 							<tr>
@@ -51,27 +51,27 @@
 							<tr>
 								<th>사고형태</th>
 								<td>
-									<input type="checkbox" name="" size="10" class="hhi"> 경상
-									<input type="checkbox" name="" size="10" class="hhi"> 중상
-									<input type="checkbox" name="" size="10" class="hhi"> 사망
-									<input type="checkbox" name="" size="10" class="hhi"> 부상
+									<input type="checkbox" name="" class="hhi"> 경상
+									<input type="checkbox" name="" class="hhi"> 중상
+									<input type="checkbox" name="" class="hhi"> 사망
+									<input type="checkbox" name="" class="hhi"> 부상
 								</td>
 							</tr>
 							<tr>
 								<th>사고구분</th>
 								<td>
-									<input type="checkbox" name="" size="10" class="hhi"> 차대차
-									<input type="checkbox" name="" size="10" class="hhi"> 차대사람
-									<input type="checkbox" name="" size="10" class="hhi"> 차대기타
+									<input type="checkbox" name="" class="hhi"> 차대차
+									<input type="checkbox" name="" class="hhi"> 차대사람
+									<input type="checkbox" name="" class="hhi"> 차대기타
 								</td>
 							</tr>
 							<tr>
 								<th>사고종류</th>
 								<td>
-									<input type="checkbox" name="" size="10" class="hhi"> 음주운전
-									<input type="checkbox" name="" size="10" class="hhi"> 어린이보호
-									<input type="checkbox" name="" size="10" class="hhi"> 노인
-									<input type="checkbox" name="" size="10" class="hhi"> 기타
+									<input type="checkbox" name="" class="hhi"> 음주운전
+									<input type="checkbox" name="" class="hhi"> 어린이보호
+									<input type="checkbox" name="" class="hhi"> 노인
+									<input type="checkbox" name="" class="hhi"> 기타
 								</td>
 							</tr>
 						</tbody>
@@ -142,7 +142,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="layersContain on" style="left:60px">
+
+		<div class="layersContain" style="left:60px" id="onOffLayer">
 			<div class="layers">
 				<ul>
 					<label>레이어 ON/OFF</label>
@@ -154,116 +155,7 @@
 			</div>
 		</div>
 
-		<!-- 레이어 표출 -->
-		<div class="layerWrap layerSetup" style="top: 36px; left: 300px; display:none;">
-			<div class="layerHead">
-				<h4>표출 속성 변경</h4>
-				<button type="button" class="layerClose" title="닫기">닫기</button>
-			</div>
-			<div class="layerContents">
-				<div class="sectionGroup">
-					<div>
-						<label class="mr20"><input type="radio"> 모든 스케일에서 레이어 보기</label>
-						<label><input type="radio"> 표출스케일 지정</label>
-						<div class="scale">
-							<div>
-								<label>Min.Scale</label>
-								<input type="text" size="10" class="hhi">
-							</div>
-							<div>
-								<label>Max.Scale</label>
-								<input type="text" size="10" class="hhi">
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- // 스케일 -->
-
-				<div class="sectionGroup">
-					<h5>선</h5>
-					<div>
-						<label>색상</label>
-						<input type="color" class="color">
-					</div>
-					<div>
-						<label>선종류</label>
-						<select name="" id="" class="noBorder">
-							<option value="">----</option>
-						</select>
-					</div>
-					<div>
-						<label>굵기</label>
-						<input type="number" class="hhiNo">
-					</div>
-				</div>
-				<!-- // 선속성 -->
-
-				<div class="sectionGroup">
-					<h5>채우기</h5>
-					<div>
-						<label>색상</label>
-						<input type="color" class="color">
-					</div>
-					<div>
-						<label>채우기 종류</label>
-						<select name="" id="" class="noBorder">
-							<option value="">HATCH</option>
-						</select>
-					</div>
-					<div>
-						<label>투명도</label>
-						<input type="range" size="20" class="">
-					</div>
-				</div>
-				<!-- // 채우기 -->
-
-				<div class="sectionGroup">
-					<h5>폰트</h5>
-					<div>
-						<label>색상</label>
-						<input type="color" class="color">
-					</div>
-					<div>
-						<label>폰트종류</label>
-						<select name="" id="" class="hhi">
-							<option value="">HATCH</option>
-						</select>
-					</div>
-					<div>
-						<label>폰트크기</label>
-						<input type="number" class="hhiNo">
-					</div>
-					<div>
-						<label  class="mr20"><input type="checkbox"> 굵게</label>
-						<label><input type="checkbox"> 기울임</label>
-					</div>
-				</div>
-				<!-- // 폰트 -->
-
-				<div class="sectionGroup">
-					<h5>라벨</h5>
-					<div>
-						<label class="mr20"><input type="radio"> 표시</label>
-						<label class="mr20"><input type="radio"> 미표시</label>
-					</div>
-					<div>
-						<label>라벨필드</label>
-						<select name="" id="">
-							<option value="">NAME</option>
-						</select>
-					</div>
-				</div>
-				<!-- // 폰트 -->
-
-				<div class="btnsFlex">
-					<button type="button" class="hhiA" title="저장">저장</button>
-					<button type="button" class="close" title="닫기">x</button>
-				</div>
-			</div>
-		</div>
-		<!-- // 레이어 표출 -->
 		<!-- //LAYERSWRAP  -->
-
 
 		<!-- SETUP -->
 		<div class="setupNav">
@@ -279,36 +171,8 @@
 			<input type="checkbox"> 보행자
 		</div>
 
-		<!-- 노드편집 -->
-		<div class="layerWrap setup" style="display:none;">
-			<div class="layerHead">
-				<h4>노드편집</h4>
-				<button type="button" class="layerClose" title="닫기">닫기</button>
-			</div>
-			<div class="layerContents">
-				<div>
-					<button type="button" title="저장" class="icoSave">저장</button>
-					<button type="button" title="삭제" class="icoDel">삭제</button>
-				</div>
-				<div>
-				    <input type="text" size="5">
-				    <input type="text" size="5">
-				</div>
-				<ul class="ulList">
-					<li><span>240123.456</span> <span>374663.234</span></li>
-					<li class="on"><span>240123.456</span> <span>374663.234</span></li>
-					<li><span>240123.456</span> <span>374663.234</span></li>
-					<li><span>240123.456</span> <span>374663.234</span></li>
-					<li><span>240123.456</span> <span>374663.234</span></li>
-					<li><span>240123.456</span> <span>374663.234</span></li>
-					<li><span>240123.456</span> <span>374663.234</span></li>
-				</ul>
-			</div>
-		</div>
-		<!-- // 노드편집 -->
-
 		<!-- 그래프 -->
-		<div class="layerWrap setup" style="top: 36px; left: 200px; display:none;" id="graphLayerWrap">
+		<div class="layerWrap setup" style="top: 36px; left: 500px; display:none;" id="graphLayerWrap">
 			<div class="layerHead">
 				<h4>그래프</h4>
 				<button type="button" class="layerClose" title="닫기">닫기</button>
@@ -391,75 +255,6 @@
 		</div>
 		<!-- // 사고 상세 -->
 
-
-		<!-- 지도설정하기 -->
-		<div class="layerWrap setup" style="display:none;">
-			<div class="layerHead">
-				<h4>지도설정하기</h4>
-				<button type="button" class="layerClose" title="닫기">닫기</button>
-			</div>
-			<div class="layerContents">
-				<div class="">
-					<button type="button" title="추가" class="face">추가</button>
-					<button type="button" title="삭제" class="icoDel">삭제</button>
-				</div>
-				<div class="boardList">
-					<table>
-						<thead>
-							<th>기본</th>
-							<th>지도이름</th>
-							<th>버튼</th>
-						</thead>
-						<tbody>
-							<tr>
-								<td><input type="radio"></td>
-								<td>제1사업장 지도</td>
-								<td>
-                                    <button type="button" title="기본지도" class="icoStar">기본지도</button>
-                                    <button type="button" title="기본지도로 저장" class="icoStarline">기본지도로 저장</button>
-								    <button title="적용" class="icoApply">적용</button>
-								</td>
-							</tr>
-							<tr>
-								<td><input type="radio"></td>
-								<td>my map 2020</td>
-								<td>
-								    <button class="icoApply">적용</button>
-								</td>
-							</tr>
-							<tr>
-								<td><input type="radio"></td>
-								<td>제2사업장 지도</td>
-								<td>
-								    <button class="icoApply">적용</button>
-								</td>
-							</tr>\
-							\
-							<tr>
-								<td><input type="radio"></td>
-								<td>제3사업장 지도</td>
-								<td>
-								    <button class="icoApply">적용</button>
-								</td>
-							</tr>
-							<tr>
-								<td><input type="radio"></td>
-								<td>제4사업장 지도</td>
-								<td>
-								    <button class="icoApply">적용</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="btnsFlex">
-					<button type="button" class="hhiA" title="저장">저장</button>
-					<button type="button" class="close" title="닫기">x</button>
-				</div>
-			</div>
-		</div>
-		<!-- // 지도설정하기 -->
-
 		<!-- // 지도구성 -->
 		<div class="ctrlWrap">
 			<div>
@@ -477,12 +272,19 @@
 		</ul> -->
 
 		</div>
-		<!-- // 설비 -->
+
 	</div>
 	<!-- //MAPWRAP  -->
 </div>
 <!-- // WRAP -->
+<script type="module" src="<c:url value='/js/common.js?v=${JS_CSS_VERSION}' />"></script>
 <script src="<c:url value='/js/traffic_accident.js?v=${JS_CSS_VERSION}' />"></script>
 <script type="module" src="<c:url value='/js/main_map.js?v=${JS_CSS_VERSION}' />"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+	});
+</script>
 </body>
 </html>
