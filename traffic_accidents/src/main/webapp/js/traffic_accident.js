@@ -28,7 +28,12 @@ $(document).ready(function() {
 
     $('#layers').click(function() {
         $(this).toggleClass('on');
-        console.log('레이어 on/off 창');
+
+        if($(this).hasClass('on')) {
+            $mapWrap.find('#onOffLayer').addClass('on');
+        } else {
+            $mapWrap.find('#onOffLayer').removeClass('on');
+        }
     });
 
     $('#cluster').click(function() {
