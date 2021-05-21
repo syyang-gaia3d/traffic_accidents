@@ -37,8 +37,60 @@
 				<!-- <button type="button" class="hhiA" title="Export Layer">Export Layer</button> -->
 				<button type="button" class="close" title="닫기">x</button>
 			</div>
-			<div class="layers" style="height: 200px;">
+			<div class="layers" style="">
 				검색 파라미터 공간
+				<div class="boardForm">
+					<table>
+						<colgroup>
+							<col width="50">
+							<col width="220">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>발생일</th>
+								<td>
+									<input type="text" name="" size="10" class="hhi calendar"> ~
+									<input type="text" name="" size="10" class="hhi calendar">
+								</td>
+							</tr>
+							<tr>
+								<th>발생시간</th>
+								<td>
+									<input type="text" name="" size="10" class="hhi"> ~
+									<input type="text" name="" size="10" class="hhi">
+									<input type="radio"> 시간대 검색
+								</td>
+							</tr>
+							<tr>
+								<th>사고형태</th>
+								<td>
+									<input type="checkbox" name="" size="10" class="hhi"> 경상
+									<input type="checkbox" name="" size="10" class="hhi"> 중상
+									<input type="checkbox" name="" size="10" class="hhi"> 사망
+									<input type="checkbox" name="" size="10" class="hhi"> 부상
+								</td>
+							</tr>
+							<tr>
+								<th>사고구분</th>
+								<td>
+									<input type="checkbox" name="" size="10" class="hhi"> 차대차
+									<input type="checkbox" name="" size="10" class="hhi"> 차대사람
+									<input type="checkbox" name="" size="10" class="hhi"> 차대기타
+								</td>
+							</tr>
+							<tr>
+								<th>사고종류</th>
+								<td>
+									<input type="checkbox" name="" size="10" class="hhi"> 음주운전
+									<input type="checkbox" name="" size="10" class="hhi"> 어린이보호
+									<input type="checkbox" name="" size="10" class="hhi"> 노인
+									<input type="checkbox" name="" size="10" class="hhi"> 기타
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<button type="button" class="hhiA">검색</button>
 			</div>
 			<div class="layers boardList" style="height: 400px;">
 				레이어
@@ -249,7 +301,7 @@
 		<!-- // 노드편집 -->
 
 		<!-- 그래프 -->
-		<div class="layerWrap setup" style="top: 36px; left: 400px;" id="graphLayerWrap">
+		<div class="layerWrap setup" style="top: 36px; left: 200ㅔㅌ;" id="graphLayerWrap">
 			<div class="layerHead">
 				<h4>그래프</h4>
 				<button type="button" class="layerClose" title="닫기">닫기</button>

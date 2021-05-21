@@ -244,7 +244,7 @@ background-position: -247px -53px;
 } */
 .ctrlWrap div > button.oinfo {
 background-position: -662px -6px;
-}  
+}
 .ctrlWrap div > button.rotateReset {
 background-position: -292px -3px;
 }
@@ -295,7 +295,7 @@ background-image: url(../images/ico_map_ctrl.png);
 background-repeat: no-repeat;
 }
 .draw.on {
-    
+
 }
 .face {
     background-color: transparent;
@@ -959,7 +959,7 @@ button.icoApply {
 width: 25px;
 height: 25px;
 border: none;
-text-indent: -999em;    
+text-indent: -999em;
 background: url(../images/ico_btn.png) no-repeat 5px -493px;
 }
 button.icoSave {
@@ -1088,7 +1088,7 @@ margin-right: 10px;
 .slider{
 -webkit-appearance: none;
 width: 100px;
-border: 1px solid white; 
+border: 1px solid white;
 opacity: 0.7;
 -webkit-transition: .2s;
 transition: opacity .2s;
@@ -1245,8 +1245,8 @@ background-position: -375px -322px;
 }
 
 /* 레이어 표출 속성 변경 */
-#layerStyleDiv input, 
-#layerStyleDiv select, 
+#layerStyleDiv input,
+#layerStyleDiv select,
 #layerStyleDiv .lineType {
 height: 30px;
 }
@@ -1257,8 +1257,8 @@ position: absolute;
 color: #fff;
 border-radius: 7px;
 background-color: #6B6E80;
-box-shadow: 1px 1px 2px #888;       
-z-index: 999;   
+box-shadow: 1px 1px 2px #888;
+z-index: 999;
 }
 .rClick li {
 padding: 5px 8px;
@@ -1282,7 +1282,7 @@ overflow-y: auto;
 min-height: 100px;
 max-height: 150px;
 margin: 5px 0;
-border: 1px solid #555;   
+border: 1px solid #555;
 }
 .ulList li {
 padding: 3px;

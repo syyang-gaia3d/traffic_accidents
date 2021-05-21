@@ -72,7 +72,7 @@ background-color: #fff;
 }
 
 #map {
-height: calc(100vh - 270px);
+/* height: calc(100vh - 270px); */
 /* min-height: 600px; */
 }
 
@@ -1103,7 +1103,7 @@ color: #fff;
 cursor: pointer;
 border-radius: 10px;
 box-sizing: border-box;
-background-color: #fff;    
+background-color: #fff;
 background-image: url(../images/ico_mode.png);
 background-repeat: no-repeat;
 }
@@ -1214,7 +1214,7 @@ display: block
 .sectionHeader {
 margin-bottom: 15px;
 padding: 10px;
-border: 2px solid #333;  
+border: 2px solid #333;
 }
 .sectionHeader > li {
 display: inline-block;
@@ -1240,7 +1240,7 @@ border: none;
 background-color: #333;
 }
 .sectionHeader button:hover {
-background-color: #4648BF;   
+background-color: #4648BF;
 }
 .sectionGroup {
 margin: 0;
@@ -1403,9 +1403,9 @@ span.personal {
 display: inline-block;
 padding: 1px 3px;
 color: #fff;
-font-size: 0.8em;    
+font-size: 0.8em;
 border: 1px solid #4648bf;
-background-color: #4648bf;  
+background-color: #4648bf;
 }
 
 
