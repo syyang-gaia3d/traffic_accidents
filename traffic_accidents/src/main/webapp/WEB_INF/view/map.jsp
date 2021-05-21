@@ -18,13 +18,6 @@
 		<div class="map" id="map"></div>
 		<!-- //MAP  -->
 
-        <!-- 마우스 우클릭 -->
-        <!-- <ul class="rClick" style="top: 100px; left: 300px; display:none;">
-            <li>스타일편집</li>
-            <li>객체추가</li>
-            <li>내보내기</li>
-        </ul> -->
-
 		<!-- LAYERS -->
         <ul class="layersHead">
 			<li class="on" id="layersBtn">검색</li>
@@ -32,18 +25,12 @@
 			<li id="cluster">클러스터</li>
 		</ul>
 		<div class="layersContain on" id="searchLayer">
-			<div class="btnsFlex">
-				<button type="button" class="hhiA" title="graph" id="graphBtn">그래프</button>
-				<!-- <button type="button" class="hhiA" title="Export Layer">Export Layer</button> -->
-				<button type="button" class="close" title="닫기">x</button>
-			</div>
 			<div class="layers" style="">
-				검색 파라미터 공간
 				<div class="boardForm">
 					<table>
 						<colgroup>
-							<col width="50">
-							<col width="220">
+							<col width="20">
+							<col width="280">
 						</colgroup>
 						<tbody>
 							<tr>
@@ -58,7 +45,7 @@
 								<td>
 									<input type="text" name="" size="10" class="hhi"> ~
 									<input type="text" name="" size="10" class="hhi">
-									<input type="radio"> 시간대 검색
+									<br><input type="radio"> 시간대 검색
 								</td>
 							</tr>
 							<tr>
@@ -90,10 +77,14 @@
 						</tbody>
 					</table>
 				</div>
-				<button type="button" class="hhiA">검색</button>
+				<div class="btnsFlex">
+				<button type="button" class="hhiA" title="graph" id="graphBtn">그래프</button>
+				<button type="button" class="hhiA" title="Export Layer">검색</button>
+				<%-- <button type="button" class="close" title="닫기">x</button> --%>
+				</div>
 			</div>
+
 			<div class="layers boardList" style="height: 400px;">
-				레이어
 				<table id="accidentList">
 					<thead>
 						<th>사고일시</th>
@@ -143,6 +134,23 @@
 						</tr>
 					</tbody>
 				</table>
+				<div class="pagination">
+					<a href="#" class="prev"><span class="icon-glyph glyph-prev"></span></a>
+					<a href="#" class="current-page">1</a>
+					<a href="#" class="">2</a>
+					<a href="#" class="next"><span class="icon-glyph glyph-next"></span></a>
+				</div>
+			</div>
+		</div>
+		<div class="layersContain on" style="left:60px">
+			<div class="layers">
+				<ul>
+					<label>레이어 ON/OFF</label>
+					<li><input type="checkbox"> OSM</li>
+					<li><input type="checkbox"> 시도</li>
+					<li><input type="checkbox"> 시군구</li>
+					<li><input type="checkbox"> 읍면동</li>
+				</ul>
 			</div>
 		</div>
 
@@ -259,17 +267,16 @@
 
 		<!-- SETUP -->
 		<div class="setupNav">
-			<select name="" id="">
-				<option value="">지도구성</option>
-				<option value="">제1사업장</option>
-				<option value="">제2사업장</option>
-			</select>
-			<button type="button" title="지도설정" class="setup">지도설정</button>
-
-			<select name="" id="">
-				<option value="">사업장이동</option>
-				<option value="">제1사업장</option>
-			</select>
+			사고구분 :
+			<input type="checkbox"> 차대차
+			<input type="checkbox"> 차대사람
+			<input type="checkbox"> 차대기타
+			<br>
+			사고종류 :
+			<input type="checkbox"> 음주운전
+			<input type="checkbox"> 어린이
+			<input type="checkbox"> 노인
+			<input type="checkbox"> 보행자
 		</div>
 
 		<!-- 노드편집 -->
@@ -301,7 +308,7 @@
 		<!-- // 노드편집 -->
 
 		<!-- 그래프 -->
-		<div class="layerWrap setup" style="top: 36px; left: 200ㅔㅌ;" id="graphLayerWrap">
+		<div class="layerWrap setup" style="top: 36px; left: 200px; display:none;" id="graphLayerWrap">
 			<div class="layerHead">
 				<h4>그래프</h4>
 				<button type="button" class="layerClose" title="닫기">닫기</button>
@@ -315,7 +322,7 @@
 		<!-- // 그래프 -->
 
 		<!-- 사고 상세 -->
-		<div class="layerWrap" style="top: 50px; left: 400px;" id="accidentDetailWrap">
+		<div class="layerWrap" style="top: 50px; left: 400px; display:none;" id="accidentDetailWrap">
 			<div class="layerHead">
 				<h4>사고 상세</h4>
 				<button type="button" class="layerClose" title="닫기">닫기</button>

@@ -518,7 +518,7 @@ border: 1px solid #ccc;
 border: 1px solid #ccc;
 }
 .boardForm {
-margin: 10px 0 40px;
+margin: 10px 0 10px;
 }
 .boardForm > table, .fileForm > table {
 width: 100%;
@@ -533,7 +533,7 @@ color: #444;
 text-align: left;
 font-weight: normal;
 background-color: #fafafa;
-min-width: 100px;
+/* min-width: 100px; */
 }
 .boardForm th span.must, .fileForm th span.must {
 display: inline-block;
