@@ -13,14 +13,3 @@ function initJqueryCalendar() {
 		yearSuffix : "년"
 	});
 }
-
-// Calendar 초기화
-function initCalendar(idArray, valueArray) {
-	for(var i=0; i<idArray.length; i++) {
-		$("#" + idArray[i]).datepicker( { dateFormat: 'yy-mm-dd' } );
-		if(valueArray[i] != null && valueArray[i] != "") {
-			//$("#" + idArray[i]).val(valueArray[i].substring(0,8));
-			$("#" + idArray[i]).val(valueArray[i].replace(/([0-9]{4})([0-9]{2})([0-9]{2})/,"$1-$2-$3").substring(0,10));
-		}
-	}
-}

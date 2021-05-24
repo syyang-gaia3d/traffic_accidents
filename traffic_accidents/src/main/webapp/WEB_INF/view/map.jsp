@@ -36,8 +36,8 @@
 							<tr>
 								<th>발생일</th>
 								<td>
-									<input type="text" name="" size="14" class="hhi calendar"> ~
-									<input type="text" name="" size="14" class="hhi calendar">
+									<input type="text" name="" size="14" class="hhi date calendar"> ~
+									<input type="text" name="" size="14" class="hhi date calendar">
 								</td>
 							</tr>
 							<tr>
@@ -277,12 +277,13 @@
 	<!-- //MAPWRAP  -->
 </div>
 <!-- // WRAP -->
-<script type="module" src="<c:url value='/js/common.js?v=${JS_CSS_VERSION}' />"></script>
+<script src="<c:url value='/js/common.js?v=${JS_CSS_VERSION}' />"></script>
 <script src="<c:url value='/js/traffic_accident.js?v=${JS_CSS_VERSION}' />"></script>
 <script type="module" src="<c:url value='/js/main_map.js?v=${JS_CSS_VERSION}' />"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		initJqueryCalendar();
 
 	});
 </script>
