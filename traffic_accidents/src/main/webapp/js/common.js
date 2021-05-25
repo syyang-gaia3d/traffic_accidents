@@ -1,3 +1,4 @@
+// 공통기능 모음
 
 function initJqueryCalendar() {
 	$( ".date" ).datepicker({

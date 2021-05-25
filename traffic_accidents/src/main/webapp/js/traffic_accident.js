@@ -1,9 +1,18 @@
+import { InitMap } from './main_map.js';
+
 /*********** html 요소 변수 선언 ***********/
 const $mapWrap = $('#mapWrap');
 const $map = $('#map');
 
 $(document).ready(function() {
 
+    // var policy = {
+    //     layerInitMapCenter : '240175.364,324954.256',
+    //     layerInitMapExtent : '-80000,0,300000,64000'
+    // };
+
+    var initMap = new InitMap(policy);
+    initMap.create('map');
     /*********** click, onchange 등 초기 바인딩 셋팅 ***********/
     // 닫기
     $mapWrap.find('button.close').click(function() {

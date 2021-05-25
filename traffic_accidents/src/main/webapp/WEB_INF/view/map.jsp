@@ -16,6 +16,7 @@
 
 	<div id="mapWrap">
 		<div class="map" id="map"></div>
+		<div id="mouse-position" style="position: absolute; bottom: 50px; right: 40px; font-size: 17px; font-weight: bold; text-shadow: 0 0 0.1em #fff, 0 0 0.1em #fff, 0 0 0.1em #fff;"></div>
 		<!-- //MAP  -->
 
 		<!-- LAYERS -->
@@ -277,15 +278,23 @@
 	<!-- //MAPWRAP  -->
 </div>
 <!-- // WRAP -->
-<script src="<c:url value='/js/common.js?v=${JS_CSS_VERSION}' />"></script>
-<script src="<c:url value='/js/traffic_accident.js?v=${JS_CSS_VERSION}' />"></script>
-<script type="module" src="<c:url value='/js/main_map.js?v=${JS_CSS_VERSION}' />"></script>
 
 <script type="text/javascript">
+	var policy = {
+			layerInitMapCenter : '240175.364,324954.256',
+			layerInitMapExtent : '-80000,0,300000,64000'
+	};
+
 	$(document).ready(function() {
 		initJqueryCalendar();
-
+		//
+		// var policy = {};
+		// var InitMap = new InitMap(policy);
+		// InitMap.create('map');
 	});
 </script>
+<script src="<c:url value='/js/common.js?v=${JS_CSS_VERSION}' />"></script>
+<script type="module" src="<c:url value='/js/traffic_accident.js?v=${JS_CSS_VERSION}' />"></script>
+<%-- <script type="module" src="<c:url value='/js/main_map.js?v=${JS_CSS_VERSION}' />"></script> --%>
 </body>
 </html>
