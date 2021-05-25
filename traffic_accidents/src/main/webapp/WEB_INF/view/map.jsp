@@ -281,7 +281,7 @@
 
 <script type="text/javascript">
 	var policy = {
-			layerInitMapCenter : '240175.364,324954.256',
+			layerInitMapCenter : '14261127.97, 4360280.11',
 			layerInitMapExtent : '-80000,0,300000,64000'
 	};
 

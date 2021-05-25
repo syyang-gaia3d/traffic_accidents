@@ -4,28 +4,28 @@ import { InitMap } from './main_map.js';
 const $mapWrap = $('#mapWrap');
 const $map = $('#map');
 
-$(document).ready(function() {
+$(document).ready(() => {
 
     // var policy = {
     //     layerInitMapCenter : '240175.364,324954.256',
     //     layerInitMapExtent : '-80000,0,300000,64000'
     // };
 
-    var initMap = new InitMap(policy);
+    const initMap = new InitMap(policy);
     initMap.create('map');
     /*********** click, onchange 등 초기 바인딩 셋팅 ***********/
     // 닫기
-    $mapWrap.find('button.close').click(function() {
+    $mapWrap.find('button.close').click(() => {
         $(this).parents('div').removeClass('on');
         $('#layersBtn').removeClass('on');
     });
 
-    $mapWrap.find('button.layerClose').click(function() {
+    $mapWrap.find('button.layerClose').click(() => {
         $(this).parents('div.layerWrap').hide();
     });
 
     // ul 메뉴
-    $('#layersBtn').click(function() {
+    $('#layersBtn').click(() => {
         $(this).toggleClass('on');
 
         if($(this).hasClass('on')) {
@@ -35,7 +35,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#layers').click(function() {
+    $('#layers').click(() => {
         $(this).toggleClass('on');
 
         if($(this).hasClass('on')) {
@@ -45,13 +45,13 @@ $(document).ready(function() {
         }
     });
 
-    $('#cluster').click(function() {
+    $('#cluster').click(() => {
         $(this).toggleClass('on');
         console.log('클러스터 on/off');
     });
 
     // 그래프 창 on/off
-    $('#graphBtn').click(function() {
+    $('#graphBtn').click(() => {
         $(this).toggleClass('on');
         if($(this).hasClass('on')) {
             $('#graphLayerWrap').show();
@@ -61,9 +61,17 @@ $(document).ready(function() {
     });
 
     // 사고상세 창 on/off
-    $('#accidentList tr').click(function() {
+    $('#accidentList tr').click(() => {
         $('#accidentDetailWrap').show();
     });
+
+    $mapWrap.find('.zoomin').click(() => {
+        initMap.zoomIn();
+    });
+
+    $mapWrap.find('.zoomout').click(() => {
+        initMap.zoomOut();
+    })
 
     /*********** click, onchange 등 초기 바인딩 셋팅 ***********/
 });

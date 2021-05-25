@@ -8,34 +8,34 @@ export function InitMap(policy) {
   }
 
   // 공통사용값
-  var zoomSize = 0.5;
-  var zoomDuration = 250;
-  var helpTooltipElement = null;
-  var helpTooltip = null;
+  const zoomSize = 0.5;
+  const zoomDuration = 250;
+  let helpTooltipElement = null;
+  let helpTooltip = null;
   // 지도이동
-  var moveArray = [];
-  var moveFlag = true;
-  var moveIndex = -1;
+  let moveArray = [];
+  let moveFlag = true;
+  let moveIndex = -1;
   // geoserver
-  var geoserverDomainUrl = policy.geoserverDomainUrl;
-  var geoserverDataWorkspace = policy.geoserverDataWorkspace;
-  var geoserverDataStore = policy.geoserverDataStore;
-  var coordinate = policy.layerTargetCoordinate; //EPSG:3857 (WGS84)
+  const geoserverDomainUrl = policy.geoserverDomainUrl;
+  const geoserverDataWorkspace = policy.geoserverDataWorkspace;
+  const geoserverDataStore = policy.geoserverDataStore;
+  const coordinate = 'EPSG:3857';//policy.layerTargetCoordinate; //EPSG:3857 (WGS84)
 
-  var layerInitMapCenter = [];
-	var mapCenterArray = policy.layerInitMapCenter.split(",");
+  let layerInitMapCenter = [];
+	let mapCenterArray = policy.layerInitMapCenter.split(",");
 	for( var i=0; i<mapCenterArray.length; i++) {
 		layerInitMapCenter.push(parseFloat(mapCenterArray[i]));
 	}
 
-	var layerInitMapExtent = [];
-	var mapExtentArray = policy.layerInitMapExtent.split(",");
+	let layerInitMapExtent = [];
+	let mapExtentArray = policy.layerInitMapExtent.split(",");
 	for( var i=0; i<mapExtentArray.length; i++) {
 		layerInitMapExtent.push(parseFloat(mapExtentArray[i]));
 	}
 
   // 마우스 좌표
-  var mousePosition = new ol.control.MousePosition({
+  const mousePosition = new ol.control.MousePosition({
     className: 'mousePosition',
     coordinateFormat: function(coordinate) {
         return ol.coordinate.format(coordinate, '{x}, {y}', 6);
@@ -45,10 +45,10 @@ export function InitMap(policy) {
     undefinedHTML: ' '
   });
 
-  var scaleLineControl = new ol.control.ScaleLine();
+  const scaleLineControl = new ol.control.ScaleLine();
 
   // default controls
-  var controls = ol.control.defaults({
+  const controls = ol.control.defaults({
       attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
           collapsible: false
       }), zoom: false, rotate: false
@@ -59,23 +59,23 @@ export function InitMap(policy) {
 
 
   // 레이어
-  var layers = [];
+  let layers = [];
   // osm 레이어
-	var layerInitOsm = policy.layerInitOsm;
-	var layerInitOsmVisible = policy.layerInitOsmVisible;
+	let layerInitOsm = policy.layerInitOsm;
+	let layerInitOsmVisible = policy.layerInitOsmVisible;
 	// 시도 레이어(ctprvn)
-	var layerInitCtprvn = policy.layerInitCtprvn;
-	var layerInitCtprvnVisible = policy.layerInitCtprvnVisible;
+	let layerInitCtprvn = policy.layerInitCtprvn;
+	let layerInitCtprvnVisible = policy.layerInitCtprvnVisible;
   // 시군구 레이어(cgg)
-  var layerInitCgg = policy.layerInitCgg;
-  var layerInitCggVisible = policy.layerInitCggVisible;
+  let layerInitCgg = policy.layerInitCgg;
+  let layerInitCggVisible = policy.layerInitCggVisible;
   // 읍면동 레이어(emd)
-  var layerInitEmd = policy.layerInitEmd;
-  var layerInitEmdVisible = policy.layerInitEmdVisible;
+  let layerInitEmd = policy.layerInitEmd;
+  let layerInitEmdVisible = policy.layerInitEmdVisible;
 
 
   // OSM 배경지도
-	var osmLayer = new ol.layer.Tile({
+	const osmLayer = new ol.layer.Tile({
 		id : layerInitOsm,
 		source: new ol.source.OSM(),
 		visible : layerInitOsmVisible
@@ -146,33 +146,33 @@ export function InitMap(policy) {
 
 
   // 좌표계
-  var proj = new ol.proj.Projection({
+  const proj = new ol.proj.Projection({
     code: coordinate,
     units: 'm',
     global: false,
-    extent: layerInitMapExtent
+    // extent: layerInitMapExtent
   });
   // view
-  var view = new ol.View({
-    zoom: 10,
+  const view = new ol.View({
+    zoom: 7,
     maxZoom: 18,
     minZoom: 3,
     center: layerInitMapCenter,
-    extent: layerInitMapExtent,
+    // extent: layerInitMapExtent,
     projection : proj
   });
 
 
-  var map;
+  let map;
 
   /**
    * public
    */
   return {
-    mouseOver: function() {
+    mouseOver: () => {
       return mouseOver;
     },
-    create: function(element) {
+    create: (element) => {
       // 맵 생성
       map = new ol.Map({
         controls : controls,
@@ -180,7 +180,25 @@ export function InitMap(policy) {
         view : view,
         target : element
       });
-    }
+    },
+    zoomIn: () => {
+      const view = map.getView();
+      const zoom = view.getZoom();
+
+      view.animate({
+            zoom: zoom + zoomSize,
+            duration: zoomDuration
+        });
+    },
+    zoomOut: () => {
+      const view = map.getView();
+      const zoom = view.getZoom();
+
+      view.animate({
+            zoom: zoom - zoomSize,
+            duration: zoomDuration
+        });
+    },
   }
 
 }
