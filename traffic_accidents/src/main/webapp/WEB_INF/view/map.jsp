@@ -17,6 +17,7 @@
 	<div id="mapWrap">
 		<div class="map" id="map"></div>
 		<div id="mouse-position" style="position: absolute; bottom: 50px; right: 40px; font-size: 17px; font-weight: bold; text-shadow: 0 0 0.1em #fff, 0 0 0.1em #fff, 0 0 0.1em #fff;"></div>
+		<div id="drawToolTip"></div>
 		<!-- //MAP  -->
 
 		<!-- LAYERS -->

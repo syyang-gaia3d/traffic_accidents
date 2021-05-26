@@ -1,5 +1,6 @@
 // 공통기능 모음
 
+// jquery Calendar 초기화
 function initJqueryCalendar() {
 	$( ".date" ).datepicker({
 		dateFormat : "yy-mm-dd",
@@ -13,4 +14,16 @@ function initJqueryCalendar() {
 		showMonthAfterYear : true,
 		yearSuffix : "년"
 	});
+}
+
+// 지도상 길이 측정 함수
+function formatLength(line) {
+	var length = ol.sphere.getLength(line); // TODO : 문제!!!!!!!!!!!
+	var output;
+	if (length > 100) {
+		output = (Math.round(length / 1000 * 100) / 100) + ' ' + 'km';
+	} else {
+		output = (Math.round(length * 100) / 100) + ' ' + 'm';
+	}
+	return output;
 }
