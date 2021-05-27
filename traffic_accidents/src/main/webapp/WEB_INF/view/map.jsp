@@ -48,7 +48,7 @@
 									<td>
 										<input type="text" name="startTime" size="10" class="hhi"> ~
 										<input type="text" name="endTime" size="10" class="hhi">
-										<br><input type="radio" name="isTimeSlot" value="true"> 시간대 검색
+										<br><input type="checkbox" name="isTimeSlot" value="true"> 시간대 검색
 									</td>
 								</tr>
 								<tr>
