@@ -20,7 +20,7 @@ export function InitMap(policy) {
   const geoserverDomainUrl = policy.geoserverDomainUrl;
   const geoserverDataWorkspace = policy.geoserverDataWorkspace;
   const geoserverDataStore = policy.geoserverDataStore;
-  const coordinate = 'EPSG:3857';//policy.layerTargetCoordinate; //EPSG:3857 (WGS84)
+  const coordinate = policy.layerTargetCoordinate; //EPSG:3857 (WGS84)
 
   let layerInitMapCenter = [];
 	let mapCenterArray = policy.layerInitMapCenter.split(",");

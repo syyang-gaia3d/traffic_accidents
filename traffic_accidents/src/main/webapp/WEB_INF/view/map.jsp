@@ -281,10 +281,7 @@
 <!-- // WRAP -->
 
 <script type="text/javascript">
-	var policy = {
-			layerInitMapCenter : '14261127.97, 4360280.11',
-			layerInitMapExtent : '-80000,0,300000,64000'
-	};
+	var policy = JSON.parse('${policyJson}');
 
 	$(document).ready(function() {
 		initJqueryCalendar();
