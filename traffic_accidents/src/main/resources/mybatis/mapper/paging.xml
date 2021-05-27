@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="paging">
+	<sql id="head">
+		<if test="use == true">SELECT * FROM (</if>
+	</sql>
+	<sql id="foot">
+		<if test="use == true">
+			) BASE
+			WHERE BASE.ROW_NUM BETWEEN #{offset} + 1 AND #{offset} +
+			<if test="size == null">100</if>
+			<if test="size != null">#{size}</if>
+		</if>
+	</sql>
+</mapper>

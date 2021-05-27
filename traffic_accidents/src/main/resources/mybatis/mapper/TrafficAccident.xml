@@ -32,11 +32,33 @@
     <sql id="wherePhrase">
         <where>
             <if test="isTimeSlot == true">
-                <!-- 시간대 검색 -->
+                AND (
+                    <if test="startDate != null and startDate != ''">
+                        occu_date <![CDATA[ >= ]]> #{startDate}
+                    </if>
+                    <if test="endDate != null and endDate != ''">
+                        AND occu_date <![CDATA[ <= ]]> #{endDate}
+                    </if>
+                    <if test="startTime != null and startTime != ''">
+                        AND occu_tm  <![CDATA[ >= ]]> #{startTime}
+                    </if>
+                    <if test="endTime != null and endTime != ''">
+                        AND occu_tm  <![CDATA[ <= ]]> #{endTime}
+                    </if>
+                )
             </if>
             <if test="isTimeSlot != true">
                 <if test="startDate != null and startDate != ''">
-                    AND occu_date <![CDATA[ >= ]]> #{startDate}
+                    AND (occu_date <![CDATA[ >= ]]> #{startDate}
+                </if>
+                <if test="endDate != null and endDate != ''">
+                    AND occu_date <![CDATA[ <= ]]> #{endDate} )
+                </if>
+                <if test="startTime != null and startTime != ''">
+                    OR (occu_tm  <![CDATA[ >= ]]> #{startTime}
+                </if>
+                <if test="endTime != null and endTime != ''">
+                    AND occu_tm  <![CDATA[ <= ]]> #{endTime} )
                 </if>
             </if>
             <if test="injuryTypes != null and injuryTypes.size > 0">
@@ -51,6 +73,20 @@
                     #{type}
                 </foreach>
             </if>
+            <choose>
+                <when test="category == 'drnkg'">
+                    AND drnkg IS NOT NULL
+                </when>
+                <when test="category == 'kid'">
+                    AND kid IS NOT NULL
+                </when>
+                <when test="category == 'odsn'">
+                    AND odsn IS NOT NULL
+                </when>
+                <when test="category == 'wlkg'">
+                    AND wlkg IS NOT NULL
+                </when>
+            </choose>
         </where>
     </sql>
 
