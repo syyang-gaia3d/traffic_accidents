@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.exercise.traffic_accidents.mapper.PolicyMapper">
+
+    <select id="selectPolicy" resultType="Policy">
+        SELECT
+            policy_id,
+            geoserver_enable,
+            geoserver_wms_version,
+            geoserver_data_url,
+            geoserver_data_workspace,
+            geoserver_data_store,
+            geoserver_user,
+            geoserver_password,
+            layer_source_coordinate,
+            layer_target_coordinate,
+            layer_init_osm,
+            layer_init_map_center,
+            layer_init_map_extent,
+            insert_date
+        FROM policy
+        WHERE policy_id = 1
+    </select>
+
+</mapper>
