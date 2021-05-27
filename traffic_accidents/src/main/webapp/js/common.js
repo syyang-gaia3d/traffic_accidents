@@ -27,3 +27,28 @@ function formatLength(line) {
 	}
 	return output;
 }
+
+$.fn.serializeObject = function() {
+	"use strict"
+	var result = {}
+	var extend = function(i, element) {
+		var node = result[element.name]
+		if ("undefined" !== typeof node && node !== null) {
+			if ($.isArray(node)) {
+				node.push(element.value)
+			} else {
+				result[element.name] = [ node, element.value ]
+			}
+		} else {
+			result[element.name] = element.value
+		}
+	}
+
+	$.each(this.serializeArray(), extend);
+	return result
+}
+
+// ajax 오류 공통 처리
+function ajaxErrorHandler(request) {
+	alert(request.responseJSON.error.message);
+}

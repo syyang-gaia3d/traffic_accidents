@@ -14,7 +14,7 @@ $(document).ready(() => {
 
         //그리기 이벤트
         if($('.distance').hasClass("on")) initMap.pointerMoveHandler(evt);
-      });
+    });
     /*********** click, onchange 등 초기 바인딩 셋팅 ***********/
     // 닫기
     $mapWrap.find('button.close').click(function() {
@@ -62,6 +62,12 @@ $(document).ready(() => {
         }
     });
 
+    // 검색
+    $('#searchBtn').click(function(e) {
+        e.preventDefault();
+        searchAccidentList('desc');
+    });
+
     // 사고상세 창 on/off
     $('#accidentList tr').click(() => {
         $('#accidentDetailWrap').show();
@@ -92,4 +98,44 @@ $(document).ready(() => {
     });
 
     /*********** click, onchange 등 초기 바인딩 셋팅 ***********/
+
+    // 검색
+    const searchAccidentList = function(orderBy) {
+
+        let searchParams = $('#searchForm').serializeObject();
+
+        searchParams.orderBy = orderBy;
+
+        console.log(searchParams);
+
+        $.ajax({
+            url: '/list',
+            type: 'GET',
+            headers: {'X-Requested-With': 'XMLHttpRequest'},
+            data: searchParams,
+            dataType: 'json',
+            success: (res) => {
+                const table = $('#accidentList');
+                const tbody = table.find('tbody');
+
+                var list = res.list;
+
+                let html = '';
+
+                for(var idx in list) {
+                    html += '<tr>';
+                    html +=     '<td>'+ list[idx].occuDate + '</td>';
+                    html +=     '<td>' + list[idx].lclas + '</td>';
+                    html +=     '<td>' + list[idx].death + '/' + list[idx].swpsn + '/' + list[idx].sinjpsn + '</td>';
+                    html += '</tr>';
+                }
+
+                tbody.empty();
+                tbody.append(html);
+            },
+            error: (request, status, error) =>{
+                ajaxErrorHandler(request);
+            }
+        });
+    }
 });
