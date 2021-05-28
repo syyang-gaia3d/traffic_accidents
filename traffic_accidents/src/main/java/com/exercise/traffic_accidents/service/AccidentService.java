@@ -17,4 +17,8 @@ public class AccidentService {
     public List<TrafficAccidentInfo> getTrafficAccidentList(TrafficAccidentInfo params) {
         return accidentMapper.getTrafficAccidentList(params);
     }
+
+    public TrafficAccidentInfo getTrafficAccidentInfo(Integer objtId) {
+        return accidentMapper.getTrafficAccidentInfo(objtId);
+    }
 }

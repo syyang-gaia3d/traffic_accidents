@@ -10,4 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface AccidentMapper {
 
     public List<TrafficAccidentInfo> getTrafficAccidentList(TrafficAccidentInfo params);
+    public TrafficAccidentInfo getTrafficAccidentInfo(Integer objtId);
 }

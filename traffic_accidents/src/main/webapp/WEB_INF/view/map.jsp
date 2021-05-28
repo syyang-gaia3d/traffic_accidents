@@ -91,7 +91,7 @@
 			<div class="layers boardList" style="height: 400px;">
 				<table id="accidentList">
 					<thead>
-						<th>사고일시</th>
+						<th class="sort-list">사고일시</th>
 						<th>사고형태</th>
 						<th>사상자수(사망/중상/경상)</th>
 					</thead>
@@ -159,65 +159,7 @@
 				<button type="button" class="layerClose" title="닫기">닫기</button>
 			</div>
 			<div class="layerContents boardList">
-				사고상세
-				<div class="boardForm">
-					<table>
-						<tr>
-							<th>발생일시</th>
-							<td>
-								2016.05.15 03:00
-							</td>
-						</tr>
-						<tr>
-							<th>사고형태</th>
-							<td>
-								경상사고
-							</td>
-						</tr>
-						<tr>
-							<th>사고구분</th>
-							<td>
-								차대차
-							</td>
-						</tr>
-						<tr>
-							<th>사망자수</th>
-							<td>
-								0
-							</td>
-						</tr>
-						<tr>
-							<th>중상자수</th>
-							<td>
-								5
-							</td>
-						</tr>
-						<tr>
-							<th>경상자수</th>
-							<td>
-								3
-							</td>
-						</tr>
-						<tr>
-							<th>위반내용</th>
-							<td>
-								음주
-							</td>
-						</tr>
-						<tr>
-							<th>발생위치</th>
-							<td>
-								대전 유성구 테크노1로
-							</td>
-						</tr>
-						<tr>
-							<th>사고종류</th>
-							<td>
-								음주운전
-							</td>
-						</tr>
-					</table>
-				</div>
+				<div class="boardForm"></div>
 			</div>
 		</div>
 		<!-- // 사고 상세 -->
@@ -244,6 +186,44 @@
 	<!-- //MAPWRAP  -->
 </div>
 <!-- // WRAP -->
+<table class="hide-custom" id="accidentInfoItem">
+	<tr>
+		<th>발생일시</th>
+		<td class="date-time"></td>
+	</tr>
+	<tr>
+		<th>사고형태</th>
+		<td class="injury-type"></td>
+	</tr>
+	<tr>
+		<th>사고구분</th>
+		<td class="accident-type"></td>
+	</tr>
+	<tr>
+		<th>사망자수</th>
+		<td class="death"></td>
+	</tr>
+	<tr>
+		<th>중상자수</th>
+		<td class="slander"></td>
+	</tr>
+	<tr>
+		<th>경상자수</th>
+		<td class="slightly-injured"></td>
+	</tr>
+	<tr>
+		<th>위반내용</th>
+		<td class="violation"></td>
+	</tr>
+	<tr>
+		<th>발생위치</th>
+		<td class="location"></td>
+	</tr>
+	<tr>
+		<th>사고종류</th>
+		<td class="category"></td>
+	</tr>
+</table>
 
 <script type="text/javascript">
 	var policy = JSON.parse('${policyJson}');

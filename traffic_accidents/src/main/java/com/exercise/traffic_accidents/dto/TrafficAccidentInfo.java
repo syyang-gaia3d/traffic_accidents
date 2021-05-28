@@ -18,6 +18,8 @@ public class TrafficAccidentInfo {
     private String offset;
     // 시간대 검색 여부
     private Boolean isTimeSlot;
+    // 정렬
+    private String orderBy;
     // 파라미터
     private String startDate;
     private String endDate;
@@ -51,5 +53,5 @@ public class TrafficAccidentInfo {
     private String emdCd;       // 읍면동코드
     private Integer x;          // x좌표
     private Integer y;          // y좌표
-    private String geometry;    // point
+    private String geom;    // point
 }

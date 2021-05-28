@@ -13,7 +13,7 @@
         lclas,
         sclas,
         death,
-        swpsh,
+        swpsn,
         sinjpsn,
         injpsn,
         drnkg,
@@ -26,7 +26,7 @@
         emd_cd,
         x,
         y,
-        geometry
+        geom
     </sql>
 
     <sql id="wherePhrase">
@@ -82,7 +82,7 @@
     </sql>
 
     <sql id="orderByPhrase">
-        ORDER BY occu_date DESC
+        ORDER BY occu_date ${orderBy}
     </sql>
 
     <select id="getTrafficAccidentList" parameterType="TrafficAccidentInfo" resultType="TrafficAccidentInfo">
@@ -99,6 +99,15 @@
                 traffic_accident
             <include refid="wherePhrase"/>
         <!-- <include refid="paging.foot" /> -->
+    </select>
+
+    <select id="getTrafficAccidentInfo" parameterType="Integer" resultType="TrafficAccidentInfo">
+        SELECT
+            <include refid="selectPhrase"/>
+        FROM
+            traffic_accident
+        WHERE
+            objt_id = #{objtId}
     </select>
 
 </mapper>

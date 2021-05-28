@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.exercise.traffic_accidents.dto.Paging;
 import com.exercise.traffic_accidents.dto.Policy;
 import com.exercise.traffic_accidents.dto.TrafficAccidentInfo;
 import com.exercise.traffic_accidents.service.AccidentService;
@@ -16,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
@@ -57,5 +57,17 @@ public class AccidentController {
         result.put("list", trafficAccidentList);
 
         return ResponseEntity.ok(result);
-    };
+    }
+
+    @GetMapping(value = "{objtId}")
+    public ResponseEntity<?> detail(@PathVariable(name = "objtId") String objtId) {
+        Map<String, Object> result = new HashMap<>();
+        Integer objtIdInt = Integer.parseInt(objtId);
+
+        TrafficAccidentInfo info = accidentService.getTrafficAccidentInfo(objtIdInt);
+
+        result.put("info", info);
+
+        return ResponseEntity.ok(result);
+    }
 }
