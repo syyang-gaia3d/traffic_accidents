@@ -2,10 +2,112 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.exercise.traffic_accidents.mapper.AccidentMapper">
 
-    <select id="selectTrafficAccidents" parameterType="TrafficAccidentInfo" resultType="TrafficAccidentInfo">
-        SELECT *
-        FROM a2sm_tfcacdsttus
-        LIMIT 10
+    <sql id="selectPhrase">
+        objt_id,
+        occu_year,
+        occu_mt,
+        occu_de,
+        occu_tm,
+        occu_day,
+        occu_date,
+        lclas,
+        sclas,
+        death,
+        swpsn,
+        sinjpsn,
+        injpsn,
+        drnkg,
+        kid,
+        odsn,
+        wlkg,
+        violt_cn,
+        ctprvn_cd,
+        sgg_cd,
+        emd_cd,
+        x,
+        y,
+        geom
+    </sql>
+
+    <sql id="wherePhrase">
+        <where>
+            <if test="isTimeSlot == true">
+                AND (
+                    <if test="startDate != null and startDate != ''">
+                        occu_date <![CDATA[ >= ]]> #{startDate}
+                    </if>
+                    <if test="endDate != null and endDate != ''">
+                        AND occu_date <![CDATA[ <= ]]> #{endDate}
+                    </if>
+                    <if test="startTime != null and startTime != ''">
+                        AND occu_tm  <![CDATA[ >= ]]> #{startTime}
+                    </if>
+                    <if test="endTime != null and endTime != ''">
+                        AND occu_tm  <![CDATA[ <= ]]> #{endTime}
+                    </if>
+                )
+            </if>
+            <if test="isTimeSlot != true">
+                <if test="startDate != null and startDate != ''">
+                    AND (occu_date <![CDATA[ >= ]]> #{startDate}
+                </if>
+                <if test="endDate != null and endDate != ''">
+                    AND occu_date <![CDATA[ <= ]]> #{endDate} )
+                </if>
+                <if test="startTime != null and startTime != ''">
+                    OR (occu_tm  <![CDATA[ >= ]]> #{startTime}
+                </if>
+                <if test="endTime != null and endTime != ''">
+                    AND occu_tm  <![CDATA[ <= ]]> #{endTime} )
+                </if>
+            </if>
+            <if test="injuryTypes != null and injuryTypes.size > 0">
+                AND lclas IN
+                <foreach collection="injuryTypes" item="injury" open="(" separator="," close=")">
+                    #{injury}
+                </foreach>
+            </if>
+            <if test="accidentTypes != null and accidentTypes.size >0">
+                AND sclas IN
+                <foreach collection="accidentTypes" item="type" open="(" separator="," close=")">
+                    #{type}
+                </foreach>
+            </if>
+            <if test="category != null and category.size > 0">
+                <foreach collection="category" item="category" open="" separator="" close="">
+                    AND ${category} IS NOT NULL
+                </foreach>
+            </if>
+        </where>
+    </sql>
+
+    <sql id="orderByPhrase">
+        ORDER BY occu_date ${orderBy}
+    </sql>
+
+    <select id="getTrafficAccidentList" parameterType="TrafficAccidentInfo" resultType="TrafficAccidentInfo">
+        <!-- <include refid="paging.head" /> -->
+            SELECT
+                ROW_NUMBER() OVER (<include refid="orderByPhrase"/>) ROW_NUM,
+                objt_id,
+                occu_date,
+                lclas,
+                death,
+                swpsn,
+                sinjpsn
+            FROM
+                traffic_accident
+            <include refid="wherePhrase"/>
+        <!-- <include refid="paging.foot" /> -->
+    </select>
+
+    <select id="getTrafficAccidentInfo" parameterType="Integer" resultType="TrafficAccidentInfo">
+        SELECT
+            <include refid="selectPhrase"/>
+        FROM
+            traffic_accident
+        WHERE
+            objt_id = #{objtId}
     </select>
 
 </mapper>

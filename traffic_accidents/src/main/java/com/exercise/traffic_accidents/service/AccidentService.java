@@ -14,7 +14,11 @@ public class AccidentService {
     @Autowired
     private AccidentMapper accidentMapper;
 
-    public List<TrafficAccidentInfo> selectTrafficAccidents(TrafficAccidentInfo params) {
-        return accidentMapper.selectTrafficAccidents(params);
+    public List<TrafficAccidentInfo> getTrafficAccidentList(TrafficAccidentInfo params) {
+        return accidentMapper.getTrafficAccidentList(params);
+    }
+
+    public TrafficAccidentInfo getTrafficAccidentInfo(Integer objtId) {
+        return accidentMapper.getTrafficAccidentInfo(objtId);
     }
 }

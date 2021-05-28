@@ -14,7 +14,7 @@ $(document).ready(() => {
 
         //그리기 이벤트
         if($('.distance').hasClass("on")) initMap.pointerMoveHandler(evt);
-      });
+    });
     /*********** click, onchange 등 초기 바인딩 셋팅 ***********/
     // 닫기
     $mapWrap.find('button.close').click(function() {
@@ -62,10 +62,45 @@ $(document).ready(() => {
         }
     });
 
+    // 검색
+    $('#searchBtn').click(function(e) {
+        e.preventDefault();
+        searchAccidentList('desc');
+    });
+
     // 사고상세 창 on/off
-    $('#accidentList tr').click(() => {
+    $('#accidentList tbody').on('click', 'tr', function() {
+        let objtId = $(this).data('id');
+        showAccidentInfo(objtId);
         $('#accidentDetailWrap').show();
     });
+
+    $('#accidentList').find('.sort-list').click(function() {
+		var $target = $(this);
+		var $sibling = $target.siblings('.sort-list');
+		var ascending = '\▲';
+		var descending = '\▼';
+
+		$sibling.removeClass('desc').removeClass('asc');
+		var siblingText = $sibling.text().replace(ascending, '').replace(descending, '');
+		$sibling.text(siblingText);
+
+		var text = $target.text().replace(ascending, '').replace(descending, '');
+
+		$target.toggleClass('desc').removeClass('asc');
+		if(!$target.hasClass('desc')) {
+			$target.toggleClass('asc').removeClass('desc');
+		}
+
+		if($target.hasClass('desc')) {
+			$target.text(text + descending);
+			searchAccidentList('desc');
+		} else if($target.hasClass('asc')) {
+			$target.text(text + ascending);
+			searchAccidentList('asc');
+		}
+
+	});
 
     $mapWrap.find('.zoomin').click(() => {
         initMap.zoomIn();
@@ -92,4 +127,86 @@ $(document).ready(() => {
     });
 
     /*********** click, onchange 등 초기 바인딩 셋팅 ***********/
+
+    // 검색
+    const searchAccidentList = function(orderBy) {
+        let searchParams = $('#searchForm').serializeObject();
+        searchParams.orderBy = orderBy;
+
+        $.ajax({
+            url: '/list',
+            type: 'GET',
+            headers: {'X-Requested-With': 'XMLHttpRequest'},
+            data: searchParams,
+            dataType: 'json',
+            success: (res) => {
+                const table = $('#accidentList');
+                const list = res.list;
+
+                setAccidentList(table, list);
+            },
+            error: (request, status, error) =>{
+                ajaxErrorHandler(request);
+            }
+        });
+    }
+
+    // 상세
+    const showAccidentInfo = function(objtId) {
+        $.ajax({
+            url: '/' + objtId,
+            type: 'GET',
+            headers: {'X-Requested-With': 'XMLHttpRequest'},
+            dataType: 'json',
+            success: (res) => {
+                console.log(res);
+                const info = res.info;
+                setAccidentInfo(info);
+            },
+            error: (request, status, error) => {
+                ajaxErrorHandler(request);
+            }
+        });
+    }
 });
+
+function setAccidentList(table, list) {
+    const tbody = table.find('tbody');
+    let html = '';
+
+    if(list.length == 0) {
+        html += makeNoResults(table);
+    } else {
+        for(var i in list) {
+            html += '<tr data-id="'+ list[i].objtId +'">';
+            html +=     '<td>'+ list[i].occuDate + '</td>';
+            html +=     '<td>' + list[i].lclas + '</td>';
+            html +=     '<td>' + list[i].death + '/' + list[i].swpsn + '/' + list[i].sinjpsn + '</td>';
+            html += '</tr>';
+        }
+    }
+
+    tbody.empty();
+    tbody.append(html);
+}
+
+function setAccidentInfo(info) {
+    $('#accidentDetailWrap').find('.boardForm').empty();
+
+    let accidentInfoItem = $('#accidentInfoItem')
+                            .clone(true)
+                            .removeAttr('id')
+                            .removeClass('hide-custom');
+
+    accidentInfoItem.find('.date-time').text(info.occuYear + '.' + info.occuMt + '.' + info.occuDe + ' ' + info.occuTm + ':00');
+    accidentInfoItem.find('.injury-type').text(info.lclas);
+    accidentInfoItem.find('.accident-type').text(info.sclas);
+    accidentInfoItem.find('.death').text(info.death);
+    accidentInfoItem.find('.slander').text(info.swpsn);
+    accidentInfoItem.find('.slightly-injured').text(info.sinjpsn);
+    accidentInfoItem.find('.violation').text(info.violtCn);
+    accidentInfoItem.find('.location').text('주소입력예정');
+    accidentInfoItem.find('.category').text('사고...처리...');
+
+    $('#accidentDetailWrap').find('.boardForm').append(accidentInfoItem);
+}

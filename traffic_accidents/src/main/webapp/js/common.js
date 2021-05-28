@@ -27,3 +27,36 @@ function formatLength(line) {
 	}
 	return output;
 }
+
+$.fn.serializeObject = function() {
+	"use strict"
+	var result = {}
+	var extend = function(i, element) {
+		var node = result[element.name]
+		if ("undefined" !== typeof node && node !== null) {
+			if ($.isArray(node)) {
+				node.push(element.value)
+			} else {
+				result[element.name] = [ node, element.value ]
+			}
+		} else {
+			result[element.name] = element.value
+		}
+	}
+
+	$.each(this.serializeArray(), extend);
+	return result
+}
+
+// ajax 오류 공통 처리
+function ajaxErrorHandler(request) {
+	alert(request.responseJSON.error.message);
+}
+
+// 검색결과가 없는 경우 표기할 td
+function makeNoResults(table) {
+	const colspan = table.find('th').length;
+	const noResults = '<tr><td colspan=' + colspan + '>검색 결과가 없습니다.</td></tr>';
+
+	return noResults;
+}
