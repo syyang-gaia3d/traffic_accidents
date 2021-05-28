@@ -15,7 +15,7 @@ public class TrafficAccidentInfo {
     private Boolean use;
     private Integer page;
     private Integer size;
-    private String offset;
+    private Integer offset;
     // 시간대 검색 여부
     private Boolean isTimeSlot;
     // 정렬

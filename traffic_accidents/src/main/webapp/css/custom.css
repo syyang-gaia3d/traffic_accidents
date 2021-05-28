@@ -1,3 +1,54 @@
 .hide-custom {
 display: none;
 }
+/* pagination */
+.page-count {
+display: flex;
+}
+.page-count > div {
+flex: auto;
+color: #2f374e;
+font-size: 12px;
+}
+.page-count > div:last-child {
+text-align: right;
+}
+.page-count span {
+color: #0995ff;
+}
+.pagination {
+margin-bottom: 3px;
+text-align: center;
+}
+.pagination a {
+display: inline-block;
+padding: 1px 3px;
+min-width: 15px;
+color: #000;
+text-decoration: none;
+
+border: ipx solid tomato;
+}
+.pagination a.active {
+font-weight: bold;
+color: #0590f8;
+}
+.pagination a.ico {
+width: 15px;
+height: 15px;
+font-size: 0;
+background-image: url(../images/pager.png);
+background-repeat: no-repeat;
+}
+.pagination a.first {
+background-position: 5px 0;
+}
+.pagination a.prev {
+background-position: -46px 0;
+}
+.pagination a.next {
+background-position: -96px 0;
+}
+.pagination a.last {
+background-position: -149px 0;
+}

@@ -60,3 +60,25 @@ function makeNoResults(table) {
 
 	return noResults;
 }
+
+var PAGING_FORMAT = {
+	format: '[ < nncnn > ]',
+	perpage: 10,
+	page: 1,
+	stepwidth: 5,
+	onFormat: function(type) {
+		if (this.active) {
+			switch (type) {
+				case 'first': return '<a href="#" class="ico first" title="first">Go to the first page</a>';
+				case 'prev': return '<a href="#" class="ico prev" title="prev">Go to the previous page</a>';
+				case 'block':
+					if (this.value == this.page) return '<a href="#" class="active">' + this.value + '</a>';
+					else return '<a href="#">' + this.value + '</a>';
+				case 'next': return '<a href="#" class="ico next" title="next">Go to the next page</a>';
+				case 'last': return '<a href="#" class="ico last" title="last">Go to the last page</a>';
+				default: return '';
+			}
+		}
+		return '';
+	}
+};

@@ -101,11 +101,13 @@
 						</tr>
 					</tbody>
 				</table>
-				<div class="pagination">
-					<a href="#" class="prev"><span class="icon-glyph glyph-prev"></span></a>
-					<a href="#" class="current-page">1</a>
-					<a href="#" class="">2</a>
-					<a href="#" class="next"><span class="icon-glyph glyph-next"></span></a>
+				<div class="page-count">
+					<div class="pagination"></div>
+					<select name="perPage" class="page-size">
+						<option value="100">100 건</option>
+						<option value="200">200 건</option>
+						<option value="300">300 건</option>
+					</select>
 				</div>
 			</div>
 		</div>

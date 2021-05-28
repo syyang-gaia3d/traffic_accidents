@@ -18,6 +18,10 @@ public class AccidentService {
         return accidentMapper.getTrafficAccidentList(params);
     }
 
+    public Integer getTotalCountTrafficAccidents(TrafficAccidentInfo params) {
+        return accidentMapper.getTotalCountTrafficAccidents(params);
+    }
+
     public TrafficAccidentInfo getTrafficAccidentInfo(Integer objtId) {
         return accidentMapper.getTrafficAccidentInfo(objtId);
     }

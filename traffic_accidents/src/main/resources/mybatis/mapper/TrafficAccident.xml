@@ -86,7 +86,7 @@
     </sql>
 
     <select id="getTrafficAccidentList" parameterType="TrafficAccidentInfo" resultType="TrafficAccidentInfo">
-        <!-- <include refid="paging.head" /> -->
+        <include refid="paging.head" />
             SELECT
                 ROW_NUMBER() OVER (<include refid="orderByPhrase"/>) ROW_NUM,
                 objt_id,
@@ -98,7 +98,15 @@
             FROM
                 traffic_accident
             <include refid="wherePhrase"/>
-        <!-- <include refid="paging.foot" /> -->
+        <include refid="paging.foot" />
+    </select>
+
+    <select id="getTotalCountTrafficAccidents" parameterType="TrafficAccidentInfo" resultType="Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            traffic_accident
+        <include refid="wherePhrase"/>
     </select>
 
     <select id="getTrafficAccidentInfo" parameterType="Integer" resultType="TrafficAccidentInfo">

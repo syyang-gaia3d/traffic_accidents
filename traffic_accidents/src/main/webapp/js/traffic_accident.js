@@ -65,7 +65,12 @@ $(document).ready(() => {
     // 검색
     $('#searchBtn').click(function(e) {
         e.preventDefault();
-        searchAccidentList('desc');
+        searchAccidentList(null, 'desc');
+    });
+
+    // select
+    $mapWrap.find('#searchLayer').find('.page-size').on('change', function() {
+        searchAccidentList(null, 'desc');
     });
 
     // 사고상세 창 on/off
@@ -75,6 +80,7 @@ $(document).ready(() => {
         $('#accidentDetailWrap').show();
     });
 
+    // 정렬
     $('#accidentList').find('.sort-list').click(function() {
 		var $target = $(this);
 		var $sibling = $target.siblings('.sort-list');
@@ -94,13 +100,14 @@ $(document).ready(() => {
 
 		if($target.hasClass('desc')) {
 			$target.text(text + descending);
-			searchAccidentList('desc');
+			searchAccidentList(null, 'desc');
 		} else if($target.hasClass('asc')) {
 			$target.text(text + ascending);
-			searchAccidentList('asc');
+			searchAccidentList(null, 'asc');
 		}
-
 	});
+
+    /*********** map setting ***********/
 
     $mapWrap.find('.zoomin').click(() => {
         initMap.zoomIn();
@@ -129,9 +136,19 @@ $(document).ready(() => {
     /*********** click, onchange 등 초기 바인딩 셋팅 ***********/
 
     // 검색
-    const searchAccidentList = function(orderBy) {
-        let searchParams = $('#searchForm').serializeObject();
+    const searchAccidentList = function(searchCondition, orderBy) {
+        const searchParams = searchCondition? searchCondition : $('#searchForm').serializeObject();
         searchParams.orderBy = orderBy;
+
+        // 페이징 파라미터
+        let page = searchParams.page ? searchParams.page : 1;
+        let size = $mapWrap.find('#searchLayer').find('.page-size').val();
+        let offset = (page - 1) * size;
+
+        searchParams.use = true;
+        searchParams.page = page;
+        searchParams.size = size;
+        searchParams.offset = offset;
 
         $.ajax({
             url: '/list',
@@ -144,11 +161,30 @@ $(document).ready(() => {
                 const list = res.list;
 
                 setAccidentList(table, list);
+                makePagination(searchParams, res.totalCount);
             },
             error: (request, status, error) =>{
                 ajaxErrorHandler(request);
             }
         });
+    }
+
+    // 페이징
+    function makePagination(searchCondition, totalCount) {
+        const paginationDiv = $('#searchLayer').find('.pagination');
+
+        if (searchCondition.page != 1) {
+        return;
+        }
+
+        PAGING_FORMAT.perpage = searchCondition.size;
+        var paginating = paginationDiv.paging(totalCount, PAGING_FORMAT);
+        paginating.setOptions({onSelect: function(page) {
+        searchCondition.page = page;
+        searchAccidentList(searchCondition, searchCondition.orderBy);
+
+        return false;
+        }});
     }
 
     // 상세

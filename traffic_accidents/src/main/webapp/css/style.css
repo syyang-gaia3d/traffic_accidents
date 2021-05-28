@@ -728,7 +728,7 @@ padding-left: 10px;
 }
 
 /* pagination */
-.pagination {
+/* .pagination {
 text-align: center;
 vertical-align: middle;
 line-height: 21px;
@@ -756,11 +756,11 @@ color: #fff;
 margin-right: 10px;
 }
 .pagination .next {
-/* margin-left: 10px; */
+margin-left: 10px;
 }
 .pageCount {
 margin-bottom: 10px;
-}
+} */
 
 /* 게시판 / 상세 */
 .boardView {

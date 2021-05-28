@@ -54,7 +54,10 @@ public class AccidentController {
         Map<String, Object> result = new HashMap<>();
 
         List<TrafficAccidentInfo> trafficAccidentList = accidentService.getTrafficAccidentList(params);
+        Integer totalCount = accidentService.getTotalCountTrafficAccidents(params);
+
         result.put("list", trafficAccidentList);
+        result.put("totalCount", totalCount);
 
         return ResponseEntity.ok(result);
     }
