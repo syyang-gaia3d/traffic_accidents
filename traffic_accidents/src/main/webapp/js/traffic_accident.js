@@ -116,22 +116,9 @@ $(document).ready(() => {
             dataType: 'json',
             success: (res) => {
                 const table = $('#accidentList');
-                const tbody = table.find('tbody');
+                const list = res.list;
 
-                var list = res.list;
-
-                let html = '';
-
-                for(var idx in list) {
-                    html += '<tr>';
-                    html +=     '<td>'+ list[idx].occuDate + '</td>';
-                    html +=     '<td>' + list[idx].lclas + '</td>';
-                    html +=     '<td>' + list[idx].death + '/' + list[idx].swpsn + '/' + list[idx].sinjpsn + '</td>';
-                    html += '</tr>';
-                }
-
-                tbody.empty();
-                tbody.append(html);
+                makeList(table, list);
             },
             error: (request, status, error) =>{
                 ajaxErrorHandler(request);
@@ -139,3 +126,23 @@ $(document).ready(() => {
         });
     }
 });
+
+function makeList(table, list) {
+    const tbody = table.find('tbody');
+    let html = '';
+
+    if(list.length == 0) {
+        html += makeNoResults(table);
+    } else {
+        for(var i in list) {
+            html += '<tr>';
+            html +=     '<td>'+ list[i].occuDate + '</td>';
+            html +=     '<td>' + list[i].lclas + '</td>';
+            html +=     '<td>' + list[i].death + '/' + list[i].swpsn + '/' + list[i].sinjpsn + '</td>';
+            html += '</tr>';
+        }
+    }
+
+    tbody.empty();
+    tbody.append(html);
+}

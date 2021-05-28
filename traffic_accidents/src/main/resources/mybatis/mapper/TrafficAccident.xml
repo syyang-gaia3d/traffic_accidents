@@ -73,20 +73,11 @@
                     #{type}
                 </foreach>
             </if>
-            <choose>
-                <when test="category == 'drnkg'">
-                    AND drnkg IS NOT NULL
-                </when>
-                <when test="category == 'kid'">
-                    AND kid IS NOT NULL
-                </when>
-                <when test="category == 'odsn'">
-                    AND odsn IS NOT NULL
-                </when>
-                <when test="category == 'wlkg'">
-                    AND wlkg IS NOT NULL
-                </when>
-            </choose>
+            <if test="category != null and category.size > 0">
+                <foreach collection="category" item="category" open="" separator="" close="">
+                    AND ${category} IS NOT NULL
+                </foreach>
+            </if>
         </where>
     </sql>
 

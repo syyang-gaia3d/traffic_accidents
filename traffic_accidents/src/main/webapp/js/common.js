@@ -52,3 +52,11 @@ $.fn.serializeObject = function() {
 function ajaxErrorHandler(request) {
 	alert(request.responseJSON.error.message);
 }
+
+// 검색결과가 없는 경우 표기할 td
+function makeNoResults(table) {
+	const colspan = table.find('th').length;
+	const noResults = '<tr><td colspan=' + colspan + '>검색 결과가 없습니다.</td></tr>';
+
+	return noResults;
+}
