@@ -3,10 +3,11 @@ import { InitMap } from './main_map.js';
 /*********** html 요소 변수 선언 ***********/
 const $mapWrap = $('#mapWrap');
 
+const initMap = new InitMap(policy);
+initMap.create('map');
+
 $(document).ready(() => {
 
-    const initMap = new InitMap(policy);
-    initMap.create('map');
 
     const map = initMap.getMap();
     map.on('pointermove', (evt) => {
@@ -15,6 +16,7 @@ $(document).ready(() => {
         //그리기 이벤트
         if($('.distance').hasClass("on")) initMap.pointerMoveHandler(evt);
     });
+
     /*********** click, onchange 등 초기 바인딩 셋팅 ***********/
     // 닫기
     $mapWrap.find('button.close').click(function() {
@@ -27,7 +29,7 @@ $(document).ready(() => {
     });
 
     // ul 메뉴
-    $('#layersBtn').click(function() {
+    $mapWrap.find('#searchBtn').click(function() {
         $(this).toggleClass('on');
 
         if($(this).hasClass('on')) {
@@ -37,7 +39,7 @@ $(document).ready(() => {
         }
     });
 
-    $('#layers').click(function() {
+    $mapWrap.find('#layers').click(function() {
         $(this).toggleClass('on');
 
         if($(this).hasClass('on')) {
@@ -45,6 +47,13 @@ $(document).ready(() => {
         } else {
             $mapWrap.find('#onOffLayer').removeClass('on');
         }
+    });
+
+    $mapWrap.find('#onOffLayer').find('input[name="layerId"]').click(function() {
+        const layerId = this.value;
+        const checked = $(this).prop('checked');
+
+        controlLayerVisible(layerId, checked);
     });
 
     $('#cluster').click(function() {
@@ -108,6 +117,9 @@ $(document).ready(() => {
 	});
 
     /*********** map setting ***********/
+
+    // div 팝업 draggable
+	$('.layerWrap').draggable();
 
     $mapWrap.find('.zoomin').click(() => {
         initMap.zoomIn();
@@ -245,4 +257,13 @@ function setAccidentInfo(info) {
     accidentInfoItem.find('.category').text('사고...처리...');
 
     $('#accidentDetailWrap').find('.boardForm').append(accidentInfoItem);
+}
+
+// 레이어 on/off
+function controlLayerVisible(layerId, visible) {
+    const targetLayerId = policy[layerId];
+    const targetLayer = initMap.getLayerById(targetLayerId);
+    if(targetLayer != null) {
+        targetLayer.setVisible(visible);
+    }
 }

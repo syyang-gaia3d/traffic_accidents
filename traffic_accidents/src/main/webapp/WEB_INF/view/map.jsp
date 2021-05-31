@@ -22,7 +22,7 @@
 
 		<!-- LAYERS -->
         <ul class="layersHead">
-			<li class="on" id="layersBtn">검색</li>
+			<li class="on" id="searchBtn">검색</li>
 			<li id="layers">레이어</li>
 			<li id="cluster">클러스터</li>
 		</ul>
@@ -116,10 +116,10 @@
 			<div class="layers">
 				<ul>
 					<label>레이어 ON/OFF</label>
-					<li><input type="checkbox"> OSM</li>
-					<li><input type="checkbox"> 시도</li>
-					<li><input type="checkbox"> 시군구</li>
-					<li><input type="checkbox"> 읍면동</li>
+					<li><input type="checkbox" name="layerId" value="layerInitOsm" checked="checked"> OSM</li>
+					<li><input type="checkbox" name="layerId" value="layerInitCtprvn"> 시도</li>
+					<li><input type="checkbox" name="layerId" value="layerInitCgg"> 시군구</li>
+					<li><input type="checkbox" name="layerId" value="layerInitEmd"> 읍면동</li>
 				</ul>
 			</div>
 		</div>
@@ -239,7 +239,7 @@
 	});
 </script>
 <script src="<c:url value='/js/common.js?v=${JS_CSS_VERSION}' />"></script>
+<%-- <script src="<c:url value='/js/map_func.js?v=${JS_CSS_VERSION}' />"></script> --%>
 <script type="module" src="<c:url value='/js/traffic_accident.js?v=${JS_CSS_VERSION}' />"></script>
-<%-- <script type="module" src="<c:url value='/js/main_map.js?v=${JS_CSS_VERSION}' />"></script> --%>
 </body>
 </html>

@@ -22,15 +22,15 @@ export function InitMap(policy) {
   const geoserverDataStore = policy.geoserverDataStore;
   const coordinate = policy.layerTargetCoordinate; //EPSG:3857 (WGS84)
 
-  let layerInitMapCenter = [];
-	let mapCenterArray = policy.layerInitMapCenter.split(",");
-	for( var i=0; i<mapCenterArray.length; i++) {
+  const layerInitMapCenter = [];
+	const mapCenterArray = policy.layerInitMapCenter.split(",");
+	for( let i=0; i<mapCenterArray.length; i++) {
 		layerInitMapCenter.push(parseFloat(mapCenterArray[i]));
 	}
 
-	let layerInitMapExtent = [];
-	let mapExtentArray = policy.layerInitMapExtent.split(",");
-	for( var i=0; i<mapExtentArray.length; i++) {
+	const layerInitMapExtent = [];
+	const mapExtentArray = policy.layerInitMapExtent.split(",");
+	for( let i=0; i<mapExtentArray.length; i++) {
 		layerInitMapExtent.push(parseFloat(mapExtentArray[i]));
 	}
 
@@ -59,19 +59,19 @@ export function InitMap(policy) {
 
 
   // 레이어
-  let layers = [];
+  const layers = [];
   // osm 레이어
-	let layerInitOsm = policy.layerInitOsm;
-	let layerInitOsmVisible = policy.layerInitOsmVisible;
+	const layerInitOsm = policy.layerInitOsm;
+	const layerInitOsmVisible = policy.layerInitOsmVisible;
 	// 시도 레이어(ctprvn)
-	let layerInitCtprvn = policy.layerInitCtprvn;
-	let layerInitCtprvnVisible = policy.layerInitCtprvnVisible;
+	const layerInitCtprvn = policy.layerInitCtprvn;
+	const layerInitCtprvnVisible = policy.layerInitCtprvnVisible;
   // 시군구 레이어(cgg)
-  let layerInitCgg = policy.layerInitCgg;
-  let layerInitCggVisible = policy.layerInitCggVisible;
+  const layerInitCgg = policy.layerInitCgg;
+  const layerInitCggVisible = policy.layerInitCggVisible;
   // 읍면동 레이어(emd)
-  let layerInitEmd = policy.layerInitEmd;
-  let layerInitEmdVisible = policy.layerInitEmdVisible;
+  const layerInitEmd = policy.layerInitEmd;
+  const layerInitEmdVisible = policy.layerInitEmdVisible;
 
 
   // OSM 배경지도
