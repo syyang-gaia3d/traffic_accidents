@@ -16,8 +16,10 @@ export function InitMap(policy) {
   let helpTooltip = null;
   let measureTooltipElement = null;
   let measureTooltip = null;
+
   let select = new ol.interaction.Select();
   let selectedFeature = null;
+
   // geoserver
   const geoserverDataUrl = policy.geoserverDataUrl;
   const geoserverDataWorkspace = policy.geoserverDataWorkspace;
@@ -442,7 +444,7 @@ export function InitMap(policy) {
           params: {
             'VERSION' : '1.1.1',
             tiled: true,
-   					  CQL_FILTER: queryString,
+   					  CQL_FILTER: queryString == '' ? null : queryString,
               srs: coordinate,
               layers: [layerName],
             // env: env,
@@ -459,8 +461,6 @@ export function InitMap(policy) {
       map.addInteraction(select);
 
       selectedFeature = select.getFeatures();
-
-      console.log(selectedFeature);
 
       selectedFeature.clear();
       selectedFeature.push(feature);
