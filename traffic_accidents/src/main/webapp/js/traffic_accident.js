@@ -29,7 +29,7 @@ $(document).ready(() => {
     });
 
     // ul 메뉴
-    $mapWrap.find('#searchBtn').click(function() {
+    $mapWrap.find('#layerBtn').click(function() {
         $(this).toggleClass('on');
 
         if($(this).hasClass('on')) {
@@ -150,6 +150,8 @@ $(document).ready(() => {
     // 검색
     const searchAccidentList = function(searchCondition, orderBy) {
         const searchParams = searchCondition? searchCondition : $('#searchForm').serializeObject();
+        var queryString = setQueryString(searchParams);
+        console.log(queryString);
         searchParams.orderBy = orderBy;
 
         // 페이징 파라미터
@@ -174,6 +176,8 @@ $(document).ready(() => {
 
                 setAccidentList(table, list);
                 makePagination(searchParams, res.totalCount);
+                // 지도에 point
+                initMap.getAccidentLayer('traffic_accident', true, queryString);
             },
             error: (request, status, error) =>{
                 ajaxErrorHandler(request);
@@ -210,6 +214,7 @@ $(document).ready(() => {
                 console.log(res);
                 const info = res.info;
                 setAccidentInfo(info);
+                initMap.flyToPoint(info.geom);
             },
             error: (request, status, error) => {
                 ajaxErrorHandler(request);
@@ -266,4 +271,77 @@ function controlLayerVisible(layerId, visible) {
     if(targetLayer != null) {
         targetLayer.setVisible(visible);
     }
+}
+
+// traffic_accident cql filter
+function setQueryString(params) {
+    let queryString = '';
+
+    if(params['isTimeSlot']) {
+        if(params['startDate'] && params['endDate']) {
+            queryString += ' AND occu_date >= \'' + params['startDate'] + '\'';
+            queryString += ' AND occu_date <= \'' + params['endDate'] + '\'';
+        }
+        if(params['startTime'] && params['endTime']) {
+            queryString += ' AND occu_tm >= \'' + params['startTime'] + '\'';
+            queryString += ' AND occu_tm <= \'' + params['endTime'] + '\'';
+        }
+    } else {
+        if(params['startDate'] && params['endDate']) {
+            queryString += ' AND occu_date >= \'' + params['startDate'] + '\'';
+            queryString += ' AND occu_date <= \'' + params['endDate'] + '\'';
+        }
+        if(params['startTime'] && params['endTime']) {
+            queryString += ' OR (occu_tm >= \'' + params['startTime'] + '\' AND occu_tm <= \'' + params['endTime'] + '\')';
+        }
+    }
+
+    if(params['injuryTypes'] != null) {
+        let injuryTypes = '';
+        if(typeof params['injuryTypes'] == 'string') {
+            queryString += ' AND lclas = \'' + params['injuryTypes'] + '\'';
+        }
+
+        if(typeof params['injuryTypes'] == 'object') {
+            for(var i in params['injuryTypes']) {
+                if(i == params['injuryTypes'].length-1) {
+                    injuryTypes += '\'' + params['injuryTypes'][i] + '\'';
+                } else {
+                    injuryTypes += '\'' + params['injuryTypes'][i] + '\', ';
+                }
+            }
+            queryString += ' AND lclas IN (' + injuryTypes + ')';
+        }
+    }
+
+    if(params['accidentTypes'] != null) {
+        let accidentTypes = '';
+        if(typeof params['accidentTypes'] == 'string') {
+            queryString += ' AND sclas = \'' + params['accidentTypes'] + '\'';
+        }
+
+        if(typeof params['accidentTypes'] == 'object') {
+            for(var i in params['accidentTypes']) {
+                if(i == params['accidentTypes'].length-1) {
+                    accidentTypes += '\'' + params['accidentTypes'][i] + '\'';
+                } else {
+                    accidentTypes += '\'' + params['accidentTypes'][i] + '\', ';
+                }
+            }
+            queryString += ' AND sclas IN (' + accidentTypes + ')';
+        }
+    }
+
+    if(params['category'] != null) {
+        if(typeof params['category'] == 'object') {
+            for(var i in params['category']) {
+                let category = params['category'][i];
+                queryString += ' AND ' + category + ' IS NOT NULL';
+            }
+        } else {
+            queryString += ' AND ' + params['category'] + ' IS NOT NULL';
+        }
+    }
+
+    return queryString.replace(' AND', '');
 }

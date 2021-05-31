@@ -22,7 +22,7 @@
 
 		<!-- LAYERS -->
         <ul class="layersHead">
-			<li class="on" id="searchBtn">검색</li>
+			<li class="on" id="layerBtn">검색</li>
 			<li id="layers">레이어</li>
 			<li id="cluster">클러스터</li>
 		</ul>

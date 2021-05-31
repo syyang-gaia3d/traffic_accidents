@@ -26,7 +26,7 @@
         emd_cd,
         x,
         y,
-        geom
+        ST_AsText(geom) AS geom
     </sql>
 
     <sql id="wherePhrase">

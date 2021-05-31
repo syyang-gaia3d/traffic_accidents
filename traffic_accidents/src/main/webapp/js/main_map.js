@@ -16,8 +16,10 @@ export function InitMap(policy) {
   let helpTooltip = null;
   let measureTooltipElement = null;
   let measureTooltip = null;
+  let select = new ol.interaction.Select();
+  let selectedFeature = null;
   // geoserver
-  const geoserverDomainUrl = policy.geoserverDomainUrl;
+  const geoserverDataUrl = policy.geoserverDataUrl;
   const geoserverDataWorkspace = policy.geoserverDataWorkspace;
   const geoserverDataStore = policy.geoserverDataStore;
   const coordinate = policy.layerTargetCoordinate; //EPSG:3857 (WGS84)
@@ -88,7 +90,7 @@ export function InitMap(policy) {
 //     id : layerInitCtprvn,
 //     visible : layerInitCtprvnVisible,
 //     source : new ol.source.TileWMS({
-//       url: geoserverDomainUrl + '/' + geoserverDataWorkspace + '/wms',
+//       url: geoserverDataUrl + '/' + geoserverDataWorkspace + '/wms',
 //       params: {
 //         'VERSION' : '1.1.1',
 //         tiled: true,
@@ -108,7 +110,7 @@ export function InitMap(policy) {
 //     id : layerInitCgg,
 //     visible : layerInitCggVisible,
 //     source : new ol.source.TileWMS({
-//       url: geoserverDomainUrl + '/' + geoserverDataWorkspace + '/wms',
+//       url: geoserverDataUrl + '/' + geoserverDataWorkspace + '/wms',
 //       params: {
 //         'VERSION' : '1.1.1',
 //         tiled: true,
@@ -128,7 +130,7 @@ export function InitMap(policy) {
 //     id : layerInitEmd,
 //     visible : layerInitEmdVisible,
 //     source : new ol.source.TileWMS({
-//       url: geoserverDomainUrl + '/' + geoserverDataWorkspace + '/wms',
+//       url: geoserverDataUrl + '/' + geoserverDataWorkspace + '/wms',
 //       params: {
 //         'VERSION' : '1.1.1',
 //         tiled: true,
@@ -232,6 +234,47 @@ export function InitMap(policy) {
 
       return layer;
     },
+    /**
+    * 현재 맵의 좌표계를 얻는다.
+    * @returns {Object} ol.Proj
+    */
+     getCurProj: function() {
+      return map.getView().getProjection();
+    },
+    /**
+     * WKT를 이용하여, 피쳐 생성
+     * @param  {string} wkt
+     * @return {Object} ol.Feature
+     */
+    getFeatureFromWkt: function(wkt){
+      var format = new ol.format.WKT();
+      var projection = this.getCurProj();
+
+      var feature = format.readFeature(wkt, {
+          dataProjection: projection,
+          featureProjection: projection
+      });
+      return feature;
+    },
+    /**
+     * WKT를 이용하여, 지오메트리 생성
+     * @param  {string} wkt
+     * @return {Object} ol.Geometry
+     */
+    getGeometryFromWkt: function(wkt){
+      var format = new ol.format.WKT();
+      var geometry = format.readGeometry(wkt);
+      return geometry;
+    },
+    /**
+     * 지오메트리를 이용하여, WKT 생성
+     * @param  {Object} ol.Geometry
+     * @return {string} wkt
+     */
+    getWktByGeometry: function(geometry) {
+      var wkt = (new ol.format.WKT()).writeGeometry(geometry);
+      return wkt;
+    },
     zoomIn: () => {
       const view = map.getView();
       const zoom = view.getZoom();
@@ -258,6 +301,7 @@ export function InitMap(policy) {
         }
       });
     },
+    /* 거리측정 */
     addMeasureDrawInteraction : function() {
       var listener;
       const layer = this.getLayerById('measure_layer');
@@ -384,6 +428,54 @@ export function InitMap(policy) {
         helpTooltipElement.classList.remove('hidden');
       }
     },
+    /* 사고위치 레이어 */
+    getAccidentLayer : function(layerKey, visible, queryString) {
+      layerKey = layerKey.toLowerCase();
+      map.removeLayer(this.getLayerById(layerKey));
+
+      const layerName = geoserverDataWorkspace + ":" + layerKey;
+      const layer = new ol.layer.Tile({
+        id: layerKey,
+        visible: (visible == undefined) ? false : visible,
+        source: new ol.source.TileWMS({
+          url: geoserverDataUrl + '/' + geoserverDataWorkspace + '/wms',
+          params: {
+            'VERSION' : '1.1.1',
+            tiled: true,
+   					  CQL_FILTER: queryString,
+              srs: coordinate,
+              layers: [layerName],
+            // env: env,
+            // STYLES : [geoserverDataWorkspace + "_" + geometryType]
+          },
+            crossOrigin: 'anonymous'
+        })
+      });
+      // 맵 생성
+      map.addLayer(layer);
+    },
+    getSelectedVectorFeatureByWkt: function(wkt) {
+      var feature = this.getFeatureFromWkt(wkt);
+      map.addInteraction(select);
+
+      selectedFeature = select.getFeatures();
+
+      console.log(selectedFeature);
+
+      selectedFeature.clear();
+      selectedFeature.push(feature);
+    },
+    clearSelectedVectorFeature: function() {
+      selectedFeature = null;
+      map.removeInteraction(select);
+    },
+    flyToPoint: function(wkt) {
+      let point = this.getGeometryFromWkt(wkt);
+
+      map.getView().fit(point.getExtent());
+      this.clearSelectedVectorFeature();
+      this.getSelectedVectorFeatureByWkt(wkt);
+    }
   }
 
 }
