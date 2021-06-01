@@ -119,7 +119,9 @@ $(document).ready(() => {
     /*********** map setting ***********/
 
     // div 팝업 draggable
-	$('.layerWrap').draggable();
+	$('.layerWrap').draggable({
+        handle: '.layerHead'
+    });
 
     $mapWrap.find('.zoomin').click(() => {
         initMap.zoomIn();
