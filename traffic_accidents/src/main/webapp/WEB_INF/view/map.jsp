@@ -148,7 +148,15 @@
 			</div>
 			<div class="layerContents">
 				<div>
-					그래프
+					<ul class="sectionHead">
+						<li class="sectionMenu on">사고형태</li>
+						<li class="sectionMenu">사상자</li>
+						<li class="sectionMenu">사고구분</li>
+						<li class="sectionMenu">사상자수</li>
+						<div>
+							<canvas id="accidentChart"></canvas>
+						</div>
+					</ul>
 				</div>
 			</div>
 		</div>
