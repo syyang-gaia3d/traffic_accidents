@@ -14,3 +14,4 @@
 <script src="<c:url value='/js/extranlib/jquery-ui/jquery-ui.min.js?v=${JS_CSS_VERSION}' />"></script>
 <script src="<c:url value='/js/extranlib/jquery-ui/jquery-ui.datepicker-ko.js'/>"></script>
 <script src="<c:url value='/js/extranlib/ol/ol-6.5.0.js?v=${JS_CSS_VERSION}' />"></script>
+<script src="<c:url value='/js/extranlib/chart/chart-3.3.2.js?v=${JS_CSS_VERSION}' />"></script>

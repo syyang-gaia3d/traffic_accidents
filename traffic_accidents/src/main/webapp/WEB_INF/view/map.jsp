@@ -248,5 +248,6 @@
 <script src="<c:url value='/js/common.js?v=${JS_CSS_VERSION}' />"></script>
 <%-- <script src="<c:url value='/js/map_func.js?v=${JS_CSS_VERSION}' />"></script> --%>
 <script type="module" src="<c:url value='/js/traffic_accident.js?v=${JS_CSS_VERSION}' />"></script>
+<script src="<c:url value='/js/chart.js?v=${JS_CSS_VERSION}' />"></script>
 </body>
 </html>
