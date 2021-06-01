@@ -198,7 +198,7 @@ export function InitMap(policy) {
     positioning: 'top'
   });
 
-  let map;
+  var map;
 
   /**
    * public
@@ -498,7 +498,7 @@ export function InitMap(policy) {
               srs: coordinate,
               layers: [layerName],
             // env: env,
-            // STYLES : [geoserverDataWorkspace + "_" + geometryType]
+            STYLES : ['traffic_accident']
           },
             crossOrigin: 'anonymous'
         })
