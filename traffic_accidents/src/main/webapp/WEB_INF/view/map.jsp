@@ -141,23 +141,21 @@
 		</div>
 
 		<!-- 그래프 -->
-		<div class="layerWrap setup" style="top: 36px; left: 500px; display:none;" id="graphLayerWrap">
+		<div class="layerWrap" style="top: 50px; left: 400px; display:none;" id="graphLayerWrap">
 			<div class="layerHead">
 				<h4>그래프</h4>
 				<button type="button" class="layerClose" title="닫기">닫기</button>
 			</div>
 			<div class="layerContents">
-				<div>
-					<ul class="sectionHead">
-						<li class="sectionMenu on">사고형태</li>
-						<li class="sectionMenu">사상자</li>
-						<li class="sectionMenu">사고구분</li>
-						<li class="sectionMenu">사상자수</li>
-						<div>
-							<canvas id="accidentChart"></canvas>
-						</div>
-					</ul>
-				</div>
+				<ul class="sectionHeader">
+					<button class="sectionMenu on">사고형태</button>
+					<button class="sectionMenu">사상자</button>
+					<button class="sectionMenu">사고구분</button>
+					<button class="sectionMenu">사상자수</button>
+					<div>
+						<canvas id="accidentChart"></canvas>
+					</div>
+				</ul>
 			</div>
 		</div>
 		<!-- // 그래프 -->
