@@ -25,4 +25,8 @@ public class AccidentService {
     public TrafficAccidentInfo getTrafficAccidentInfo(Integer objtId) {
         return accidentMapper.getTrafficAccidentInfo(objtId);
     }
+
+    public TrafficAccidentInfo getTrafficAccidentInfoByPoint(String point) {
+        return accidentMapper.getTrafficAccidentInfoByPoint(point);
+    }
 }

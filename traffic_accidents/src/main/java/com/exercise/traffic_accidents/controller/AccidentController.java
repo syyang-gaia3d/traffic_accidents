@@ -11,11 +11,14 @@ import com.exercise.traffic_accidents.service.PolicyService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
@@ -72,5 +75,26 @@ public class AccidentController {
         result.put("info", info);
 
         return ResponseEntity.ok(result);
+    }
+
+    @PostMapping(value = "/info/point")
+    public ResponseEntity<?> getInfoByPoint(@RequestBody Map<String, Object> data) {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            // log.info("@@@@@@@@@@ point={}", data);
+            String point = (String) data.get("point");
+            TrafficAccidentInfo info = accidentService.getTrafficAccidentInfoByPoint(point);
+
+            result.put("info", info);
+            return ResponseEntity.ok(result);
+        } catch(Exception e) {
+            e.printStackTrace();
+
+            result.put("statusCode", HttpStatus.INTERNAL_SERVER_ERROR.value());
+			return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+
     }
 }

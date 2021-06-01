@@ -14,4 +14,6 @@ public interface AccidentMapper {
     public Integer getTotalCountTrafficAccidents(TrafficAccidentInfo params);
 
     public TrafficAccidentInfo getTrafficAccidentInfo(Integer objtId);
+
+    public TrafficAccidentInfo getTrafficAccidentInfoByPoint(String point);
 }

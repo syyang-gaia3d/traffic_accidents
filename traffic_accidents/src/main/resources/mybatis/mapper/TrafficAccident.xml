@@ -118,4 +118,14 @@
             objt_id = #{objtId}
     </select>
 
+    <select id="getTrafficAccidentInfoByPoint" parameterType="String" resultType="TrafficAccidentInfo">
+        SELECT
+            <include refid="selectPhrase"/>
+        FROM
+            traffic_accident
+        WHERE
+            ST_Intersects(geom, ST_Buffer(ST_GeomFromText(#{point}), 100))
+        ORDER BY ST_Distance(geom, ST_GeomFromText(#{point})) ASC LIMIT 1
+    </select>
+
 </mapper>

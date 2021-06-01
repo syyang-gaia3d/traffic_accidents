@@ -172,6 +172,7 @@
 				<button type="button" class="zoomin" title="확대">확대</button>
 				<button type="button" class="zoomout" title="축소">축소</button>
 				<button type="button" class="distance" title="거리">거리</button>
+				<button type="button" class="oinfo" title="상세정보">상세정보</button>
 			</div>
 		</div>
 		<!-- //CTRLMAP  -->

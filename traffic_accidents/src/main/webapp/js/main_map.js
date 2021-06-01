@@ -216,6 +216,56 @@ export function InitMap(policy) {
         view : view,
         target : element
       });
+
+      map.on('click', (e) => {
+        if($('.oinfo').hasClass('on')) {
+          let coordinate = map.getCoordinateFromPixel(e.pixel);
+          let point = 'POINT(' + coordinate[0] + ' ' + coordinate[1] + ')';
+
+          $.ajax({
+            url: '/info/point',
+            type: 'POST',
+            contentType:'application/json; charset=UTF-8',
+            headers: {"X-Requested-With": "XMLHttpRequest"},
+            data: JSON.stringify({point : point}),
+            datatype: 'json',
+            success: (res) => {
+              let info = res.info;
+
+              if(info == null) {
+                alert('선택된 점이 없습니다.');
+                return;
+              }
+
+              $('#accidentDetailWrap').find('.boardForm').empty();
+
+              let accidentInfoItem = $('#accidentInfoItem')
+                                      .clone(true)
+                                      .removeAttr('id')
+                                      .removeClass('hide-custom');
+
+              accidentInfoItem.find('.date-time').text(info.occuYear + '.' + info.occuMt + '.' + info.occuDe + ' ' + info.occuTm + ':00');
+              accidentInfoItem.find('.injury-type').text(info.lclas);
+              accidentInfoItem.find('.accident-type').text(info.sclas);
+              accidentInfoItem.find('.death').text(info.death);
+              accidentInfoItem.find('.slander').text(info.swpsn);
+              accidentInfoItem.find('.slightly-injured').text(info.sinjpsn);
+              accidentInfoItem.find('.violation').text(info.violtCn);
+              accidentInfoItem.find('.location').text('주소입력예정');
+              accidentInfoItem.find('.category').text('사고...처리...');
+
+              $('#accidentDetailWrap').find('.boardForm').append(accidentInfoItem);
+              $('#accidentDetailWrap').show();
+
+              $('#accidentList').find('tr').removeClass('selected');
+              $('#accidentList').find('#' + String(info.objtId)).addClass('selected');
+            },
+            error: (request, status, error) => {
+              ajaxErrorHandler(request);
+            }
+          });
+        }
+      });
     },
     getMap: () => {
       return map;

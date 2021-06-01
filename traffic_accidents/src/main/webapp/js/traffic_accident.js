@@ -145,6 +145,9 @@ $(document).ready(() => {
         }
     });
 
+    $mapWrap.find('.oinfo').click(function() {
+        $(this).toggleClass('on');
+    });
     /*********** click, onchange 등 초기 바인딩 셋팅 ***********/
 
     // 검색
