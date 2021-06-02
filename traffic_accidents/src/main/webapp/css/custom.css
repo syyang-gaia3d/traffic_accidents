@@ -1,6 +1,9 @@
 .hide-custom {
 display: none;
 }
+.sectionMenu.on {
+background-color: #4648BF;
+}
 /* pagination */
 .page-count {
 display: flex;
