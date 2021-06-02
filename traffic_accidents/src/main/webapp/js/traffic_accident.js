@@ -1,13 +1,13 @@
-import { InitMap } from './main_map.js';
+import InitMap from './main_map.js';
 
-/*********** html 요소 변수 선언 ***********/
+/*********** 전역 변수 선언 ***********/
 const $mapWrap = $('#mapWrap');
+var chart = null;
 
 const initMap = new InitMap(policy);
 initMap.create('map');
 
 $(document).ready(() => {
-
 
     const map = initMap.getMap();
     map.on('pointermove', (evt) => {
@@ -26,6 +26,7 @@ $(document).ready(() => {
 
     $mapWrap.find('button.layerClose').click(function() {
         $(this).parents('div.layerWrap').hide();
+        $('#graphBtn').removeClass('on');
     });
 
     // ul 메뉴
@@ -39,6 +40,12 @@ $(document).ready(() => {
         }
     });
 
+    // div 팝업 draggable
+	$('.layerWrap').draggable({
+        handle: '.layerHead'
+    });
+
+    // layer on/off
     $mapWrap.find('#layers').click(function() {
         $(this).toggleClass('on');
 
@@ -56,19 +63,10 @@ $(document).ready(() => {
         controlLayerVisible(layerId, checked);
     });
 
+    // cluster on/off
     $('#cluster').click(function() {
         $(this).toggleClass('on');
         console.log('클러스터 on/off');
-    });
-
-    // 그래프 창 on/off
-    $('#graphBtn').click(function() {
-        $(this).toggleClass('on');
-        if($(this).hasClass('on')) {
-            $('#graphLayerWrap').show();
-        } else {
-            $('#graphLayerWrap').hide();
-        }
     });
 
     // 검색
@@ -77,7 +75,7 @@ $(document).ready(() => {
         searchAccidentList(null, 'desc');
     });
 
-    // select
+    // 페이지 당 표시할 사고건수 수정 시
     $mapWrap.find('#searchLayer').find('.page-size').on('change', function() {
         searchAccidentList(null, 'desc');
     });
@@ -116,12 +114,53 @@ $(document).ready(() => {
 		}
 	});
 
-    /*********** map setting ***********/
-
-    // div 팝업 draggable
-	$('.layerWrap').draggable({
-        handle: '.layerHead'
+    // 그래프 창 on/off
+    $('#graphBtn').click(function() {
+        $(this).toggleClass('on');
+        if($(this).hasClass('on')) {
+            $('#graphLayerWrap').show();
+        } else {
+            // 그래프 초기화 필요
+            $('#graphLayerWrap').hide();
+        }
     });
+
+    // 그래프 선택
+    $('#graphLayerWrap').find('button.sectionMenu').click(function() {
+        $(this).toggleClass('on');
+
+        if($(this).hasClass('on')) {
+            $(this).siblings().removeClass('on');
+
+            if(chart != null) chart.destroy();
+
+            const id = this.id;
+            const graphType = $(this).data('graph');
+            const params = $('#searchForm').serializeObject();
+            let data = {};
+            // 그래프 요청 함수 ajax
+            $.ajax({
+                url: '/graph/' + id,
+                type: 'GET',
+                headers: {'X-Requested-With': 'XMLHttpRequest'},
+                data: params,
+                datatype: 'json',
+                success: (res) => {
+                    data = res.data;
+
+                    // console.log(data);
+
+                    // 그래프 그리기 - 각 그래프마다 data, color, chart를 따로 해야함
+                    chart = createChart(graphType, id, data);
+                },
+                error: (request, status, error) =>{
+                    ajaxErrorHandler(request);
+                }
+            });
+        }
+    });
+
+    /*********** map setting ***********/
 
     $mapWrap.find('.zoomin').click(() => {
         initMap.zoomIn();

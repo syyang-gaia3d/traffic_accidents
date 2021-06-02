@@ -66,6 +66,8 @@
 										<input type="checkbox" name="accidentTypes" value="차대차" class="hhi"> 차대차
 										<input type="checkbox" name="accidentTypes" value="차대사람" class="hhi"> 차대사람
 										<input type="checkbox" name="accidentTypes" value="차량단독" class="hhi"> 차량단독
+										<input type="checkbox" name="accidentTypes" value="건널목" class="hhi"> 건널목
+										<input type="checkbox" name="accidentTypes" value="철길건널목" class="hhi"> 철길건널목
 									</td>
 								</tr>
 								<tr>
@@ -129,9 +131,11 @@
 		<!-- SETUP -->
 		<div class="setupNav">
 			사고구분 :
+			<input type="checkbox"> 건널목
 			<input type="checkbox"> 차대차
 			<input type="checkbox"> 차대사람
-			<input type="checkbox"> 차대기타
+			<input type="checkbox"> 차량단독
+			<input type="checkbox"> 철길건널목
 			<br>
 			사고종류 :
 			<input type="checkbox"> 음주운전
@@ -148,10 +152,10 @@
 			</div>
 			<div class="layerContents">
 				<ul class="sectionHeader">
-					<button class="sectionMenu on">사고형태</button>
-					<button class="sectionMenu">사상자</button>
-					<button class="sectionMenu">사고구분</button>
-					<button class="sectionMenu">사상자수</button>
+					<button class="sectionMenu on" data-graph="bar" id="injuries">일별 사고형태</button>
+					<button class="sectionMenu" data-graph="bar" id="casualties">일별 사상자</button>
+					<button class="sectionMenu" data-graph="pie" id="accident">사고구분</button>
+					<button class="sectionMenu" data-graph="pie" id="casualty">사상자수</button>
 					<div>
 						<canvas id="accidentChart"></canvas>
 					</div>
@@ -239,15 +243,12 @@
 
 	$(document).ready(function() {
 		initJqueryCalendar();
-		//
-		// var policy = {};
-		// var InitMap = new InitMap(policy);
-		// InitMap.create('map');
 	});
 </script>
 <script src="<c:url value='/js/common.js?v=${JS_CSS_VERSION}' />"></script>
-<%-- <script src="<c:url value='/js/map_func.js?v=${JS_CSS_VERSION}' />"></script> --%>
-<script type="module" src="<c:url value='/js/traffic_accident.js?v=${JS_CSS_VERSION}' />"></script>
 <script src="<c:url value='/js/chart.js?v=${JS_CSS_VERSION}' />"></script>
+<script type="module" src="<c:url value='/js/traffic_accident.js?v=${JS_CSS_VERSION}' />"></script>
+<%-- <script type="module" src="<c:url value='/js/main_map.js?v=${JS_CSS_VERSION}' />"></script> --%>
+<%-- <script src="<c:url value='/js/traffic_accident.js?v=${JS_CSS_VERSION}' />"></script> --%>
 </body>
 </html>
