@@ -59,8 +59,16 @@ function makeData(id, originData) {
     }
 
     if(id == 'accident') {
+        let dataLabels = [];
+        let dataArray = [];
+
+        for(var i in originData) {
+            dataLabels.push(originData[i].sclas);
+            dataArray.push(originData[i].count);
+        }
+
         data = {
-            labels: LABELS[id],
+            labels: dataLabels,
             datasets: [{
                 label: id,
                 backgroundColor: [
@@ -71,7 +79,7 @@ function makeData(id, originData) {
                     'rgba(153, 102, 255, 0.2)',
                     'rgba(255, 159, 64, 0.2)'
                 ],
-                data: [originData[0].count, originData[1].count, originData[2].count, originData[3].count, originData[4].count]
+                data: dataArray
             }]
         };
     }
