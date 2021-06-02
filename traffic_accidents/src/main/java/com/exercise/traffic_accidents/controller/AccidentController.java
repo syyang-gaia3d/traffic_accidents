@@ -105,7 +105,7 @@ public class AccidentController {
 
         List<ChartInjTypePerDay> list = accidentService.getInjuryTypePerDayData(params);
 
-        log.info("@@@@@@@@@list={}", list);
+        // log.info("@@@@@@@@@list={}", list);
 
         result.put("data", list);
         return ResponseEntity.ok(result);
@@ -117,7 +117,7 @@ public class AccidentController {
 
         List<ChartCasualtiesPerDay> list = accidentService.getCasualtiesPerDayData(params);
 
-        log.info("@@@@@@@@@list={}", list);
+        // log.info("@@@@@@@@@list={}", list);
 
         result.put("data", list);
         return ResponseEntity.ok(result);
@@ -129,7 +129,7 @@ public class AccidentController {
 
         List<ChartAccidentType> list = accidentService.getAccidentTypeData(params);
 
-        log.info("@@@@@@@@@list={}", list);
+        // log.info("@@@@@@@@@list={}", list);
 
         result.put("data", list);
         return ResponseEntity.ok(result);
@@ -141,7 +141,7 @@ public class AccidentController {
 
         List<ChartCasualties> list = accidentService.getCasualtiesData(params);
 
-        log.info("@@@@@@@@@list={}", list);
+        // log.info("@@@@@@@@@list={}", list);
 
         result.put("data", list);
         return ResponseEntity.ok(result);

@@ -2,7 +2,7 @@ import './extranlib/ol/ol-6.5.0.js';
 // import { ol } from './extranlib/ol/ol-6.5.0.js';
 
 // 지도 객체 생성
-export function InitMap(policy) {
+export default function InitMap(policy) {
 
   if (!(this instanceof InitMap)) {
     throw new Error("New 를 통해 생성 하십시오.");
