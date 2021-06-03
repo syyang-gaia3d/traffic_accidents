@@ -135,6 +135,7 @@
             traffic_accident
         <include refid="wherePhrase"/>
         GROUP BY occu_date, lclas
+        ORDER BY occu_date
     </select>
 
     <select id="getCasualtiesPerDayData" parameterType="TrafficAccidentInfo" resultType="ChartCasualtiesPerDay">

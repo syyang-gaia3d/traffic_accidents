@@ -35,26 +35,39 @@ function makeData(id, originData) {
     let data = {};
 
     if(id == 'injuries') {
+        let datasets = [];
+
+        // for(var i = 0; i < originData.length; i+3) {
+        //     let dataset = {
+        //         label: originData[i].occuDate,
+        //         backgroundColor: 'rgb(255, 99, 132)',
+        //         borderColor: 'rgb(255, 99, 132)',
+        //         data: [originData[i].count, originData[i+1].count, originData[i+2].count, originData[i+3].count]
+        //     };
+        //     datasets.push(dataset);
+        // }
         data = {
             labels: LABELS[id],
-            datasets: [{
-                label: id,
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: originData,
-            }]
+            datasets: datasets
         };
     }
 
     if(id == 'casualties') {
-        data = {
-            labels: LABELS[id],
-            datasets: [{
-                label: id,
+        let datasets = [];
+
+        for(var i in originData) {
+            let dataset = {
+                label: originData[i].occuDate,
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: originData,
-            }]
+                data: [originData[i].death, originData[i].swpsn, originData[i].injpsn]
+            };
+            datasets.push(dataset);
+        }
+
+        data = {
+            labels: LABELS[id],
+            datasets: datasets
         };
     }
 
