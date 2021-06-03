@@ -26,6 +26,7 @@ $(document).ready(() => {
 
     $mapWrap.find('button.layerClose').click(function() {
         $(this).parents('div.layerWrap').hide();
+        $('#accidentList').find('tr').removeClass('selected');
         $('#graphBtn').removeClass('on');
     });
 
@@ -96,6 +97,9 @@ $(document).ready(() => {
 
     // 사고상세 창 on/off
     $('#accidentList tbody').on('click', 'tr', function() {
+        $(this).siblings().removeClass('selected');
+        $(this).toggleClass('selected');
+
         let objtId = $(this).data('id');
         showAccidentInfo(objtId);
         $('#accidentDetailWrap').show();
