@@ -39,15 +39,15 @@
 								<tr>
 									<th>발생일</th>
 									<td>
-										<input type="text" name="startDate" size="14" class="hhi date calendar"> ~
-										<input type="text" name="endDate" size="14" class="hhi date calendar">
+										<input type="text" name="startDate" size="14" class="hhi date calendar" autocomplete="off"> ~
+										<input type="text" name="endDate" size="14" class="hhi date calendar" autocomplete="off">
 									</td>
 								</tr>
 								<tr>
 									<th>발생시간</th>
 									<td>
-										<input type="text" name="startTime" size="10" class="hhi"> ~
-										<input type="text" name="endTime" size="10" class="hhi">
+										<input type="text" name="startTime" size="10" maxlength="2" class="hhi" disabled> ~
+										<input type="text" name="endTime" size="10" maxlength="2" class="hhi" disabled>
 										<br><input type="checkbox" name="isTimeSlot" value="true"> 시간대 검색
 									</td>
 								</tr>

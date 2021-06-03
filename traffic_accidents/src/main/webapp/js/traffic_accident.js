@@ -64,15 +64,29 @@ $(document).ready(() => {
     });
 
     // cluster on/off
-    $('#cluster').click(function() {
+    $mapWrap.find('#cluster').click(function() {
         $(this).toggleClass('on');
         console.log('클러스터 on/off');
     });
 
     // 검색
-    $('#searchBtn').click(function(e) {
+    $mapWrap.find('#searchBtn').click(function(e) {
         e.preventDefault();
         searchAccidentList(null, 'desc');
+    });
+
+    // 시간대 검색 설정
+    $mapWrap.find('input[name="isTimeSlot"]').change(function() {
+        if($(this).is(':checked')){
+            $mapWrap.find('input[name="startTime"]').attr('disabled', false);
+            $mapWrap.find('input[name="endTime"]').attr('disabled', false);
+        } else {
+            $mapWrap.find('input[name="startTime"]').val('');
+            $mapWrap.find('input[name="endTime"]').val('');
+
+            $mapWrap.find('input[name="startTime"]').attr('disabled', true);
+            $mapWrap.find('input[name="endTime"]').attr('disabled', true);
+        }
     });
 
     // 페이지 당 표시할 사고건수 수정 시
@@ -137,6 +151,7 @@ $(document).ready(() => {
             const id = this.id;
             const graphType = $(this).data('graph');
             const params = $('#searchForm').serializeObject();
+
             let data = {};
             // 그래프 요청 함수 ajax
             $.ajax({

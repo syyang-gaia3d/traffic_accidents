@@ -4,6 +4,9 @@ display: none;
 .sectionMenu.on {
 background-color: #4648BF;
 }
+input.hhi:disabled {
+background-color: #c0c0c0;
+}
 /* pagination */
 .page-count {
 display: flex;
