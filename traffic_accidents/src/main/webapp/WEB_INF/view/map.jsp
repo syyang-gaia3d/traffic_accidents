@@ -234,7 +234,12 @@
 	</tr>
 	<tr>
 		<th>사고종류</th>
-		<td class="category"></td>
+		<td class="category">
+			<input type="checkbox" name="drnkg" disabled> 음주운전사고
+			<input type="checkbox" name="kid" disabled> 어린이사고
+			<input type="checkbox" name="odsn" disabled> 노인사고
+			<input type="checkbox" name="wlkg" disabled> 보행자사고
+		</td>
 	</tr>
 </table>
 

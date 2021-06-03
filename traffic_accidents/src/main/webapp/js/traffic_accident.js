@@ -318,9 +318,17 @@ function setAccidentInfo(info) {
     accidentInfoItem.find('.slightly-injured').text(info.sinjpsn);
     accidentInfoItem.find('.violation').text(info.violtCn);
     accidentInfoItem.find('.location').text('주소입력예정');
-    accidentInfoItem.find('.category').text('사고...처리...');
+    // 사고종류
+    accidentInfoItem.find('input[name="drnkg"]').attr('checked', checkCategory(info.drnkg));
+    accidentInfoItem.find('input[name="kid"]').attr('checked', checkCategory(info.kid));
+    accidentInfoItem.find('input[name="odsn"]').attr('checked', checkCategory(info.odsn));
+    accidentInfoItem.find('input[name="wlkg"]').attr('checked', checkCategory(info.wlkg));
 
     $('#accidentDetailWrap').find('.boardForm').append(accidentInfoItem);
+}
+
+function checkCategory(category) {
+    return category != null ? true : false;
 }
 
 // 레이어 on/off
