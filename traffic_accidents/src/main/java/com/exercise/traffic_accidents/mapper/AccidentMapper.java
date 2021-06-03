@@ -2,7 +2,6 @@ package com.exercise.traffic_accidents.mapper;
 
 import java.util.List;
 
-import com.exercise.traffic_accidents.TrafficAccidentsApplication;
 import com.exercise.traffic_accidents.dto.ChartAccidentType;
 import com.exercise.traffic_accidents.dto.ChartCasualties;
 import com.exercise.traffic_accidents.dto.ChartCasualtiesPerDay;
