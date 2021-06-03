@@ -15,9 +15,13 @@
             layer_source_coordinate,
             layer_target_coordinate,
             layer_init_osm,
+            layer_init_osm_visible,
             layer_init_sido,
+            layer_init_sido_visible,
             layer_init_cgg,
+            layer_init_cgg_visible,
             layer_init_emd,
+            layer_init_emd_visible,
             layer_init_map_center,
             insert_date
         FROM policy

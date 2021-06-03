@@ -21,9 +21,13 @@ public class Policy {
     String layerSourceCoordinate;
     String layerTargetCoordinate;
     String layerInitOsm;
+    Boolean layerInitOsmVisible;
     String layerInitSido;
+    Boolean layerInitSidoVisible;
     String layerInitCgg;
+    Boolean layerInitCggVisible;
     String layerInitEmd;
+    Boolean layerInitEmdVisible;
     String layerInitMapCenter;
     Date insertDate;
 }
