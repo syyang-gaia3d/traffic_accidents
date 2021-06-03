@@ -15,9 +15,13 @@ create table policy(
 	layer_source_coordinate			varchar(100)				default 'EPSG:5187',
 	layer_target_coordinate			varchar(100)				default 'EPSG:5187',
 	layer_init_osm					varchar(64),
+	layer_init_osm_visible			boolean						default true,
 	layer_init_sido					varchar(64),
+	layer_init_sido_visible			boolean						default false,
 	layer_init_cgg					varchar(64),
+	layer_init_cgg_visible			boolean						default false,
 	layer_init_emd					varchar(64),
+	layer_init_emd_visible			boolean						default false,
 
 	layer_init_map_center			varchar(128)				default '14261127.97, 4360280.11',
 
@@ -39,9 +43,13 @@ comment on column policy.geoserver_password is 'geoserver 비밀번호';
 comment on column policy.layer_source_coordinate is 'Layer 원본 좌표계';
 comment on column policy.layer_target_coordinate is 'Layer 좌표계 정의';
 comment on column policy.layer_init_osm is '기본 osm 레이어';
+comment on column policy.layer_init_osm_visible is '기본 osm 레이어 표시여부';
 comment on column policy.layer_init_sido is '기본 시도 레이어';
+comment on column policy.layer_init_sido_visible is '기본 시도 레이어 표시여부';
 comment on column policy.layer_init_cgg is '기본 시군구 레이어';
+comment on column policy.layer_init_cgg_visible is '기본 시군구 레이어 표시여부';
 comment on column policy.layer_init_emd is '기본 읍면동 레이어';
+comment on column policy.layer_init_emd_visible is '기본 읍면동 레이어 표시여부';
 comment on column policy.layer_init_map_center is 'map center';
 
 comment on column policy.insert_date is '등록일';
