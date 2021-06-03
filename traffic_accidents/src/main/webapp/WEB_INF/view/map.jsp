@@ -106,9 +106,9 @@
 				<div class="page-count">
 					<div class="pagination"></div>
 					<select name="perPage" class="page-size">
-						<option value="100">100 건</option>
-						<option value="200">200 건</option>
-						<option value="300">300 건</option>
+						<option value="10">10 건</option>
+						<option value="20">20 건</option>
+						<option value="30">30 건</option>
 					</select>
 				</div>
 			</div>
