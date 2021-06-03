@@ -1,2 +1,2 @@
-insert into policy(policy_id, geoserver_data_url, geoserver_data_workspace, geoserver_data_store, geoserver_user, geoserver_password, layer_source_coordinate, layer_target_coordinate)
-  values(1, 'http://localhost:8080/geoserver', 'accident', 'accident', 'admin', 'geoserver', 'EPSG:3857', 'EPSG:3857');
+insert into policy(policy_id, geoserver_data_url, geoserver_data_workspace, geoserver_data_store, geoserver_user, geoserver_password, layer_source_coordinate, layer_target_coordinate, layer_init_osm, layer_init_sido, layer_init_cgg, layer_init_emd)
+  values(1, 'http://localhost:8080/geoserver', 'accident', 'accident', 'admin', 'geoserver', 'EPSG:3857', 'EPSG:3857', 'layer_init_osm', 'layer_init_sido', 'layer_init_cgg', 'layer_init_emd');

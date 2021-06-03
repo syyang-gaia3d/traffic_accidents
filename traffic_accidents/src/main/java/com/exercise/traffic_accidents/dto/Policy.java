@@ -21,7 +21,9 @@ public class Policy {
     String layerSourceCoordinate;
     String layerTargetCoordinate;
     String layerInitOsm;
+    String layerInitSido;
+    String layerInitCgg;
+    String layerInitEmd;
     String layerInitMapCenter;
-    String layerInitMapExtent;
     Date insertDate;
 }

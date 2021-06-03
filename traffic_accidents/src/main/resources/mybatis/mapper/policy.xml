@@ -15,8 +15,10 @@
             layer_source_coordinate,
             layer_target_coordinate,
             layer_init_osm,
+            layer_init_sido,
+            layer_init_cgg,
+            layer_init_emd,
             layer_init_map_center,
-            layer_init_map_extent,
             insert_date
         FROM policy
         WHERE policy_id = 1

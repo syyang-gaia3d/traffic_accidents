@@ -119,9 +119,9 @@
 				<ul>
 					<label>레이어 ON/OFF</label>
 					<li><input type="checkbox" name="layerId" value="layerInitOsm" checked="checked"> OSM</li>
-					<li><input type="checkbox" name="layerId" value="layerInitCtprvn"> 시도</li>
-					<li><input type="checkbox" name="layerId" value="layerInitCgg"> 시군구</li>
-					<li><input type="checkbox" name="layerId" value="layerInitEmd"> 읍면동</li>
+					<li><input type="checkbox" name="layerId" value="layerInitSido" checked="checked"> 시도</li>
+					<li><input type="checkbox" name="layerId" value="layerInitCgg" checked="checked"> 시군구</li>
+					<li><input type="checkbox" name="layerId" value="layerInitEmd" checked="checked"> 읍면동</li>
 				</ul>
 			</div>
 		</div>

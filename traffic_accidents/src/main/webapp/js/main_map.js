@@ -32,12 +32,6 @@ export default function InitMap(policy) {
 		layerInitMapCenter.push(parseFloat(mapCenterArray[i]));
 	}
 
-	const layerInitMapExtent = [];
-	const mapExtentArray = policy.layerInitMapExtent.split(",");
-	for( let i=0; i<mapExtentArray.length; i++) {
-		layerInitMapExtent.push(parseFloat(mapExtentArray[i]));
-	}
-
   // 마우스 좌표
   const mousePosition = new ol.control.MousePosition({
     className: 'mousePosition',
@@ -68,8 +62,8 @@ export default function InitMap(policy) {
 	const layerInitOsm = policy.layerInitOsm;
 	const layerInitOsmVisible = policy.layerInitOsmVisible;
 	// 시도 레이어(ctprvn)
-	const layerInitCtprvn = policy.layerInitCtprvn;
-	const layerInitCtprvnVisible = policy.layerInitCtprvnVisible;
+	const layerInitSido = policy.layerInitSido;
+	const layerInitSidoVisible = policy.layerInitSidoVisible;
   // 시군구 레이어(cgg)
   const layerInitCgg = policy.layerInitCgg;
   const layerInitCggVisible = policy.layerInitCggVisible;
@@ -88,65 +82,65 @@ export default function InitMap(policy) {
   layers.push(osmLayer);
 
   // 시도|시군구|읍면동 레이어
-//   var baseLayerCtprvn = new ol.layer.Tile({
-//     id : layerInitCtprvn,
-//     visible : layerInitCtprvnVisible,
-//     source : new ol.source.TileWMS({
-//       url: geoserverDataUrl + '/' + geoserverDataWorkspace + '/wms',
-//       params: {
-//         'VERSION' : '1.1.1',
-//         tiled: true,
-// //    					CQL_FILTER: queryString,
-//         srs: coordinate,
-//         layers: [layerName],
-//         env: env,
-//         STYLES : [geoserverDataWorkspace + "_" + geometryType]
-//       },
-//         crossOrigin: 'anonymous'
-//     })
-//   });
+  var baseLayerSido = new ol.layer.Tile({
+    id : layerInitSido,
+    visible : layerInitSidoVisible,
+    source : new ol.source.TileWMS({
+      url: geoserverDataUrl + '/' + geoserverDataWorkspace + '/wms',
+      params: {
+        'VERSION' : '1.1.1',
+        tiled: true,
+        // CQL_FILTER: queryString,
+        srs: coordinate,
+        layers: [geoserverDataWorkspace + ":" + 'sido'],
+        // env: env,
+        // STYLES : [geoserverDataWorkspace + "_" + geometryType]
+      },
+        crossOrigin: 'anonymous'
+    })
+  });
 
-//   layers.push(baseLayerCtprvn);
+  layers.push(baseLayerSido);
 
-//   var baseLayerCgg = new ol.layer.Tile({
-//     id : layerInitCgg,
-//     visible : layerInitCggVisible,
-//     source : new ol.source.TileWMS({
-//       url: geoserverDataUrl + '/' + geoserverDataWorkspace + '/wms',
-//       params: {
-//         'VERSION' : '1.1.1',
-//         tiled: true,
-// //    					CQL_FILTER: queryString,
-//         srs: coordinate,
-//         layers: [layerName],
-//         env: env,
-//         STYLES : [geoserverDataWorkspace + "_" + geometryType]
-//       },
-//         crossOrigin: 'anonymous'
-//     })
-//   });
+  var baseLayerCgg = new ol.layer.Tile({
+    id : layerInitCgg,
+    visible : layerInitCggVisible,
+    source : new ol.source.TileWMS({
+      url: geoserverDataUrl + '/' + geoserverDataWorkspace + '/wms',
+      params: {
+        'VERSION' : '1.1.1',
+        tiled: true,
+        // CQL_FILTER: queryString,
+        srs: coordinate,
+        layers: [geoserverDataWorkspace + ":" + 'cgg'],
+        // env: env,
+        // STYLES : [geoserverDataWorkspace + "_" + geometryType]
+      },
+        crossOrigin: 'anonymous'
+    })
+  });
 
-//   layers.push(baseLayerCgg);
+  layers.push(baseLayerCgg);
 
-//   var baseLayerEmd = new ol.layer.Tile({
-//     id : layerInitEmd,
-//     visible : layerInitEmdVisible,
-//     source : new ol.source.TileWMS({
-//       url: geoserverDataUrl + '/' + geoserverDataWorkspace + '/wms',
-//       params: {
-//         'VERSION' : '1.1.1',
-//         tiled: true,
-// //    					CQL_FILTER: queryString,
-//         srs: coordinate,
-//         layers: [layerName],
-//         env: env,
-//         STYLES : [geoserverDataWorkspace + "_" + geometryType]
-//       },
-//         crossOrigin: 'anonymous'
-//     })
-//   });
+  var baseLayerEmd = new ol.layer.Tile({
+    id : layerInitEmd,
+    visible : layerInitEmdVisible,
+    source : new ol.source.TileWMS({
+      url: geoserverDataUrl + '/' + geoserverDataWorkspace + '/wms',
+      params: {
+        'VERSION' : '1.1.1',
+        tiled: true,
+        // CQL_FILTER: queryString,
+        srs: coordinate,
+        layers: [geoserverDataWorkspace + ":" + 'emd'],
+        // env: env,
+        // STYLES : [geoserverDataWorkspace + "_" + geometryType]
+      },
+        crossOrigin: 'anonymous'
+    })
+  });
 
-//   layers.push(baseLayerEmd);
+  layers.push(baseLayerEmd);
 
 	// 거리 측정 벡터 레이어
 	const measureLayer = new ol.layer.Vector({
@@ -178,7 +172,6 @@ export default function InitMap(policy) {
     code: coordinate,
     units: 'm',
     global: false,
-    // extent: layerInitMapExtent
   });
   // view
   const view = new ol.View({
@@ -186,7 +179,6 @@ export default function InitMap(policy) {
     maxZoom: 18,
     minZoom: 3,
     center: layerInitMapCenter,
-    // extent: layerInitMapExtent,
     projection : proj
   });
 
