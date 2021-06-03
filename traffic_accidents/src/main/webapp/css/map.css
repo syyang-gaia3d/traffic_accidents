@@ -190,9 +190,9 @@ background: url(../images/ico_btn.png) 5px -343px;
 .ctrlWrap {
 position: absolute;
 top: 3px;
-/* left: 50%; */
-left: 1050px;
-margin-left: -300px;
+left: 50%;
+/* left: 1050px; */
+/* margin-left: -300px; */
 z-index: 50;
 }
 .ctrlWrap div {
