@@ -152,7 +152,7 @@
 			</div>
 			<div class="layerContents">
 				<ul class="sectionHeader">
-					<button class="sectionMenu on" data-graph="bar" id="injuries">일별 사고형태</button>
+					<button class="sectionMenu" data-graph="bar" id="injuries">일별 사고형태</button>
 					<button class="sectionMenu" data-graph="bar" id="casualties">일별 사상자</button>
 					<button class="sectionMenu" data-graph="pie" id="accident">사고구분</button>
 					<button class="sectionMenu" data-graph="pie" id="casualty">사상자수</button>
