@@ -321,7 +321,7 @@ function setAccidentInfo(info) {
     accidentInfoItem.find('.slander').text(info.swpsn);
     accidentInfoItem.find('.slightly-injured').text(info.sinjpsn);
     accidentInfoItem.find('.violation').text(info.violtCn);
-    accidentInfoItem.find('.location').text('주소입력예정');
+    accidentInfoItem.find('.address').text(info.address);
     // 사고종류
     accidentInfoItem.find('input[name="drnkg"]').attr('checked', checkCategory(info.drnkg));
     accidentInfoItem.find('input[name="kid"]').attr('checked', checkCategory(info.kid));

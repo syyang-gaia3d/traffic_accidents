@@ -4,13 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.exercise.traffic_accidents.dto.Cgg;
 import com.exercise.traffic_accidents.dto.ChartAccidentType;
 import com.exercise.traffic_accidents.dto.ChartCasualties;
 import com.exercise.traffic_accidents.dto.ChartCasualtiesPerDay;
 import com.exercise.traffic_accidents.dto.ChartInjTypePerDay;
+import com.exercise.traffic_accidents.dto.Emd;
 import com.exercise.traffic_accidents.dto.Policy;
+import com.exercise.traffic_accidents.dto.Sido;
 import com.exercise.traffic_accidents.dto.TrafficAccidentInfo;
 import com.exercise.traffic_accidents.service.AccidentService;
+import com.exercise.traffic_accidents.service.DistinctService;
 import com.exercise.traffic_accidents.service.PolicyService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -36,6 +40,8 @@ public class AccidentController {
     private AccidentService accidentService;
     @Autowired
     private PolicyService policyService;
+    @Autowired
+    private DistinctService distinctService;
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -75,6 +81,12 @@ public class AccidentController {
         Integer objtIdInt = Integer.parseInt(objtId);
 
         TrafficAccidentInfo info = accidentService.getTrafficAccidentInfo(objtIdInt);
+
+        String address = makeAddressFromDistinct(info.getCtprvnCd(), info.getSggCd(), info.getEmdCd());
+
+        // log.info("@@@@@@@@@@@address ={}", address);
+
+        info.setAddress(address);
 
         result.put("info", info);
 
@@ -145,5 +157,37 @@ public class AccidentController {
 
         result.put("data", list);
         return ResponseEntity.ok(result);
+    }
+
+    private String makeAddressFromDistinct(String sidoCd, String cggCd, String emdCd) {
+        String address = "";
+
+        List<Sido> sidoList = distinctService.getSidoData();
+        List<Cgg> cggList = distinctService.getCggData();
+        List<Emd> emdList = distinctService.getEmdData();
+
+        for(Sido sido : sidoList) {
+            if(Integer.parseInt(sidoCd) == Integer.parseInt(sido.getCtprvnCd())) {
+                address += sido.getCtpKorNm();
+            }
+        }
+
+        address += " ";
+
+        for(Cgg cgg : cggList) {
+            if(Integer.parseInt(cggCd) == Integer.parseInt(cgg.getSigCd())) {
+                address += cgg.getSigKorNm();
+            }
+        }
+
+        address += " ";
+
+        for(Emd emd : emdList) {
+            if(Integer.parseInt(emdCd) == Integer.parseInt(emd.getEmdCd())) {
+                address += emd.getEmdKorNm();
+            }
+        }
+
+        return address;
     }
 }

@@ -54,4 +54,6 @@ public class TrafficAccidentInfo {
     private Integer x;          // x좌표
     private Integer y;          // y좌표
     private String geom;    // point
+
+    private String address;     // 주소
 }

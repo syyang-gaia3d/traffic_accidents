@@ -230,7 +230,7 @@
 	</tr>
 	<tr>
 		<th>발생위치</th>
-		<td class="location"></td>
+		<td class="address"></td>
 	</tr>
 	<tr>
 		<th>사고종류</th>

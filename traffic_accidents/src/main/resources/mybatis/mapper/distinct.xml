@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.exercise.traffic_accidents.mapper.DistinctMapper">
+
+    <select id="getSidoData" resultType="Sido">
+        SELECT ctprvn_cd, ctp_kor_nm
+        FROM sido
+    </select>
+
+    <select id="getCggData" resultType="Cgg">
+        SELECT sig_cd, sig_kor_nm
+        FROM cgg
+    </select>
+
+    <select id="getEmdData" resultType="Emd">
+        SELECT emd_cd, emd_kor_nm
+        FROM emd
+    </select>
+
+</mapper>
