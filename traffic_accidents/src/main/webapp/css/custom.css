@@ -7,6 +7,9 @@ background-color: #4648BF;
 input.hhi:disabled {
 background-color: #c0c0c0;
 }
+.sort-list {
+cursor: pointer;
+}
 /* pagination */
 .page-count {
 display: flex;
