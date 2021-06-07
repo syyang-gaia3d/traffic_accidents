@@ -49,16 +49,10 @@
             </if>
             <if test="isTimeSlot != true">
                 <if test="startDate != null and startDate != ''">
-                    AND (occu_date <![CDATA[ >= ]]> #{startDate}
+                    AND occu_date <![CDATA[ >= ]]> #{startDate}
                 </if>
                 <if test="endDate != null and endDate != ''">
-                    AND occu_date <![CDATA[ <= ]]> #{endDate} )
-                </if>
-                <if test="startTime != null and startTime != ''">
-                    OR (occu_tm  <![CDATA[ >= ]]> #{startTime}
-                </if>
-                <if test="endTime != null and endTime != ''">
-                    AND occu_tm  <![CDATA[ <= ]]> #{endTime} )
+                    AND occu_date <![CDATA[ <= ]]> #{endDate}
                 </if>
             </if>
             <if test="injuryTypes != null and injuryTypes.size > 0">

@@ -248,6 +248,22 @@ $(document).ready(() => {
             return false;
         }
 
+        if(searchParams.isTimeSlot) {
+            if($startDate.val() == '' || $endDate.val() == '') {
+                alert('시간대검색 시, 발생일은 필수값입니다.');
+                $startDate.focus();
+
+                return false;
+            }
+
+            if($startTime.val() == '' || $endTime.val() == '') {
+                alert('시간대검색 시, 발생시간은 필수값입니다.');
+                $startTime.focus();
+
+                return false;
+            }
+        }
+
         $.ajax({
             url: '/list',
             type: 'GET',
@@ -440,7 +456,7 @@ function setQueryString(params) {
 
 function validateDateObject($date) {
     const date = $date.val();
-    const pattern = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
+    const pattern = /^(19|20)\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$/;
 
     if(date != '' && !pattern.test(date)) {
         return false;
@@ -461,7 +477,7 @@ function compareDateRange($startDate, $endDate) {
 
 function validateTimeObject($time) {
     const time = $time.val();
-    const pattern = /^([0-9]|1[0-9]|2[0-4])$/;
+    const pattern = /^(0[0-9]|1[0-9]|2[0-4])$/;
 
     if(time != '' && !pattern.test(time)) {
         return false;
