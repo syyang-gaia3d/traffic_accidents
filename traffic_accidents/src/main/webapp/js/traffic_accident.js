@@ -227,6 +227,27 @@ $(document).ready(() => {
         searchParams.size = size;
         searchParams.offset = offset;
 
+        //validate
+        const $startDate = $('#searchForm').find('input[name="startDate"]');
+        const $endDate = $('#searchForm').find('input[name="endDate"]');
+        const $startTime = $('#searchForm').find('input[name="startTime"]');
+        const $endTime = $('#searchForm').find('input[name="endTime"]');
+
+        if(!validateDateObject($startDate) && !validateDateObject($endDate)) {
+            alert('날짜 형식이 잘못되었습니다.');
+            return false;
+        }
+
+        if(!validateTimeObject($startTime) && !validateTimeObject($endTime)) {
+            alert('시간은 00시부터 24시까지만 입력 가능합니다.');
+            return false;
+        }
+
+        if(!compareDateRange($startDate, $endDate)) {
+            alert('날짜 기간이 잘못되었습니다.');
+            return false;
+        }
+
         $.ajax({
             url: '/list',
             type: 'GET',
@@ -415,4 +436,35 @@ function setQueryString(params) {
     }
 
     return queryString.replace(' AND', '');
+}
+
+function validateDateObject($date) {
+    const date = $date.val();
+    const pattern = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
+
+    if(date != '' && !pattern.test(date)) {
+        return false;
+    }
+
+    return true;
+}
+
+function compareDateRange($startDate, $endDate) {
+    const start = new Date($startDate.val());
+    const end = new Date($endDate.val());
+
+    if(start > end) {
+        return false;
+    }
+    return true;
+}
+
+function validateTimeObject($time) {
+    const time = $time.val();
+    const pattern = /^([0-9]|1[0-9]|2[0-4])$/;
+
+    if(time != '' && !pattern.test(time)) {
+        return false;
+    }
+    return true;
 }

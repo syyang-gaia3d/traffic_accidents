@@ -39,8 +39,8 @@
 								<tr>
 									<th>발생일</th>
 									<td>
-										<input type="text" name="startDate" size="14" class="hhi date calendar" autocomplete="off"> ~
-										<input type="text" name="endDate" size="14" class="hhi date calendar" autocomplete="off">
+										<input type="text" name="startDate" size="14" maxlength="8" class="hhi date calendar" autocomplete="off"> ~
+										<input type="text" name="endDate" size="14" maxlength="8" class="hhi date calendar" autocomplete="off">
 									</td>
 								</tr>
 								<tr>
