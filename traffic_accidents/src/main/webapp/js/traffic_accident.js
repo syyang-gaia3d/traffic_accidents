@@ -67,7 +67,10 @@ $(document).ready(() => {
     // cluster on/off
     $mapWrap.find('#cluster').click(function() {
         $(this).toggleClass('on');
-        console.log('클러스터 on/off');
+
+        if($(this).hasClass('on')) {
+            initMap.makeClusters(50, 'traffic_accident');
+        }
     });
 
     // 검색

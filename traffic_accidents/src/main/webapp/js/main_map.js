@@ -517,18 +517,50 @@ export default function InitMap(policy) {
       map.getView().fit(point.getExtent());
       this.clearSelectedVectorFeature();
       this.getSelectedVectorFeatureByWkt(wkt);
+    },
+    makeClusters: function(distance, layerKey) {
+      const layer = this.getLayerById(layerKey);
+      const source = layer.getSource();
+
+      const clusterSource = new ol.source.Cluster({
+        distance: parseInt(distance, 10),
+        source: source
+      });
+
+      let styleCache = {};
+      let clusters = new ol.layer.Vector({
+        id: 'cluster',
+        source: clusterSource,
+        style: function(feature) {
+          const size = feature.get('features').length;
+          const style = styleCache[size];
+          if(!style) {
+            style = new ol.Style.Style({
+              image: new ol.Style.Circle({
+                radius: 20,
+                stroke: new ol.Style.Stroke({
+                  color: '#ffffff'
+                }),
+                fill: new ol.Style.Fill({
+                  color: '#ff9933'
+                })
+              }),
+              text: new ol.Style.Text({
+                text: size.toString(),
+                font: 'Bold 20px Verdana',
+                fill: new ol.Style.Fill({
+                  color: '#ffffff'
+                })
+              })
+            });
+            styleCache[size] = style;
+          }
+          return style;
+        }
+      });
+
+      map.addLayer(clusters);
     }
   }
 
 }
-// var map = new ol.Map({
-//     layers: [
-//         new ol.layer.Tile({
-//           source: new ol.source.OSM(),
-//         }) ],
-//       target: 'map',
-//       view: new ol.View({
-//         center: [0, 0],
-//         zoom: 2,
-//       }),
-// });
