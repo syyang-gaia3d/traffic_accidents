@@ -519,40 +519,30 @@ export default function InitMap(policy) {
       this.getSelectedVectorFeatureByWkt(wkt);
     },
     makeClusters: function(distance, layerKey) {
-      // const layer = this.getLayerById(layerKey);
-      // const source = layer.getSource();
 
-      var vectorSource = new ol.source.Vector({
-        format: new ol.format.GeoJSON(),
-        loader: function(extent, resolution, projection) {
-          var proj = projection.getCode();
-          var url = geoserverDataUrl + '/wfs?service=WFS&' +
-              'version=1.1.0&request=GetFeature&typename=' + geoserverDataWorkspace + ':' + layerKey +
-              '&outputFormat=application/json&srsname=' + proj + '&' +
-              'bbox=' + extent.join(',') + ',' + proj;
-          var xhr = new XMLHttpRequest();
-          xhr.open('GET', url);
-          var onError = function() {
-            vectorSource.removeLoadedExtent(extent);
-          }
-          xhr.onerror = onError;
-          xhr.onload = function() {
-            console.log(xhr.status);
-            if (xhr.status == 200) {
-              vectorSource.addFeatures(
-                  vectorSource.getFormat().readFeatures(xhr.responseText));
-            } else {
-              onError();
-            }
-          }
-          xhr.send();
-        },
-        strategy: ol.loadingstrategy.bbox
+      let source = new ol.source.Vector();
+
+      const featureRequest = new ol.format.WFS().writeGetFeature({
+        srsName: coordinate,
+        featureNS: geoserverDataUrl + '/' + geoserverDataWorkspace + '/',
+        featurePrefix: 'accident',
+        featureTypes: [layerKey],
+        outputFormat: 'application/json'
+      });
+
+      fetch(geoserverDataUrl + '/' + geoserverDataWorkspace + '/wfs', {
+        method: 'POST',
+        body: new XMLSerializer().serializeToString(featureRequest)
+      }).then(function(response) {
+        return response.json();
+      }).then(function(json) {
+        var features = new ol.format.GeoJSON().readFeatures(json);
+        source.addFeatures(features);
       });
 
       const clusterSource = new ol.source.Cluster({
         distance: parseInt(distance, 10),
-        source: vectorSource
+        source: source
       });
 
       let styleCache = {};
@@ -590,5 +580,4 @@ export default function InitMap(policy) {
       map.addLayer(clusters);
     }
   }
-
 }
