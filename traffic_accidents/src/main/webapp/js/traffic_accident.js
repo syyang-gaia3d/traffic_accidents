@@ -70,6 +70,8 @@ $(document).ready(() => {
 
         if($(this).hasClass('on')) {
             initMap.makeClusters(50, 'traffic_accident');
+        } else {
+            map.removeLayer(initMap.getLayerById('cluster'));
         }
     });
 

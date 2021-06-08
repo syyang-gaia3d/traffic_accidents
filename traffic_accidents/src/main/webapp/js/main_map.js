@@ -519,12 +519,40 @@ export default function InitMap(policy) {
       this.getSelectedVectorFeatureByWkt(wkt);
     },
     makeClusters: function(distance, layerKey) {
-      const layer = this.getLayerById(layerKey);
-      const source = layer.getSource();
+      // const layer = this.getLayerById(layerKey);
+      // const source = layer.getSource();
+
+      var vectorSource = new ol.source.Vector({
+        format: new ol.format.GeoJSON(),
+        loader: function(extent, resolution, projection) {
+          var proj = projection.getCode();
+          var url = geoserverDataUrl + '/wfs?service=WFS&' +
+              'version=1.1.0&request=GetFeature&typename=' + geoserverDataWorkspace + ':' + layerKey +
+              '&outputFormat=application/json&srsname=' + proj + '&' +
+              'bbox=' + extent.join(',') + ',' + proj;
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', url);
+          var onError = function() {
+            vectorSource.removeLoadedExtent(extent);
+          }
+          xhr.onerror = onError;
+          xhr.onload = function() {
+            console.log(xhr.status);
+            if (xhr.status == 200) {
+              vectorSource.addFeatures(
+                  vectorSource.getFormat().readFeatures(xhr.responseText));
+            } else {
+              onError();
+            }
+          }
+          xhr.send();
+        },
+        strategy: ol.loadingstrategy.bbox
+      });
 
       const clusterSource = new ol.source.Cluster({
         distance: parseInt(distance, 10),
-        source: source
+        source: vectorSource
       });
 
       let styleCache = {};
@@ -532,23 +560,23 @@ export default function InitMap(policy) {
         id: 'cluster',
         source: clusterSource,
         style: function(feature) {
-          const size = feature.get('features').length;
-          const style = styleCache[size];
+          let size = feature.get('features').length;
+          let style = styleCache[size];
           if(!style) {
-            style = new ol.Style.Style({
-              image: new ol.Style.Circle({
+            style = new ol.style.Style({
+              image: new ol.style.Circle({
                 radius: 20,
-                stroke: new ol.Style.Stroke({
+                stroke: new ol.style.Stroke({
                   color: '#ffffff'
                 }),
-                fill: new ol.Style.Fill({
+                fill: new ol.style.Fill({
                   color: '#ff9933'
                 })
               }),
-              text: new ol.Style.Text({
+              text: new ol.style.Text({
                 text: size.toString(),
                 font: 'Bold 20px Verdana',
-                fill: new ol.Style.Fill({
+                fill: new ol.style.Fill({
                   color: '#ffffff'
                 })
               })
