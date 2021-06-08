@@ -18,7 +18,7 @@ function initJqueryCalendar() {
 
 // 지도상 길이 측정 함수
 function formatLength(line) {
-	var length = ol.sphere.getLength(line); // TODO : 문제!!!!!!!!!!!
+	var length = ol.sphere.getLength(line);
 	var output;
 	if (length > 100) {
 		output = (Math.round(length / 1000 * 100) / 100) + ' ' + 'km';
