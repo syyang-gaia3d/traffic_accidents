@@ -575,7 +575,7 @@ export default function InitMap(policy) {
               }),
               text: new ol.style.Text({
                 text: size.toString(),
-                font: 'Bold 20px Verdana',
+                font: 'Bold 10px Verdana',
                 fill: new ol.style.Fill({
                   color: '#ffffff'
                 })
