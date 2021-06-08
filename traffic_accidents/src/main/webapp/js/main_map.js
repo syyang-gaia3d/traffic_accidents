@@ -517,18 +517,78 @@ export default function InitMap(policy) {
       map.getView().fit(point.getExtent());
       this.clearSelectedVectorFeature();
       this.getSelectedVectorFeatureByWkt(wkt);
+    },
+    makeClusters: function(distance, layerKey) {
+      // const layer = this.getLayerById(layerKey);
+      // const source = layer.getSource();
+
+      var vectorSource = new ol.source.Vector({
+        format: new ol.format.GeoJSON(),
+        loader: function(extent, resolution, projection) {
+          var proj = projection.getCode();
+          var url = geoserverDataUrl + '/wfs?service=WFS&' +
+              'version=1.1.0&request=GetFeature&typename=' + geoserverDataWorkspace + ':' + layerKey +
+              '&outputFormat=application/json&srsname=' + proj + '&' +
+              'bbox=' + extent.join(',') + ',' + proj;
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', url);
+          var onError = function() {
+            vectorSource.removeLoadedExtent(extent);
+          }
+          xhr.onerror = onError;
+          xhr.onload = function() {
+            console.log(xhr.status);
+            if (xhr.status == 200) {
+              vectorSource.addFeatures(
+                  vectorSource.getFormat().readFeatures(xhr.responseText));
+            } else {
+              onError();
+            }
+          }
+          xhr.send();
+        },
+        strategy: ol.loadingstrategy.bbox
+      });
+
+      const clusterSource = new ol.source.Cluster({
+        distance: parseInt(distance, 10),
+        source: vectorSource
+      });
+
+      let styleCache = {};
+      let clusters = new ol.layer.Vector({
+        id: 'cluster',
+        source: clusterSource,
+        style: function(feature) {
+          let size = feature.get('features').length;
+          let style = styleCache[size];
+          if(!style) {
+            style = new ol.style.Style({
+              image: new ol.style.Circle({
+                radius: 20,
+                stroke: new ol.style.Stroke({
+                  color: '#ffffff'
+                }),
+                fill: new ol.style.Fill({
+                  color: '#ff9933'
+                })
+              }),
+              text: new ol.style.Text({
+                text: size.toString(),
+                font: 'Bold 20px Verdana',
+                fill: new ol.style.Fill({
+                  color: '#ffffff'
+                })
+              })
+            });
+            styleCache[size] = style;
+          }
+          return style;
+        }
+      });
+
+      map.addLayer(clusters);
     }
   }
 
 }
-// var map = new ol.Map({
-//     layers: [
-//         new ol.layer.Tile({
-//           source: new ol.source.OSM(),
-//         }) ],
-//       target: 'map',
-//       view: new ol.View({
-//         center: [0, 0],
-//         zoom: 2,
-//       }),
-// });
