@@ -238,12 +238,12 @@ $(document).ready(() => {
         const $startTime = $('#searchForm').find('input[name="startTime"]');
         const $endTime = $('#searchForm').find('input[name="endTime"]');
 
-        if(!validateDateObject($startDate) && !validateDateObject($endDate)) {
+        if(!validateDateObject($startDate) || !validateDateObject($endDate)) {
             alert('날짜 형식이 잘못되었습니다.');
             return false;
         }
 
-        if(!validateTimeObject($startTime) && !validateTimeObject($endTime)) {
+        if(!validateTimeObject($startTime) || !validateTimeObject($endTime)) {
             alert('시간은 00시부터 24시까지만 입력 가능합니다.');
             return false;
         }
