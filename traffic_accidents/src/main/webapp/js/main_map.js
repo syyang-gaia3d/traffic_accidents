@@ -243,8 +243,12 @@ export default function InitMap(policy) {
               accidentInfoItem.find('.slander').text(info.swpsn);
               accidentInfoItem.find('.slightly-injured').text(info.sinjpsn);
               accidentInfoItem.find('.violation').text(info.violtCn);
-              accidentInfoItem.find('.location').text('주소입력예정');
-              accidentInfoItem.find('.category').text('사고...처리...');
+              accidentInfoItem.find('.address').text(info.address);
+              // 사고종류
+              accidentInfoItem.find('input[name="drnkg"]').attr('checked', info.drnkg != null? true:false);
+              accidentInfoItem.find('input[name="kid"]').attr('checked', info.kid != null? true:false);
+              accidentInfoItem.find('input[name="odsn"]').attr('checked', info.odsn != null? true:false);
+              accidentInfoItem.find('input[name="wlkg"]').attr('checked', info.wlkg != null? true:false);
 
               $('#accidentDetailWrap').find('.boardForm').append(accidentInfoItem);
               $('#accidentDetailWrap').show();

@@ -101,6 +101,14 @@ public class AccidentController {
             String point = (String) data.get("point");
             TrafficAccidentInfo info = accidentService.getTrafficAccidentInfoByPoint(point);
 
+            if(info != null) {
+                String address = makeAddressFromDistinct(info.getCtprvnCd(), info.getSggCd(), info.getEmdCd());
+
+                // log.info("@@@@@@@@@@@address ={}", address);
+
+                info.setAddress(address);
+            }
+
             result.put("info", info);
             return ResponseEntity.ok(result);
         } catch(Exception e) {
