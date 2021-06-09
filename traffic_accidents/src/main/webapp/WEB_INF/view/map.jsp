@@ -65,7 +65,7 @@
 									<td>
 										<input type="checkbox" name="accidentTypes" value="차대차" class="hhi"> 차대차
 										<input type="checkbox" name="accidentTypes" value="차대사람" class="hhi"> 차대사람
-										<input type="checkbox" name="accidentTypes" value="차량단독" class="hhi"> 차량단독
+										<input type="checkbox" name="accidentTypes" value="차량단독" class="hhi"> 차량단독<br>
 										<input type="checkbox" name="accidentTypes" value="건널목" class="hhi"> 건널목
 										<input type="checkbox" name="accidentTypes" value="철길건널목" class="hhi"> 철길건널목
 									</td>
@@ -165,7 +165,7 @@
 		<!-- // 그래프 -->
 
 		<!-- 사고 상세 -->
-		<div class="layerWrap" style="top: 50px; left: 400px; display:none;" id="accidentDetailWrap">
+		<div class="layerWrap" style="top: 50px; left: 82%; display:none;" id="accidentDetailWrap">
 			<div class="layerHead">
 				<h4>사고 상세</h4>
 				<button type="button" class="layerClose" title="닫기">닫기</button>
@@ -236,7 +236,7 @@
 		<th>사고종류</th>
 		<td class="category">
 			<input type="checkbox" name="drnkg" disabled> 음주운전사고
-			<input type="checkbox" name="kid" disabled> 어린이사고
+			<input type="checkbox" name="kid" disabled> 어린이사고<br>
 			<input type="checkbox" name="odsn" disabled> 노인사고
 			<input type="checkbox" name="wlkg" disabled> 보행자사고
 		</td>

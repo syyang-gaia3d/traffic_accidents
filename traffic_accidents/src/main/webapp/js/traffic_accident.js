@@ -101,7 +101,7 @@ $(document).ready(() => {
     });
 
     // 사고상세 창 on/off
-    $('#accidentList tbody').on('click', 'tr', function() {
+    $('#accidentList tbody').on('click', 'tr:not(#noResults)', function() {
         $(this).siblings().removeClass('selected');
         $(this).toggleClass('selected');
 
