@@ -38,7 +38,7 @@ export default function InitMap(policy) {
     coordinateFormat: function(coordinate) {
         return ol.coordinate.format(coordinate, '{x}, {y}', 6);
     },
-    projection: ol.proj.get('EPSG:3857'),
+    projection: ol.proj.get('EPSG:5187'),
     target: document.getElementById('mouse-position'),
     undefinedHTML: ' '
   });
@@ -524,6 +524,9 @@ export default function InitMap(policy) {
     },
     makeClusters: function(distance, layerKey) {
 
+      // filter 파라미터를 받아와서 필터 형성 필요
+      // 발생일시, 발생시간, 사고형태(lclas), 사고구분(sclas), 사고종류(is not null)
+
       let source = new ol.source.Vector();
 
       const featureRequest = new ol.format.WFS().writeGetFeature({
@@ -531,7 +534,8 @@ export default function InitMap(policy) {
         featureNS: geoserverDataUrl + '/' + geoserverDataWorkspace + '/',
         featurePrefix: 'accident',
         featureTypes: [layerKey],
-        outputFormat: 'application/json'
+        outputFormat: 'application/json',
+        // filter: ol.format.filter.equalTo('enable_yn', 'Y'),
       });
 
       fetch(geoserverDataUrl + '/' + geoserverDataWorkspace + '/wfs', {
