@@ -21,8 +21,6 @@ public interface AccidentMapper {
 
     public TrafficAccidentInfo getTrafficAccidentInfoByPoint(String point);
 
-    public List<ChartInjTypePerDay> getInjuryTypePerDayData(TrafficAccidentInfo params);
-
     public List<ChartCasualtiesPerDay> getCasualtiesPerDayData(TrafficAccidentInfo params);
 
     public List<ChartAccidentType> getAccidentTypeData(TrafficAccidentInfo params);

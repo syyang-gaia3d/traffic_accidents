@@ -122,16 +122,6 @@
         ORDER BY ST_Distance(geom, ST_GeomFromText(#{point})) ASC LIMIT 1
     </select>
 
-    <select id="getInjuryTypePerDayData" parameterType="TrafficAccidentInfo" resultType="ChartInjTypePerDay">
-        SELECT
-            occu_date, lclas, count(*) AS count
-        FROM
-            traffic_accident
-        <include refid="wherePhrase"/>
-        GROUP BY occu_date, lclas
-        ORDER BY occu_date
-    </select>
-
     <select id="getCasualtiesPerDayData" parameterType="TrafficAccidentInfo" resultType="ChartCasualtiesPerDay">
         SELECT
             occu_date, SUM(death) death, SUM(swpsn) swpsn, SUM(injpsn) injpsn

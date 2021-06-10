@@ -119,18 +119,6 @@ public class AccidentController {
         }
     }
 
-    @GetMapping(value = "/graph/injuries")
-    public ResponseEntity<?> getInjuryPerDayData(TrafficAccidentInfo params) {
-        Map<String, Object> result = new HashMap<>();
-
-        List<ChartInjTypePerDay> list = accidentService.getInjuryTypePerDayData(params);
-
-        // log.info("@@@@@@@@@list={}", list);
-
-        result.put("data", list);
-        return ResponseEntity.ok(result);
-    }
-
     @GetMapping(value = "/graph/casualties")
     public ResponseEntity<?> getCasualtiesPerDayData(TrafficAccidentInfo params) {
         Map<String, Object> result = new HashMap<>();

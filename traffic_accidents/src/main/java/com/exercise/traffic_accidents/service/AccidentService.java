@@ -34,10 +34,6 @@ public class AccidentService {
         return accidentMapper.getTrafficAccidentInfoByPoint(point);
     }
 
-    public List<ChartInjTypePerDay> getInjuryTypePerDayData(TrafficAccidentInfo params) {
-        return accidentMapper.getInjuryTypePerDayData(params);
-    }
-
     public List<ChartCasualtiesPerDay> getCasualtiesPerDayData(TrafficAccidentInfo params) {
         return accidentMapper.getCasualtiesPerDayData(params);
     }
