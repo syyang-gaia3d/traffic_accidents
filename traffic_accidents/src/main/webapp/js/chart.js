@@ -1,5 +1,4 @@
 const LABELS = {
-    injuries : ['경상', '중상', '사망', '부상신고'],
     casualties : ['사망', '중상', '경상'],
     accident : ['건널목', '차대차', '차대사람', '차량단독', '철길건널목'],
     casualty : ['사망', '중상', '경상']
@@ -14,10 +13,10 @@ function createChart(chartType, id, originData) {
         type: chartType,
         data: data,
         options: {
-            responsive: true,
+            responsive: false,
             plugins: {
                 legend: {
-                    position: 'top',
+                    position: 'bottom',
                 },
             }
         }
@@ -33,24 +32,6 @@ function createChart(chartType, id, originData) {
 
 function makeData(id, originData) {
     let data = {};
-
-    if(id == 'injuries') {
-        let datasets = [];
-
-        // for(var i = 0; i < originData.length; i+3) {
-        //     let dataset = {
-        //         label: originData[i].occuDate,
-        //         backgroundColor: 'rgb(255, 99, 132)',
-        //         borderColor: 'rgb(255, 99, 132)',
-        //         data: [originData[i].count, originData[i+1].count, originData[i+2].count, originData[i+3].count]
-        //     };
-        //     datasets.push(dataset);
-        // }
-        data = {
-            labels: LABELS[id],
-            datasets: datasets
-        };
-    }
 
     if(id == 'casualties') {
         let datasets = [];

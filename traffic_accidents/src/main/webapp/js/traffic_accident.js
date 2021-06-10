@@ -69,6 +69,7 @@ $(document).ready(() => {
         $(this).toggleClass('on');
 
         if($(this).hasClass('on')) {
+            // showHideSpinner(true, $('#wrap'));
             initMap.makeClusters(50, 'traffic_accident');
         } else {
             map.removeLayer(initMap.getLayerById('cluster'));
@@ -159,28 +160,27 @@ $(document).ready(() => {
 
             const id = this.id;
             const graphType = $(this).data('graph');
-            const params = $('#searchForm').serializeObject();
+            const param = $('#searchForm').serializeObject();
+            const $startDate = $(this).parents('ul.sectionHeader').find('input[name="startDate"]');
+            const $endDate = $(this).parents('ul.sectionHeader').find('input[name="endDate"]');
 
-            let data = {};
-            // 그래프 요청 함수 ajax
-            $.ajax({
-                url: '/graph/' + id,
-                type: 'GET',
-                headers: {'X-Requested-With': 'XMLHttpRequest'},
-                data: params,
-                datatype: 'json',
-                success: (res) => {
-                    data = res.data;
+            if(!$startDate.val() || !$endDate.val()) {
+                alert('기간을 설정해주십시오.');
+                $(this).removeClass('on');
+                return false;
+            }
 
-                    // console.log(data);
+            if(!validateDateObject($startDate) || !validateDateObject($endDate)) {
+                alert('날짜 형식이 잘못되었습니다.');
+                $(this).removeClass('on');
+                return false;
+            }
 
-                    // 그래프 그리기 - 각 그래프마다 data, color, chart를 따로 해야함
-                    chart = createChart(graphType, id, data);
-                },
-                error: (request, status, error) =>{
-                    ajaxErrorHandler(request);
-                }
-            });
+            param.startDate = $startDate.val();
+            param.endDate = $endDate.val();
+
+            showHideSpinner(true, $('#graphLayerWrap div.layerContents'));
+            requestGraph(id, graphType, param);
         }
     });
 
@@ -216,7 +216,7 @@ $(document).ready(() => {
     /*********** click, onchange 등 초기 바인딩 셋팅 ***********/
 
     // 검색
-    const searchAccidentList = function(searchCondition, orderBy) {
+    const searchAccidentList = (searchCondition, orderBy) => {
         const searchParams = searchCondition? searchCondition : $('#searchForm').serializeObject();
         var queryString = setQueryString(searchParams);
         console.log(queryString);
@@ -281,6 +281,8 @@ $(document).ready(() => {
 
                 setAccidentList(table, list);
                 makePagination(searchParams, res.totalCount);
+                // totalCount 표시
+                $mapWrap.find('#totalCount').text(res.totalCount);
                 // 지도에 point
                 initMap.getAccidentLayer('traffic_accident', true, queryString);
             },
@@ -291,7 +293,7 @@ $(document).ready(() => {
     }
 
     // 페이징
-    function makePagination(searchCondition, totalCount) {
+    const makePagination = (searchCondition, totalCount) => {
         const paginationDiv = $('#searchLayer').find('.pagination');
 
         if (searchCondition.page != 1) {
@@ -309,7 +311,7 @@ $(document).ready(() => {
     }
 
     // 상세
-    const showAccidentInfo = function(objtId) {
+    const showAccidentInfo = (objtId) => {
         $.ajax({
             url: '/' + objtId,
             type: 'GET',
@@ -322,6 +324,26 @@ $(document).ready(() => {
                 initMap.flyToPoint(info.geom);
             },
             error: (request, status, error) => {
+                ajaxErrorHandler(request);
+            }
+        });
+    }
+
+    // 그래프 요청 함수 ajax
+    const requestGraph = (id, graphType, params) => {
+        $.ajax({
+            url: '/graph/' + id,
+            type: 'GET',
+            headers: {'X-Requested-With': 'XMLHttpRequest'},
+            data: params,
+            datatype: 'json',
+            success: (res) => {
+                let data = res.data;
+
+                chart = createChart(graphType, id, data);
+                showHideSpinner(false, $('#graphLayerWrap div.layerContents'));
+            },
+            error: (request, status, error) =>{
                 ajaxErrorHandler(request);
             }
         });

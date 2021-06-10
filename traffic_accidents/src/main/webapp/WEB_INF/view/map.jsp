@@ -13,6 +13,9 @@
 
 <body>
 <div id="wrap">
+	<div class="spinner-modal">
+		<dialog></dialog>
+	</div>
 
 	<div id="mapWrap">
 		<div class="map" id="map"></div>
@@ -91,6 +94,7 @@
 			</div>
 
 			<div class="layers boardList" style="height: 400px;">
+				<label style="display:block; text-align:right;"><span id="totalCount">0</span>건</label>
 				<table id="accidentList">
 					<thead>
 						<th class="sort-list">사고일시</th>
@@ -151,13 +155,17 @@
 				<button type="button" class="layerClose" title="닫기">닫기</button>
 			</div>
 			<div class="layerContents">
+				<div class="spinner-modal">
+					<dialog></dialog>
+				</div>
 				<ul class="sectionHeader">
-					<button class="sectionMenu" data-graph="bar" id="injuries">일별 사고형태</button>
+					<input type="text" name="startDate" size="14" maxlength="8" class="hhi date calendar" autocomplete="off"> ~
+					<input type="text" name="endDate" size="14" maxlength="8" class="hhi date calendar" autocomplete="off">
 					<button class="sectionMenu" data-graph="bar" id="casualties">일별 사상자</button>
 					<button class="sectionMenu" data-graph="pie" id="accident">사고구분</button>
 					<button class="sectionMenu" data-graph="pie" id="casualty">사상자수</button>
 					<div>
-						<canvas id="accidentChart"></canvas>
+						<canvas id="accidentChart" width="800px" height="400px"></canvas>
 					</div>
 				</ul>
 			</div>
