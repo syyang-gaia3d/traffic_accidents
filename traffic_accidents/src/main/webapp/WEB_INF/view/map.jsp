@@ -241,6 +241,10 @@
 		<td class="address"></td>
 	</tr>
 	<tr>
+		<th>발생좌표(x, y)</th>
+		<td class="location"></td>
+	</tr>
+	<tr>
 		<th>사고종류</th>
 		<td class="category">
 			<input type="checkbox" name="drnkg" disabled> 음주운전사고

@@ -51,8 +51,8 @@ public class TrafficAccidentInfo {
     private String ctprvnCd;    // 시도코드
     private String sggCd;       // 시군구코드
     private String emdCd;       // 읍면동코드
-    private Integer x;          // x좌표
-    private Integer y;          // y좌표
+    private double x;          // x좌표
+    private double y;          // y좌표
     private String geom;    // point
 
     private String address;     // 주소
