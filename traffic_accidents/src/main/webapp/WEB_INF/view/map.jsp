@@ -241,7 +241,7 @@
 		<td class="address"></td>
 	</tr>
 	<tr>
-		<th>발생좌표(x, y)</th>
+		<th>발생좌표 (x, y)</th>
 		<td class="location"></td>
 	</tr>
 	<tr>
