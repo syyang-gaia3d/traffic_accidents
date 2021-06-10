@@ -82,3 +82,16 @@ var PAGING_FORMAT = {
 		return '';
 	}
 };
+// spinner
+function showHideSpinner(isTrue, $selector) {
+	if ($selector === undefined) {
+		return;
+	}
+
+	$selector.find('.spinner-modal')
+		.eq(0)
+		.toggle(isTrue);
+	$selector.find('.spinner-modal > dialog')
+		.eq(0)
+		.toggle(isTrue);
+}
