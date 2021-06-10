@@ -8,7 +8,6 @@ import com.exercise.traffic_accidents.dto.Cgg;
 import com.exercise.traffic_accidents.dto.ChartAccidentType;
 import com.exercise.traffic_accidents.dto.ChartCasualties;
 import com.exercise.traffic_accidents.dto.ChartCasualtiesPerDay;
-import com.exercise.traffic_accidents.dto.ChartInjTypePerDay;
 import com.exercise.traffic_accidents.dto.Emd;
 import com.exercise.traffic_accidents.dto.Policy;
 import com.exercise.traffic_accidents.dto.Sido;

@@ -5,7 +5,6 @@ import java.util.List;
 import com.exercise.traffic_accidents.dto.ChartAccidentType;
 import com.exercise.traffic_accidents.dto.ChartCasualties;
 import com.exercise.traffic_accidents.dto.ChartCasualtiesPerDay;
-import com.exercise.traffic_accidents.dto.ChartInjTypePerDay;
 import com.exercise.traffic_accidents.dto.TrafficAccidentInfo;
 
 import org.apache.ibatis.annotations.Mapper;
