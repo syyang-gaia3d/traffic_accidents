@@ -38,7 +38,7 @@ export default function InitMap(policy) {
     coordinateFormat: function(coordinate) {
         return ol.coordinate.format(coordinate, '{x}, {y}', 6);
     },
-    projection: ol.proj.get('EPSG:5187'),
+    projection: ol.proj.get('EPSG:4326'),
     target: document.getElementById('mouse-position'),
     undefinedHTML: ' '
   });
