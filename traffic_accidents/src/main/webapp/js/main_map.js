@@ -82,6 +82,26 @@ export default function InitMap(policy) {
   layers.push(osmLayer);
 
   // 시도|시군구|읍면동 레이어
+  var baseLayerEmd = new ol.layer.Tile({
+    id : layerInitEmd,
+    visible : layerInitEmdVisible,
+    source : new ol.source.TileWMS({
+      url: geoserverDataUrl + '/' + geoserverDataWorkspace + '/wms',
+      params: {
+        'VERSION' : '1.1.1',
+        tiled: true,
+        // CQL_FILTER: queryString,
+        srs: coordinate,
+        layers: [geoserverDataWorkspace + ":" + 'emd'],
+        // env: env,
+        // STYLES : [geoserverDataWorkspace + "_" + geometryType]
+      },
+      crossOrigin: 'anonymous'
+    })
+  });
+
+  layers.push(baseLayerEmd);
+
   var baseLayerSido = new ol.layer.Tile({
     id : layerInitSido,
     visible : layerInitSidoVisible,
@@ -121,26 +141,6 @@ export default function InitMap(policy) {
   });
 
   layers.push(baseLayerCgg);
-
-  var baseLayerEmd = new ol.layer.Tile({
-    id : layerInitEmd,
-    visible : layerInitEmdVisible,
-    source : new ol.source.TileWMS({
-      url: geoserverDataUrl + '/' + geoserverDataWorkspace + '/wms',
-      params: {
-        'VERSION' : '1.1.1',
-        tiled: true,
-        // CQL_FILTER: queryString,
-        srs: coordinate,
-        layers: [geoserverDataWorkspace + ":" + 'emd'],
-        // env: env,
-        // STYLES : [geoserverDataWorkspace + "_" + geometryType]
-      },
-        crossOrigin: 'anonymous'
-    })
-  });
-
-  layers.push(baseLayerEmd);
 
 	// 거리 측정 벡터 레이어
 	const measureLayer = new ol.layer.Vector({
@@ -563,7 +563,7 @@ export default function InitMap(policy) {
           if(!style) {
             style = new ol.style.Style({
               image: new ol.style.Circle({
-                radius: 20,
+                radius: setRadiusInCluster(size), // 일종의 범례처럼 일정하게 크기조절할 함수 만들기
                 stroke: new ol.style.Stroke({
                   color: '#ffffff'
                 }),
@@ -587,5 +587,21 @@ export default function InitMap(policy) {
 
       map.addLayer(clusters);
     }
+  }
+}
+
+function setRadiusInCluster(size) {
+  if(size < 10) {
+    return 10;
+  } else if(size < 100) {
+    return 20;
+  } else if(size < 1000) {
+    return 30;
+  } else if(size < 10000) {
+    return 40;
+  } else if(size < 100000) {
+    return 50;
+  } else {
+    return 60;
   }
 }
