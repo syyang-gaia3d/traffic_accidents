@@ -76,29 +76,33 @@ $(document).ready(() => {
     });
 
     // 필터 & 검색 동기화
-    $mapWrap.find('input[name="accidentTypes"]').on('change', function() {
+    $mapWrap.find('#searchForm').find('input[name="accidentTypes"]').on('change', function() {
         const value = this.value;
 
         if($(this).is(':checked')) {
             $mapWrap.find('input[value="' + value + '"]').prop('checked', true);
+            $mapWrap.find('#onOffFilter').find('input[value="' + value + '"]').prop('disabled', false);
         } else {
             $mapWrap.find('input[value="' + value + '"]').prop('checked', false);
+            $mapWrap.find('#onOffFilter').find('input[value="' + value + '"]').prop('disabled', true);
         }
     });
 
-    $mapWrap.find('input[name="category"]').on('change', function() {
+    $mapWrap.find('#searchForm').find('input[name="category"]').on('change', function() {
         const value = this.value;
 
         if($(this).is(':checked')) {
             $mapWrap.find('input[value="' + value + '"]').prop('checked', true);
+            $mapWrap.find('#onOffFilter').find('input[value="' + value + '"]').prop('disabled', false);
         } else {
             $mapWrap.find('input[value="' + value + '"]').prop('checked', false);
+            $mapWrap.find('#onOffFilter').find('input[value="' + value + '"]').prop('disabled', true);
         }
     });
 
     // filtering
     $mapWrap.find('#onOffFilter').find('input[type="checkbox"]').on('change', function() {
-        let param = {};
+        let param = $('#searchForm').serializeObject();
         let accidentTypes = [];
         let category = [];
 

@@ -130,10 +130,28 @@
 			</div>
 		</div>
 
+		<div class="layersContain" style="left:125px" id="onOffFilter">
+			<div class="layers">
+				<ul>
+					<label><b>사고구분</b></label>
+					<li><input type="checkbox" name="accidentTypes" value="건널목" disabled="true"> 건널목</li>
+					<li><input type="checkbox" name="accidentTypes" value="차대차" disabled="true"> 차대차</li>
+					<li><input type="checkbox" name="accidentTypes" value="차대사람" disabled="true"> 차대사람</li>
+					<li><input type="checkbox" name="accidentTypes" value="차량단독" disabled="true"> 차량단독</li>
+					<li><input type="checkbox" name="accidentTypes" value="철길건널목" disabled="true"> 철길건널목</li>
+					<br> <label><b>사고종류</b></label>
+					<li><input type="checkbox" name="category" value="drnkg" disabled="true"> 음주운전</li>
+					<li><input type="checkbox" name="category" value="kid" disabled="true"> 어린이</li>
+					<li><input type="checkbox" name="category" value="odsn" disabled="true"> 노인</li>
+					<li><input type="checkbox" name="category" value="wlkg" disabled="true"> 보행자</li>
+				</ul>
+			</div>
+		</div>
+
 		<!-- //LAYERSWRAP  -->
 
 		<!-- SETUP -->
-		<div class="setupNav">
+		<%-- <div class="setupNav">
 			사고구분 :
 			<input type="checkbox"> 건널목
 			<input type="checkbox"> 차대차
@@ -146,7 +164,7 @@
 			<input type="checkbox"> 어린이
 			<input type="checkbox"> 노인
 			<input type="checkbox"> 보행자
-		</div>
+		</div> --%>
 
 		<!-- 그래프 -->
 		<div class="layerWrap" style="top: 50px; left: 400px; display:none;" id="graphLayerWrap">
