@@ -68,8 +68,8 @@
                 </foreach>
             </if>
             <if test="category != null and category.size > 0">
-                <foreach collection="category" item="category" open="" separator="" close="">
-                    AND ${category} IS NOT NULL
+                <foreach collection="category" item="category" open="AND (" separator="OR" close=")">
+                    ${category} IS NOT NULL
                 </foreach>
             </if>
         </where>

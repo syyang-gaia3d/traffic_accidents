@@ -470,9 +470,17 @@ function setQueryString(params) {
 
     if(params['category'] != null) {
         if(typeof params['category'] == 'object') {
+            const length = params['category'].length;
+
             for(var i in params['category']) {
                 let category = params['category'][i];
-                queryString += ' AND ' + category + ' IS NOT NULL';
+                if(i == 0) {
+                    queryString += ' AND (' + category + ' IS NOT NULL';
+                } else if(i == length-1) {
+                    queryString += ' OR ' + category + ' IS NOT NULL)';
+                } else {
+                    queryString += ' OR ' + category + ' IS NOT NULL';
+                }
             }
         } else {
             queryString += ' AND ' + params['category'] + ' IS NOT NULL';
