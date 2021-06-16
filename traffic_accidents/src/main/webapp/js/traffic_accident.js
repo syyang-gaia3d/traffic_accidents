@@ -64,6 +64,68 @@ $(document).ready(() => {
         controlLayerVisible(layerId, checked);
     });
 
+    // filter on/off
+    $mapWrap.find('#filter').click(function() {
+        $(this).toggleClass('on');
+
+        if($(this).hasClass('on')) {
+            $mapWrap.find('#onOffFilter').addClass('on');
+        } else {
+            $mapWrap.find('#onOffFilter').removeClass('on');
+        }
+    });
+
+    // 필터 & 검색 동기화
+    $mapWrap.find('input[name="accidentTypes"]').on('change', function() {
+        const value = this.value;
+
+        if($(this).is(':checked')) {
+            $mapWrap.find('input[value="' + value + '"]').prop('checked', true);
+        } else {
+            $mapWrap.find('input[value="' + value + '"]').prop('checked', false);
+        }
+    });
+
+    $mapWrap.find('input[name="category"]').on('change', function() {
+        const value = this.value;
+
+        if($(this).is(':checked')) {
+            $mapWrap.find('input[value="' + value + '"]').prop('checked', true);
+        } else {
+            $mapWrap.find('input[value="' + value + '"]').prop('checked', false);
+        }
+    });
+
+    // filtering
+    $mapWrap.find('#onOffFilter').find('input[type="checkbox"]').on('change', function() {
+        let param = {};
+        let accidentTypes = [];
+        let category = [];
+
+        $('#onOffFilter').find('input[name="accidentTypes"]:checked').each(function() {
+            accidentTypes.push(this.value);
+        });
+
+        $('#onOffFilter').find('input[name="category"]:checked').each(function() {
+            category.push(this.value);
+        });
+
+        param.accidentTypes = accidentTypes;
+        param.category = category;
+
+        if(param.accidentTypes.length != 0 || param.category.length != 0) {
+            const query = setQueryString(param);
+
+            initMap.getAccidentLayer('traffic_accident', true, query);
+        } else {
+            const map = initMap.getMap();
+            const layer = initMap.getLayerById('traffic_accident');
+
+            map.removeLayer(layer);
+        }
+
+    });
+
     // cluster on/off
     $mapWrap.find('#cluster').click(function() {
         $(this).toggleClass('on');
@@ -456,7 +518,7 @@ function setQueryString(params) {
             queryString += ' AND sclas = \'' + params['accidentTypes'] + '\'';
         }
 
-        if(typeof params['accidentTypes'] == 'object') {
+        if(typeof params['accidentTypes'] == 'object' && params['accidentTypes'][0] != '') {
             for(var i in params['accidentTypes']) {
                 if(i == params['accidentTypes'].length-1) {
                     accidentTypes += '\'' + params['accidentTypes'][i] + '\'';
@@ -464,16 +526,25 @@ function setQueryString(params) {
                     accidentTypes += '\'' + params['accidentTypes'][i] + '\', ';
                 }
             }
-            queryString += ' AND sclas IN (' + accidentTypes + ')';
+
+            if(accidentTypes.length > 0) {
+                queryString += ' AND sclas IN (' + accidentTypes + ')';
+            }
         }
     }
 
-    if(params['category'] != null) {
-        if(typeof params['category'] == 'object') {
+    if(typeof params['category'] == 'string') {
+        queryString += ' AND ' + params['category'] + ' IS NOT NULL';
+    }
+
+    if(params['category'] != null && params['category'][0] != '') {
+        if(typeof params['category'] == 'object' && params['category'].length > 1) {
+
             const length = params['category'].length;
 
             for(var i in params['category']) {
                 let category = params['category'][i];
+
                 if(i == 0) {
                     queryString += ' AND (' + category + ' IS NOT NULL';
                 } else if(i == length-1) {
@@ -482,8 +553,6 @@ function setQueryString(params) {
                     queryString += ' OR ' + category + ' IS NOT NULL';
                 }
             }
-        } else {
-            queryString += ' AND ' + params['category'] + ' IS NOT NULL';
         }
     }
 
