@@ -3,7 +3,7 @@
 // jquery Calendar 초기화
 function initJqueryCalendar() {
 	$( ".date" ).datepicker({
-		dateFormat : "yy-mm-dd",
+		dateFormat : "yymmdd",
 		dayNames : [ "일", "월", "화", "수", "목", "금", "토" ],
 		dayNamesShort : [ "일", "월", "화", "수", "목", "금", "토" ],
 		dayNamesMin : [ "일", "월", "화", "수", "목", "금", "토" ],
