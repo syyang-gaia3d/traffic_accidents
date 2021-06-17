@@ -542,7 +542,7 @@ function setQueryString(params) {
     }
 
     if(params['category'] != null && params['category'][0] != '') {
-        if(typeof params['category'] == 'object' && params['category'].length > 1) {
+        if(typeof params['category'] == 'object') {
 
             const length = params['category'].length;
 
@@ -555,6 +555,10 @@ function setQueryString(params) {
                     queryString += ' OR ' + category + ' IS NOT NULL)';
                 } else {
                     queryString += ' OR ' + category + ' IS NOT NULL';
+                }
+
+                if(length == 1) {
+                    queryString += ')';
                 }
             }
         }
