@@ -27,7 +27,7 @@
         <ul class="layersHead">
 			<li class="on" id="layerBtn">검색</li>
 			<li id="layers">레이어</li>
-			<li id="cluster">클러스터</li>
+			<li id="filter">필터</li>
 		</ul>
 		<div class="layersContain on" id="searchLayer">
 			<div class="layers" style="">
@@ -89,6 +89,7 @@
 				<div class="btnsFlex">
 					<button type="button" class="hhiA" title="graph" id="graphBtn">그래프</button>
 					<button type="submit" class="hhiA" title="search" id="searchBtn">검색</button>
+					<button type="button" class="hhiA" title="cluster" id="cluster">클러스터</button>
 					<%-- <button type="button" class="close" title="닫기">x</button> --%>
 				</div>
 			</div>
@@ -212,12 +213,6 @@
 			</div>
 		</div>
 		<!-- //CTRLMAP  -->
-
-
-		<!-- <ul class="sectionHead">
-			<li class="sectionMenu on">공사</li>
-			<li class="sectionMenu">설비</li>
-		</ul> -->
 
 		</div>
 
