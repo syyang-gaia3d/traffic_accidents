@@ -23,6 +23,11 @@
 		<div id="drawToolTip"></div>
 		<!-- //MAP  -->
 
+
+		<div class="layersContain on" style="top:86%">
+			<img src="http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&STRICT=false&style=accident:traffic_accident">
+		</div>
+
 		<!-- LAYERS -->
         <ul class="layersHead">
 			<li class="on" id="layerBtn">검색</li>
