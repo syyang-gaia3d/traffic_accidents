@@ -119,7 +119,7 @@ $(document).ready(() => {
 
         if(param.accidentTypes.length != 0 || param.category.length != 0) {
             const query = setQueryString(param);
-
+            // console.log(query);
             initMap.getAccidentLayer('traffic_accident', true, query);
         } else {
             const map = initMap.getMap();
@@ -134,9 +134,13 @@ $(document).ready(() => {
     $mapWrap.find('#cluster').click(function() {
         $(this).toggleClass('on');
 
+        let params = setQueryString($('#searchForm').serializeObject());
         if($(this).hasClass('on')) {
-            // showHideSpinner(true, $('#wrap'));
-            initMap.makeClusters(50, 'traffic_accident');
+            showHideSpinner(true, $('#wrap'));
+            // console.log(params);
+            map.removeLayer(initMap.getLayerById('traffic_accident'));
+
+            initMap.makeClusters(100, 'traffic_accident', params);
         } else {
             map.removeLayer(initMap.getLayerById('cluster'));
         }
@@ -145,6 +149,7 @@ $(document).ready(() => {
     // 검색
     $mapWrap.find('#searchBtn').click(function(e) {
         e.preventDefault();
+        showHideSpinner(true, $('#wrap'));
         searchAccidentList(null, 'desc');
     });
 
@@ -285,7 +290,7 @@ $(document).ready(() => {
     const searchAccidentList = (searchCondition, orderBy) => {
         const searchParams = searchCondition? searchCondition : $('#searchForm').serializeObject();
         var queryString = setQueryString(searchParams);
-        console.log(queryString);
+        // console.log(queryString);
         searchParams.orderBy = orderBy;
 
         // 페이징 파라미터
@@ -351,6 +356,9 @@ $(document).ready(() => {
                 $mapWrap.find('#totalCount').text(res.totalCount);
                 // 지도에 point
                 initMap.getAccidentLayer('traffic_accident', true, queryString);
+                // cluster layer 삭제
+                map.removeLayer(initMap.getLayerById('cluster'));
+                showHideSpinner(false, $('#wrap'));
             },
             error: (request, status, error) =>{
                 ajaxErrorHandler(request);
@@ -384,10 +392,12 @@ $(document).ready(() => {
             headers: {'X-Requested-With': 'XMLHttpRequest'},
             dataType: 'json',
             success: (res) => {
-                console.log(res);
+                // console.log(res);
                 const info = res.info;
                 setAccidentInfo(info);
                 initMap.flyToPoint(info.geom);
+                initMap.clearSelectedVectorFeature();
+                initMap.getSelectedVectorFeatureByWkt(info.geom);
             },
             error: (request, status, error) => {
                 ajaxErrorHandler(request);

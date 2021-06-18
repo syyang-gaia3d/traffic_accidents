@@ -544,6 +544,7 @@ export default function InitMap(policy) {
       }).then(function(response) {
         return response.json();
       }).then(function(json) {
+        showHideSpinner(false, $('#wrap'));
         var features = new ol.format.GeoJSON().readFeatures(json);
         source.addFeatures(features);
       });
