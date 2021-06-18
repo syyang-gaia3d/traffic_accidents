@@ -232,23 +232,23 @@ $(document).ready(() => {
             const id = this.id;
             const graphType = $(this).data('graph');
             const param = $('#searchForm').serializeObject();
-            const $startDate = $(this).parents('ul.sectionHeader').find('input[name="startDate"]');
-            const $endDate = $(this).parents('ul.sectionHeader').find('input[name="endDate"]');
+            // const $startDate = $(this).parents('ul.sectionHeader').find('input[name="startDate"]');
+            // const $endDate = $(this).parents('ul.sectionHeader').find('input[name="endDate"]');
 
-            if(!$startDate.val() || !$endDate.val()) {
-                alert('기간을 설정해주십시오.');
-                $(this).removeClass('on');
-                return false;
-            }
+            // if(!$startDate.val() || !$endDate.val()) {
+            //     alert('기간을 설정해주십시오.');
+            //     $(this).removeClass('on');
+            //     return false;
+            // }
 
-            if(!validateDateObject($startDate) || !validateDateObject($endDate)) {
-                alert('날짜 형식이 잘못되었습니다.');
-                $(this).removeClass('on');
-                return false;
-            }
+            // if(!validateDateObject($startDate) || !validateDateObject($endDate)) {
+            //     alert('날짜 형식이 잘못되었습니다.');
+            //     $(this).removeClass('on');
+            //     return false;
+            // }
 
-            param.startDate = $startDate.val();
-            param.endDate = $endDate.val();
+            // param.startDate = $startDate.val();
+            // param.endDate = $endDate.val();
 
             showHideSpinner(true, $('#graphLayerWrap div.layerContents'));
             requestGraph(id, graphType, param);
