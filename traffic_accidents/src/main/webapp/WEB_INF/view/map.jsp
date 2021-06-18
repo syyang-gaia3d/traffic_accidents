@@ -47,8 +47,8 @@
 								<tr>
 									<th>발생일</th>
 									<td>
-										<input type="text" name="startDate" size="14" maxlength="8" class="hhi date calendar" autocomplete="off"> ~
-										<input type="text" name="endDate" size="14" maxlength="8" class="hhi date calendar" autocomplete="off">
+										<input type="text" name="startDate" size="14" maxlength="8" class="hhi date calendar" autocomplete="off" value="20181231"> ~
+										<input type="text" name="endDate" size="14" maxlength="8" class="hhi date calendar" autocomplete="off" value="20181231">
 									</td>
 								</tr>
 								<tr>
@@ -60,22 +60,22 @@
 									</td>
 								</tr>
 								<tr>
-									<th>사고형태</th>
+									<th>사고형태(필수)</th>
 									<td>
-										<input type="checkbox" name="injuryTypes" value="경상사고" class="hhi"> 경상
-										<input type="checkbox" name="injuryTypes" value="중상사고" class="hhi"> 중상
-										<input type="checkbox" name="injuryTypes" value="사망사고" class="hhi"> 사망
-										<input type="checkbox" name="injuryTypes" value="부상신고사고" class="hhi"> 부상신고
+										<input type="checkbox" name="injuryTypes" value="경상사고" class="hhi" checked="checked"> 경상
+										<input type="checkbox" name="injuryTypes" value="중상사고" class="hhi" checked="checked"> 중상
+										<input type="checkbox" name="injuryTypes" value="사망사고" class="hhi" checked="checked"> 사망
+										<input type="checkbox" name="injuryTypes" value="부상신고사고" class="hhi" checked="checked"> 부상신고
 									</td>
 								</tr>
 								<tr>
-									<th>사고구분</th>
+									<th>사고구분(필수)</th>
 									<td>
-										<input type="checkbox" name="accidentTypes" value="차대차" class="hhi"> 차대차
-										<input type="checkbox" name="accidentTypes" value="차대사람" class="hhi"> 차대사람
-										<input type="checkbox" name="accidentTypes" value="차량단독" class="hhi"> 차량단독<br>
-										<input type="checkbox" name="accidentTypes" value="건널목" class="hhi"> 건널목
-										<input type="checkbox" name="accidentTypes" value="철길건널목" class="hhi"> 철길건널목
+										<input type="checkbox" name="accidentTypes" value="차대차" class="hhi" checked="checked"> 차대차
+										<input type="checkbox" name="accidentTypes" value="차대사람" class="hhi" checked="checked"> 차대사람
+										<input type="checkbox" name="accidentTypes" value="차량단독" class="hhi" checked="checked"> 차량단독<br>
+										<input type="checkbox" name="accidentTypes" value="건널목" class="hhi" checked="checked"> 건널목
+										<input type="checkbox" name="accidentTypes" value="철길건널목" class="hhi" checked="checked"> 철길건널목
 									</td>
 								</tr>
 								<tr>
@@ -140,11 +140,11 @@
 			<div class="layers">
 				<ul>
 					<label><b>사고구분</b></label>
-					<li><input type="checkbox" name="accidentTypes" value="건널목" disabled="true"> 건널목</li>
-					<li><input type="checkbox" name="accidentTypes" value="차대차" disabled="true"> 차대차</li>
-					<li><input type="checkbox" name="accidentTypes" value="차대사람" disabled="true"> 차대사람</li>
-					<li><input type="checkbox" name="accidentTypes" value="차량단독" disabled="true"> 차량단독</li>
-					<li><input type="checkbox" name="accidentTypes" value="철길건널목" disabled="true"> 철길건널목</li>
+					<li><input type="checkbox" name="accidentTypes" value="건널목" checked="checked"> 건널목</li>
+					<li><input type="checkbox" name="accidentTypes" value="차대차" checked="checked"> 차대차</li>
+					<li><input type="checkbox" name="accidentTypes" value="차대사람" checked="checked"> 차대사람</li>
+					<li><input type="checkbox" name="accidentTypes" value="차량단독" checked="checked"> 차량단독</li>
+					<li><input type="checkbox" name="accidentTypes" value="철길건널목" checked="checked"> 철길건널목</li>
 					<br> <label><b>사고종류</b></label>
 					<li><input type="checkbox" name="category" value="drnkg" disabled="true"> 음주운전</li>
 					<li><input type="checkbox" name="category" value="kid" disabled="true"> 어린이</li>
@@ -218,8 +218,6 @@
 			</div>
 		</div>
 		<!-- //CTRLMAP  -->
-
-		</div>
 
 	</div>
 	<!-- //MAPWRAP  -->

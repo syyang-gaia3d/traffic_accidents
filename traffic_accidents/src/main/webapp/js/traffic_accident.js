@@ -117,7 +117,7 @@ $(document).ready(() => {
         param.accidentTypes = accidentTypes;
         param.category = category;
 
-        if(param.accidentTypes.length != 0 || param.category.length != 0) {
+        if(param.accidentTypes.length != 0) {
             const query = setQueryString(param);
             // console.log(query);
             initMap.getAccidentLayer('traffic_accident', true, query);
@@ -291,6 +291,22 @@ $(document).ready(() => {
         const searchParams = searchCondition? searchCondition : $('#searchForm').serializeObject();
         var queryString = setQueryString(searchParams);
         // console.log(queryString);
+
+        // 조회 파라미터 빈 값 체크
+        if(Object.keys(searchParams).length == 2 && searchParams.startDate == '' && searchParams.endDate == '') {
+            alert('검색할 내용을 선정하여 주십시오.');
+            showHideSpinner(false, $('#wrap'));
+            return;
+        }
+
+        // 필수값 체크
+        if(!Object.keys(searchParams).includes('injuryTypes') && !Object.keys(searchParams).includes('accidentTypes')) {
+            alert('필수 값은 반드시 선택하여야 합니다.');
+            showHideSpinner(false, $('#wrap'));
+            return;
+        }
+
+
         searchParams.orderBy = orderBy;
 
         // 페이징 파라미터
