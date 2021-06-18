@@ -496,7 +496,11 @@ export default function InitMap(policy) {
             // env: env,
             STYLES : ['traffic_accident']
           },
-            crossOrigin: 'anonymous'
+          crossOrigin: 'anonymous',
+          tileLoadFunction: function(imageTile, src) {
+            imageTile.getImage().src = src;
+            showHideSpinner(false, $('#wrap'));
+          }
         })
       });
       // 맵 생성
