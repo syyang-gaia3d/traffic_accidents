@@ -24,7 +24,7 @@
 		<!-- //MAP  -->
 
 
-		<div class="layersContain on" style="top:86%">
+		<div class="layersContain on" style="top:1%;left:95%">
 			<img src="http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&STRICT=false&style=accident:traffic_accident">
 		</div>
 
