@@ -8,6 +8,7 @@ import com.exercise.traffic_accidents.dto.Cgg;
 import com.exercise.traffic_accidents.dto.ChartAccidentType;
 import com.exercise.traffic_accidents.dto.ChartCasualties;
 import com.exercise.traffic_accidents.dto.ChartCasualtiesPerDay;
+import com.exercise.traffic_accidents.dto.ChartCasualtiesPerMonth;
 import com.exercise.traffic_accidents.dto.Emd;
 import com.exercise.traffic_accidents.dto.Policy;
 import com.exercise.traffic_accidents.dto.Sido;
@@ -118,11 +119,23 @@ public class AccidentController {
         }
     }
 
-    @GetMapping(value = "/graph/casualties")
+    @GetMapping(value = "/graph/daily")
     public ResponseEntity<?> getCasualtiesPerDayData(TrafficAccidentInfo params) {
         Map<String, Object> result = new HashMap<>();
 
         List<ChartCasualtiesPerDay> list = accidentService.getCasualtiesPerDayData(params);
+
+        // log.info("@@@@@@@@@list={}", list);
+
+        result.put("data", list);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping(value = "/graph/monthly")
+    public ResponseEntity<?> getCasualtiesPerMonthData(TrafficAccidentInfo params) {
+        Map<String, Object> result = new HashMap<>();
+
+        List<ChartCasualtiesPerMonth> list = accidentService.getCasualtiesPerMonthData(params);
 
         // log.info("@@@@@@@@@list={}", list);
 

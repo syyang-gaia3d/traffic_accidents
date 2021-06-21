@@ -1,5 +1,6 @@
 const LABELS = {
-    casualties : ['사망', '중상', '경상'],
+    daily : ['사망', '중상', '경상'],
+    monthly : ['사망', '중상', '경상'],
     accident : ['건널목', '차대차', '차대사람', '차량단독', '철길건널목'],
     casualty : ['사망', '중상', '경상']
 };
@@ -33,21 +34,82 @@ function createChart(chartType, id, originData) {
 function makeData(id, originData) {
     let data = {};
 
-    if(id == 'casualties') {
-        let datasets = [];
+    if(id == 'daily') {
+        let labels = [];
+        let death = [];
+        let swpsn = [];
+        let injpsn = [];
 
         for(var i in originData) {
-            let dataset = {
-                label: originData[i].occuDate,
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [originData[i].death, originData[i].swpsn, originData[i].injpsn]
-            };
-            datasets.push(dataset);
+            labels.push(originData[i].occuDate);
+            death.push(originData[i].death);
+            swpsn.push(originData[i].swpsn);
+            injpsn.push(originData[i].injpsn);
         }
 
+        let datasets = [
+            {
+                label: LABELS[id][0], // 사망
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: death
+            },
+            {
+                label: LABELS[id][1], // 중상
+                backgroundColor: 'rgb(0,128,128)',
+                borderColor: 'rgb(0,128,128)',
+                data: swpsn
+            },
+            {
+                label: LABELS[id][2], //경상
+                backgroundColor: 'rgb(255,255,0)',
+                borderColor: 'rgb(255,255,0)',
+                data: injpsn
+            }
+        ];
+
         data = {
-            labels: LABELS[id],
+            labels: labels,
+            datasets: datasets
+        };
+    }
+
+    if(id == 'monthly') {
+        let labels = [];
+        let death = [];
+        let swpsn = [];
+        let injpsn = [];
+
+        for(var i in originData) {
+            labels.push(originData[i].occuMt);
+            death.push(originData[i].death);
+            swpsn.push(originData[i].swpsn);
+            injpsn.push(originData[i].injpsn);
+        }
+
+        let datasets = [
+            {
+                label: LABELS[id][0], // 사망
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: death
+            },
+            {
+                label: LABELS[id][1], // 중상
+                backgroundColor: 'rgb(0,128,128)',
+                borderColor: 'rgb(0,128,128)',
+                data: swpsn
+            },
+            {
+                label: LABELS[id][2], //경상
+                backgroundColor: 'rgb(255,255,0)',
+                borderColor: 'rgb(255,255,0)',
+                data: injpsn
+            }
+        ];
+
+        data = {
+            labels: labels,
             datasets: datasets
         };
     }

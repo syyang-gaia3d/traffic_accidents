@@ -72,6 +72,9 @@
                     ${category} IS NOT NULL
                 </foreach>
             </if>
+            <if test="occuYear != null and occuYear != ''">
+                AND occu_year = #{occuYear}
+            </if>
         </where>
     </sql>
 
@@ -118,7 +121,7 @@
         FROM
             traffic_accident
         WHERE
-            ST_Intersects(geom, ST_Buffer(ST_GeomFromText(#{point}), 100))
+            ST_Intersects(geom, ST_Buffer(ST_GeomFromText(#{point}), 300))
         ORDER BY ST_Distance(geom, ST_GeomFromText(#{point})) ASC LIMIT 1
     </select>
 
@@ -129,6 +132,17 @@
             traffic_accident
         <include refid="wherePhrase"/>
         GROUP BY occu_date
+        ORDER BY occu_date
+    </select>
+
+    <select id="getCasualtiesPerMonthData" parameterType="TrafficAccidentInfo" resultType="ChartCasualtiesPerMonth">
+        SELECT
+            occu_mt, SUM(death) death, SUM(swpsn) swpsn, SUM(injpsn) injpsn
+        FROM
+            traffic_accident
+        <include refid="wherePhrase"/>
+        GROUP BY occu_mt
+        ORDER BY occu_mt
     </select>
 
     <select id="getAccidentTypeData" parameterType="TrafficAccidentInfo" resultType="ChartAccidentType">

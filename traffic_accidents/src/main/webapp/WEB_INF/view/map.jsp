@@ -183,13 +183,23 @@
 					<dialog></dialog>
 				</div>
 				<ul class="sectionHeader">
-					<input type="text" name="startDate" size="14" maxlength="8" class="hhi date calendar" autocomplete="off"> ~
-					<input type="text" name="endDate" size="14" maxlength="8" class="hhi date calendar" autocomplete="off">
-					<button class="sectionMenu" data-graph="bar" id="casualties">일별 사상자</button>
-					<button class="sectionMenu" data-graph="pie" id="accident">사고구분</button>
-					<button class="sectionMenu" data-graph="pie" id="casualty">사상자수</button>
+					<div id="inputOccuDateWrap" style="display:none;float:left;margin-bottom:10px;">
+						<input type="text" name="startDate" size="14" maxlength="8" class="hhi date calendar daily" autocomplete="off"> ~
+						<input type="text" name="endDate" size="14" maxlength="8" class="hhi date calendar daily" autocomplete="off">
+					</div>
+					<div id="radioOccuYearWrap" style="display:none;float:left;margin-bottom:10px;">
+						<input type="radio" class="monthly" name="occuYear" value="2016"> 2016
+						<input type="radio" class="monthly" name="occuYear" value="2017"> 2017
+						<input type="radio" class="monthly" name="occuYear" value="2018" checked="checked"> 2018
+					</div>
+					<div style="clear:both;margin-top:10px">
+						<button class="sectionMenu" data-graph="line" id="daily">일별 사상자</button>
+						<button class="sectionMenu" data-graph="line" id="monthly">월별 사상자</button>
+						<button class="sectionMenu" data-graph="pie" id="accident">사고구분</button>
+						<button class="sectionMenu" data-graph="pie" id="casualty">사상자수</button>
+					</div>
 					<div>
-						<canvas id="accidentChart" width="800px" height="400px"></canvas>
+						<canvas id="accidentChart" width="1200px" height="600px"></canvas>
 					</div>
 				</ul>
 			</div>

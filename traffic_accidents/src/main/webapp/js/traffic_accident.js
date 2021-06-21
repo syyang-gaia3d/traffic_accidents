@@ -213,45 +213,54 @@ $(document).ready(() => {
     $('#graphBtn').click(function() {
         $(this).toggleClass('on');
         if($(this).hasClass('on')) {
+            $('#graphLayerWrap').find('#daily').click();
             $('#graphLayerWrap').show();
         } else {
-            // 그래프 초기화 필요
+            chart.destroy();
             $('#graphLayerWrap').hide();
         }
     });
 
     // 그래프 선택
     $('#graphLayerWrap').find('button.sectionMenu').click(function() {
-        $(this).toggleClass('on');
+        $(this).addClass('on');
 
         if($(this).hasClass('on')) {
             $(this).siblings().removeClass('on');
 
-            if(chart != null) chart.destroy();
-
+            const $graphLayer = $('#graphLayerWrap');
             const id = this.id;
             const graphType = $(this).data('graph');
-            const param = $('#searchForm').serializeObject();
-            // const $startDate = $(this).parents('ul.sectionHeader').find('input[name="startDate"]');
-            // const $endDate = $(this).parents('ul.sectionHeader').find('input[name="endDate"]');
 
-            // if(!$startDate.val() || !$endDate.val()) {
-            //     alert('기간을 설정해주십시오.');
-            //     $(this).removeClass('on');
-            //     return false;
-            // }
+            if(chart != null) chart.destroy();
 
-            // if(!validateDateObject($startDate) || !validateDateObject($endDate)) {
-            //     alert('날짜 형식이 잘못되었습니다.');
-            //     $(this).removeClass('on');
-            //     return false;
-            // }
+            if(id == 'daily') {
+                const start = $('#searchForm').find('input[name="startDate"]').val();
+                const end =  $('#searchForm').find('input[name="endDate"]').val();
 
-            // param.startDate = $startDate.val();
-            // param.endDate = $endDate.val();
+                if($graphLayer.find('#inputOccuDateWrap').find('input').val() == '') {
+                    $graphLayer.find('#inputOccuDateWrap').find('input[name="startDate"]').val(start);
+                    $graphLayer.find('#inputOccuDateWrap').find('input[name="endDate"]').val(end);
+                }
+
+                $graphLayer.find('#inputOccuDateWrap').show();
+                $graphLayer.find('#radioOccuYearWrap').hide();
+            } else if(id == 'monthly') {
+                $graphLayer.find('#inputOccuDateWrap').hide();
+                $graphLayer.find('#radioOccuYearWrap').show();
+            } else {
+                $graphLayer.find('#inputOccuDateWrap').hide();
+                $graphLayer.find('#radioOccuYearWrap').hide();
+            }
+
+            const param = setGraphParams(id);
+
+            // console.log(param);
 
             showHideSpinner(true, $('#graphLayerWrap div.layerContents'));
             requestGraph(id, graphType, param);
+        } else {
+            chart.destroy();
         }
     });
 
@@ -499,6 +508,46 @@ function controlLayerVisible(layerId, visible) {
     if(targetLayer != null) {
         targetLayer.setVisible(visible);
     }
+}
+
+// graph parameter setting
+function setGraphParams(graphId) {
+    const param = $('#searchForm').serializeObject();
+
+    if(graphId == 'daily') {
+        const $startDate = $('#graphLayerWrap').find('.daily[name="startDate"]');
+        const $endDate = $('#graphLayerWrap').find('.daily[name="endDate"]');
+
+        // if(!$startDate.val() || !$endDate.val()) {
+        //     alert('기간을 설정해주십시오.');
+        //     $(this).removeClass('on');
+        //     return false;
+        // }
+
+        if(!validateDateObject($startDate) || !validateDateObject($endDate)) {
+            alert('날짜 형식이 잘못되었습니다.');
+            $(this).removeClass('on');
+            return false;
+        }
+        param.startDate = $startDate.val();
+        param.endDate = $endDate.val();
+
+        return param;
+
+    } else if (graphId == 'monthly') {
+        param.startDate = '';
+        param.endDate = '';
+        param.occuYear = $('#radioOccuYearWrap').find('input[name="occuYear"]:checked').val();
+
+        return param;
+
+    } else {
+        param.startDate = '';
+        param.endDate = '';
+        return param;
+    }
+
+
 }
 
 // traffic_accident cql filter

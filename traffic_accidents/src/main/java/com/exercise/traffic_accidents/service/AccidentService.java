@@ -5,6 +5,7 @@ import java.util.List;
 import com.exercise.traffic_accidents.dto.ChartAccidentType;
 import com.exercise.traffic_accidents.dto.ChartCasualties;
 import com.exercise.traffic_accidents.dto.ChartCasualtiesPerDay;
+import com.exercise.traffic_accidents.dto.ChartCasualtiesPerMonth;
 import com.exercise.traffic_accidents.dto.TrafficAccidentInfo;
 import com.exercise.traffic_accidents.mapper.AccidentMapper;
 
@@ -35,6 +36,10 @@ public class AccidentService {
 
     public List<ChartCasualtiesPerDay> getCasualtiesPerDayData(TrafficAccidentInfo params) {
         return accidentMapper.getCasualtiesPerDayData(params);
+    }
+
+    public List<ChartCasualtiesPerMonth> getCasualtiesPerMonthData(TrafficAccidentInfo params) {
+        return accidentMapper.getCasualtiesPerMonthData(params);
     }
 
     public List<ChartAccidentType> getAccidentTypeData(TrafficAccidentInfo params) {
