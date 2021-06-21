@@ -41,7 +41,7 @@ function makeData(id, originData) {
         let injpsn = [];
 
         for(var i in originData) {
-            labels.push(originData[i].occuDate);
+            labels.push(originData[i].occuDate.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3'));
             death.push(originData[i].death);
             swpsn.push(originData[i].swpsn);
             injpsn.push(originData[i].injpsn);

@@ -328,6 +328,9 @@ $(document).ready(() => {
         searchParams.size = size;
         searchParams.offset = offset;
 
+        searchParams.startDate = searchParams.startDate.replace(/-/gi, '');
+        searchParams.endDate = searchParams.endDate.replace(/-/gi, '');
+
         //validate
         const $startDate = $('#searchForm').find('input[name="startDate"]');
         const $endDate = $('#searchForm').find('input[name="endDate"]');
@@ -529,8 +532,8 @@ function setGraphParams(graphId) {
             $(this).removeClass('on');
             return false;
         }
-        param.startDate = $startDate.val();
-        param.endDate = $endDate.val();
+        param.startDate = $startDate.val().replace(/-/gi, '');
+        param.endDate = $endDate.val().replace(/-/gi, '');
 
         return param;
 
@@ -554,55 +557,55 @@ function setGraphParams(graphId) {
 function setQueryString(params) {
     let queryString = '';
 
-    if(params['isTimeSlot']) {
-        if(params['startDate'] && params['endDate']) {
-            queryString += ' AND occu_date >= \'' + params['startDate'] + '\'';
-            queryString += ' AND occu_date <= \'' + params['endDate'] + '\'';
+    if(params.isTimeSlot) {
+        if(params.startDate && params.endDate) {
+            queryString += ' AND occu_date >= \'' + params.startDate.replace(/-/gi, '') + '\'';
+            queryString += ' AND occu_date <= \'' + params.endDate.replace(/-/gi, '') + '\'';
         }
-        if(params['startTime'] && params['endTime']) {
-            queryString += ' AND occu_tm >= \'' + params['startTime'] + '\'';
-            queryString += ' AND occu_tm <= \'' + params['endTime'] + '\'';
+        if(params.startTime && params.endTime) {
+            queryString += ' AND occu_tm >= \'' + params.startTime + '\'';
+            queryString += ' AND occu_tm <= \'' + params.endTime + '\'';
         }
     } else {
-        if(params['startDate'] && params['endDate']) {
-            queryString += ' AND occu_date >= \'' + params['startDate'] + '\'';
-            queryString += ' AND occu_date <= \'' + params['endDate'] + '\'';
+        if(params.startDate && params.endDate) {
+            queryString += ' AND occu_date >= \'' + params.startDate.replace(/-/gi, '') + '\'';
+            queryString += ' AND occu_date <= \'' + params.endDate.replace(/-/gi, '') + '\'';
         }
-        if(params['startTime'] && params['endTime']) {
-            queryString += ' OR (occu_tm >= \'' + params['startTime'] + '\' AND occu_tm <= \'' + params['endTime'] + '\')';
+        if(params.startTime && params.endTime) {
+            queryString += ' OR (occu_tm >= \'' + params.startTime + '\' AND occu_tm <= \'' + params.endTime + '\')';
         }
     }
 
-    if(params['injuryTypes'] != null) {
+    if(params.injuryTypes != null) {
         let injuryTypes = '';
-        if(typeof params['injuryTypes'] == 'string') {
-            queryString += ' AND lclas = \'' + params['injuryTypes'] + '\'';
+        if(typeof params.injuryTypes == 'string') {
+            queryString += ' AND lclas = \'' + params.injuryTypes + '\'';
         }
 
-        if(typeof params['injuryTypes'] == 'object') {
-            for(var i in params['injuryTypes']) {
-                if(i == params['injuryTypes'].length-1) {
-                    injuryTypes += '\'' + params['injuryTypes'][i] + '\'';
+        if(typeof params.injuryTypes == 'object') {
+            for(var i in params.injuryTypes) {
+                if(i == params.injuryTypes.length-1) {
+                    injuryTypes += '\'' + params.injuryTypes[i] + '\'';
                 } else {
-                    injuryTypes += '\'' + params['injuryTypes'][i] + '\', ';
+                    injuryTypes += '\'' + params.injuryTypes[i] + '\', ';
                 }
             }
             queryString += ' AND lclas IN (' + injuryTypes + ')';
         }
     }
 
-    if(params['accidentTypes'] != null) {
+    if(params.accidentTypes != null) {
         let accidentTypes = '';
-        if(typeof params['accidentTypes'] == 'string') {
-            queryString += ' AND sclas = \'' + params['accidentTypes'] + '\'';
+        if(typeof params.accidentTypes == 'string') {
+            queryString += ' AND sclas = \'' + params.accidentTypes + '\'';
         }
 
-        if(typeof params['accidentTypes'] == 'object' && params['accidentTypes'][0] != '') {
-            for(var i in params['accidentTypes']) {
-                if(i == params['accidentTypes'].length-1) {
-                    accidentTypes += '\'' + params['accidentTypes'][i] + '\'';
+        if(typeof params.accidentTypes == 'object' && params.accidentTypes[0] != '') {
+            for(var i in params.accidentTypes) {
+                if(i == params.accidentTypes.length-1) {
+                    accidentTypes += '\'' + params.accidentTypes[i] + '\'';
                 } else {
-                    accidentTypes += '\'' + params['accidentTypes'][i] + '\', ';
+                    accidentTypes += '\'' + params.accidentTypes[i] + '\', ';
                 }
             }
 
@@ -612,17 +615,17 @@ function setQueryString(params) {
         }
     }
 
-    if(typeof params['category'] == 'string') {
-        queryString += ' AND ' + params['category'] + ' IS NOT NULL';
+    if(typeof params.category == 'string') {
+        queryString += ' AND ' + params.category + ' IS NOT NULL';
     }
 
-    if(params['category'] != null && params['category'][0] != '') {
-        if(typeof params['category'] == 'object') {
+    if(params.category != null && params.category[0] != '') {
+        if(typeof params.category == 'object') {
 
-            const length = params['category'].length;
+            const length = params.category.length;
 
-            for(var i in params['category']) {
-                let category = params['category'][i];
+            for(var i in params.category) {
+                let category = params.category[i];
 
                 if(i == 0) {
                     queryString += ' AND (' + category + ' IS NOT NULL';
@@ -644,7 +647,7 @@ function setQueryString(params) {
 
 function validateDateObject($date) {
     const date = $date.val();
-    const pattern = /^(19|20)\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$/;
+    const pattern = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
 
     if(date != '' && !pattern.test(date)) {
         return false;
