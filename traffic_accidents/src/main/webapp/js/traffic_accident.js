@@ -130,6 +130,14 @@ $(document).ready(() => {
 
     });
 
+    $mapWrap.find('#searchForm').find('input[value="nothing"]').on('change', function() {
+        if($(this).is(':checked')) {
+            $mapWrap.find('#searchForm').find('input[name="category"]:not(input[value="nothing"])').prop('disabled', true);
+        } else {
+            $mapWrap.find('#searchForm').find('input[name="category"]:not(input[value="nothing"])').prop('disabled', false);
+        }
+    });
+
     // cluster on/off
     $mapWrap.find('#cluster').click(function() {
         $(this).toggleClass('on');
@@ -615,8 +623,12 @@ function setQueryString(params) {
         }
     }
 
-    if(typeof params.category == 'string') {
+    if(typeof params.category == 'string' && params.category != 'nothing') {
         queryString += ' AND ' + params.category + ' IS NOT NULL';
+    }
+
+    if(params.category == 'nothing') {
+        queryString += 'AND drnkg IS NULL AND kid IS NULL AND odsn IS NULL AND wlkg IS NULL';
     }
 
     if(params.category != null && params.category[0] != '') {

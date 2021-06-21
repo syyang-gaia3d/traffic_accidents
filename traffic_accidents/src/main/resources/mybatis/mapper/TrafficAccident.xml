@@ -69,14 +69,16 @@
             </if>
             <if test="category != null and category.size > 0">
                 <foreach collection="category" item="category" open="AND (" separator="OR" close=")">
-                    ${category} IS NOT NULL
+                <if test="category == 'nothing'">
+                    drnkg IS NULL
+                    AND kid IS NULL
+                    AND odsn IS NULL
+                    AND wlkg IS NULL
+                </if>
+                <if test="category != 'nothing'">
+                        ${category} IS NOT NULL
+                </if>
                 </foreach>
-            </if>
-            <if test="category == null or category.size == 0">
-                AND drnkg IS NULL
-                AND kid IS NULL
-                AND odsn IS NULL
-                AND wlkg IS NULL
             </if>
             <if test="occuYear != null and occuYear != ''">
                 AND occu_year = #{occuYear}

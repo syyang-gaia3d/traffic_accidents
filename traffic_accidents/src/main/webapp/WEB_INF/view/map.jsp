@@ -85,6 +85,7 @@
 										<input type="checkbox" name="category" value="kid" class="hhi"> 어린이
 										<input type="checkbox" name="category" value="odsn" class="hhi"> 노인
 										<input type="checkbox" name="category" value="wlkg" class="hhi"> 보행자
+										<br><input type="checkbox" name="category" value="nothing" class="hhi"> 해당없음
 									</td>
 								</tr>
 							</tbody>
