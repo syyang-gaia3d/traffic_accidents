@@ -72,6 +72,12 @@
                     ${category} IS NOT NULL
                 </foreach>
             </if>
+            <if test="category == null or category.size == 0">
+                AND drnkg IS NULL
+                AND kid IS NULL
+                AND odsn IS NULL
+                AND wlkg IS NULL
+            </if>
             <if test="occuYear != null and occuYear != ''">
                 AND occu_year = #{occuYear}
             </if>
