@@ -597,16 +597,14 @@ export default function InitMap(policy) {
 
 function setRadiusInCluster(size) {
   if(size < 10) {
-    return 10;
-  } else if(size < 100) {
     return 20;
+  } else if(size < 100) {
+    return 25;
   } else if(size < 1000) {
     return 30;
   } else if(size < 10000) {
-    return 40;
-  } else if(size < 100000) {
-    return 50;
+    return 35;
   } else {
-    return 60;
+    return 40;
   }
 }
