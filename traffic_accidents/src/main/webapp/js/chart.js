@@ -15,11 +15,20 @@ function createChart(chartType, id, originData) {
         data: data,
         options: {
             responsive: false,
+            interaction: {
+                intersect: false,
+                mode:'point'
+            },
             plugins: {
                 legend: {
                     position: 'bottom',
                 },
-            }
+                tooltip: {
+                    callbacks: {
+                        footer: footer
+                    }
+                }
+            },
         }
     };
 
@@ -156,4 +165,22 @@ function makeData(id, originData) {
     }
 
     return data;
+}
+
+const footer = (tooltipItems) => {
+    let data = [];
+    let total = 0;
+    let raw = 0;
+
+    tooltipItems.forEach(function(tooltipItem) {
+        data = tooltipItem.dataset.data;
+
+        data.forEach(function(element) {
+            total += element;
+        });
+
+        raw = tooltipItem.raw;
+    });
+
+    return Math.floor((raw / total) * 100) + '%';
 }
