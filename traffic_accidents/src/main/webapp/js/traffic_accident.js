@@ -157,7 +157,6 @@ $(document).ready(() => {
     // 검색
     $mapWrap.find('#searchBtn').click(function(e) {
         e.preventDefault();
-        showHideSpinner(true, $('#wrap'));
         searchAccidentList(null, 'desc');
     });
 
@@ -312,14 +311,12 @@ $(document).ready(() => {
         // 조회 파라미터 빈 값 체크
         if(Object.keys(searchParams).length == 2 && searchParams.startDate == '' && searchParams.endDate == '') {
             alert('검색할 내용을 선정하여 주십시오.');
-            showHideSpinner(false, $('#wrap'));
             return;
         }
 
         // 필수값 체크
         if(!Object.keys(searchParams).includes('injuryTypes') && !Object.keys(searchParams).includes('accidentTypes')) {
             alert('필수 값은 반드시 선택하여야 합니다.');
-            showHideSpinner(false, $('#wrap'));
             return;
         }
 
@@ -375,6 +372,7 @@ $(document).ready(() => {
                 return false;
             }
         }
+        showHideSpinner(true, $('#wrap'));
 
         $.ajax({
             url: '/list',
