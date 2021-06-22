@@ -627,7 +627,7 @@ function setQueryString(params) {
         queryString += ' AND ' + params.category + ' IS NOT NULL';
     }
 
-    if(params.category == 'nothing') {
+    if(params.category == 'nothing' || params.category[0] == 'nothing') {
         queryString += 'AND drnkg IS NULL AND kid IS NULL AND odsn IS NULL AND wlkg IS NULL';
     }
 
@@ -638,6 +638,10 @@ function setQueryString(params) {
 
             for(var i in params.category) {
                 let category = params.category[i];
+
+                if(category == 'nothing') {
+                    break;
+                }
 
                 if(i == 0) {
                     queryString += ' AND (' + category + ' IS NOT NULL';

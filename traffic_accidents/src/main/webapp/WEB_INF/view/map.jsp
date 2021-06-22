@@ -151,6 +151,7 @@
 					<li><input type="checkbox" name="category" value="kid" disabled="true"> 어린이</li>
 					<li><input type="checkbox" name="category" value="odsn" disabled="true"> 노인</li>
 					<li><input type="checkbox" name="category" value="wlkg" disabled="true"> 보행자</li>
+					<li><input type="checkbox" name="category" value="nothing" disabled="true"> 해당없음</li>
 				</ul>
 			</div>
 		</div>
