@@ -194,8 +194,8 @@
 						<input type="radio" class="monthly" name="occuYear" value="2018" checked="checked"> 2018
 					</div>
 					<div style="clear:both;margin-top:10px">
-						<button class="sectionMenu" data-graph="line" id="daily">일별 사상자</button>
-						<button class="sectionMenu" data-graph="line" id="monthly">월별 사상자</button>
+						<button class="sectionMenu" data-graph="line" id="daily">일별 사상자 동향</button>
+						<button class="sectionMenu" data-graph="line" id="monthly">월별 사상자 동향</button>
 						<button class="sectionMenu" data-graph="pie" id="accident">사고구분</button>
 						<button class="sectionMenu" data-graph="pie" id="casualty">사상자수</button>
 					</div>
