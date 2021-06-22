@@ -623,36 +623,39 @@ function setQueryString(params) {
         }
     }
 
-    if(typeof params.category == 'string' && params.category != 'nothing') {
-        queryString += ' AND ' + params.category + ' IS NOT NULL';
-    }
+    if(params.category != null) {
 
-    if(params.category == 'nothing' || params.category[0] == 'nothing') {
-        queryString += 'AND drnkg IS NULL AND kid IS NULL AND odsn IS NULL AND wlkg IS NULL';
-    }
+        if(typeof params.category == 'string' && params.category != 'nothing') {
+            queryString += ' AND ' + params.category + ' IS NOT NULL';
+        }
 
-    if(params.category != null && params.category[0] != '') {
-        if(typeof params.category == 'object') {
+        if(params.category == 'nothing' || params.category[0] == 'nothing') {
+            queryString += 'AND drnkg IS NULL AND kid IS NULL AND odsn IS NULL AND wlkg IS NULL';
+        }
 
-            const length = params.category.length;
+        if(params.category[0] != '') {
+            if(typeof params.category == 'object') {
 
-            for(var i in params.category) {
-                let category = params.category[i];
+                const length = params.category.length;
 
-                if(category == 'nothing') {
-                    break;
-                }
+                for(var i in params.category) {
+                    let category = params.category[i];
 
-                if(i == 0) {
-                    queryString += ' AND (' + category + ' IS NOT NULL';
-                } else if(i == length-1) {
-                    queryString += ' OR ' + category + ' IS NOT NULL)';
-                } else {
-                    queryString += ' OR ' + category + ' IS NOT NULL';
-                }
+                    if(category == 'nothing') {
+                        break;
+                    }
 
-                if(length == 1) {
-                    queryString += ')';
+                    if(i == 0) {
+                        queryString += ' AND (' + category + ' IS NOT NULL';
+                    } else if(i == length-1) {
+                        queryString += ' OR ' + category + ' IS NOT NULL)';
+                    } else {
+                        queryString += ' OR ' + category + ' IS NOT NULL';
+                    }
+
+                    if(length == 1) {
+                        queryString += ')';
+                    }
                 }
             }
         }
