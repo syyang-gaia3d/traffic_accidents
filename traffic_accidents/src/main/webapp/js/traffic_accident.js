@@ -2,6 +2,11 @@ import InitMap from './main_map.js';
 
 /*********** 전역 변수 선언 ***********/
 const $mapWrap = $('#mapWrap');
+const $searchForm = $('#searchForm');
+const $searchLayer = $('#searchLayer');
+const $onOffLayer = $('#onOffLayer');
+const $onOffFilter = $('#onOffFilter');
+
 var chart = null;
 
 const initMap = new InitMap(policy);
@@ -9,12 +14,18 @@ initMap.create('map');
 
 $(document).ready(() => {
 
+    // 맵 관련 세팅
     const map = initMap.getMap();
     map.on('pointermove', (evt) => {
         if (evt.dragging) return;
 
         //그리기 이벤트
         if($('.distance').hasClass("on")) initMap.pointerMoveHandler(evt);
+    });
+
+    // div 팝업 draggable
+	$('.layerWrap').draggable({
+        handle: '.layerHead'
     });
 
     /*********** click, onchange 등 초기 바인딩 셋팅 ***********/
@@ -35,82 +46,78 @@ $(document).ready(() => {
         $(this).toggleClass('on');
 
         if($(this).hasClass('on')) {
-            $mapWrap.find('#searchLayer').addClass('on');
+            $searchLayer.addClass('on');
         } else {
-            $mapWrap.find('#searchLayer').removeClass('on');
+            $searchLayer.removeClass('on');
         }
     });
 
-    // div 팝업 draggable
-	$('.layerWrap').draggable({
-        handle: '.layerHead'
-    });
-
-    // layer on/off
     $mapWrap.find('#layers').click(function() {
         $(this).toggleClass('on');
 
         if($(this).hasClass('on')) {
-            $mapWrap.find('#onOffLayer').addClass('on');
+            $onOffLayer.addClass('on');
         } else {
-            $mapWrap.find('#onOffLayer').removeClass('on');
+            $onOffLayer.removeClass('on');
         }
     });
 
-    $mapWrap.find('#onOffLayer').find('input[name="layerId"]').click(function() {
+    $mapWrap.find('#filter').click(function() {
+        $(this).toggleClass('on');
+
+        if($(this).hasClass('on')) {
+            $onOffFilter.addClass('on');
+        } else {
+            $onOffFilter.removeClass('on');
+        }
+    });
+
+    /*********** click, onchange 등 초기 바인딩 셋팅 ***********/
+
+    // layer on/off
+    $onOffLayer.find('input[name="layerId"]').click(function() {
         const layerId = this.value;
         const checked = $(this).prop('checked');
 
         controlLayerVisible(layerId, checked);
     });
 
-    // filter on/off
-    $mapWrap.find('#filter').click(function() {
-        $(this).toggleClass('on');
-
-        if($(this).hasClass('on')) {
-            $mapWrap.find('#onOffFilter').addClass('on');
-        } else {
-            $mapWrap.find('#onOffFilter').removeClass('on');
-        }
-    });
-
     // 필터 & 검색 동기화
-    $mapWrap.find('#searchForm').find('input[name="accidentTypes"]').on('change', function() {
+    $searchForm.find('input[name="accidentTypes"]').on('change', function() {
         const value = this.value;
 
         if($(this).is(':checked')) {
             $mapWrap.find('input[value="' + value + '"]').prop('checked', true);
-            $mapWrap.find('#onOffFilter').find('input[value="' + value + '"]').prop('disabled', false);
+            $onOffFilter.find('input[value="' + value + '"]').prop('disabled', false);
         } else {
             $mapWrap.find('input[value="' + value + '"]').prop('checked', false);
-            $mapWrap.find('#onOffFilter').find('input[value="' + value + '"]').prop('disabled', true);
+            $onOffFilter.find('input[value="' + value + '"]').prop('disabled', true);
         }
     });
 
-    $mapWrap.find('#searchForm').find('input[name="category"]').on('change', function() {
+    $searchForm.find('input[name="category"]').on('change', function() {
         const value = this.value;
 
         if($(this).is(':checked')) {
             $mapWrap.find('input[value="' + value + '"]').prop('checked', true);
-            $mapWrap.find('#onOffFilter').find('input[value="' + value + '"]').prop('disabled', false);
+            $onOffFilter.find('input[value="' + value + '"]').prop('disabled', false);
         } else {
             $mapWrap.find('input[value="' + value + '"]').prop('checked', false);
-            $mapWrap.find('#onOffFilter').find('input[value="' + value + '"]').prop('disabled', true);
+            $onOffFilter.find('input[value="' + value + '"]').prop('disabled', true);
         }
     });
 
     // filtering
-    $mapWrap.find('#onOffFilter').find('input[type="checkbox"]').on('change', function() {
-        let param = $('#searchForm').serializeObject();
+    $onOffFilter.find('input[type="checkbox"]').on('change', function() {
+        let param = $searchForm.serializeObject();
         let accidentTypes = [];
         let category = [];
 
-        $('#onOffFilter').find('input[name="accidentTypes"]:checked').each(function() {
+        $onOffFilter.find('input[name="accidentTypes"]:checked').each(function() {
             accidentTypes.push(this.value);
         });
 
-        $('#onOffFilter').find('input[name="category"]:checked').each(function() {
+        $onOffFilter.find('input[name="category"]:checked').each(function() {
             category.push(this.value);
         });
 
@@ -130,7 +137,8 @@ $(document).ready(() => {
 
     });
 
-    $mapWrap.find('#searchForm').find('input[value="nothing"]').on('change', function() {
+    // 사고 종류 = 해당없음일 때
+    $searchForm.find('input[value="nothing"]').on('change', function() {
         if($(this).is(':checked')) {
             $mapWrap.find('#searchForm').find('input[name="category"]:not(input[value="nothing"])').prop('disabled', true);
         } else {
@@ -142,7 +150,7 @@ $(document).ready(() => {
     $mapWrap.find('#cluster').click(function() {
         $(this).toggleClass('on');
 
-        let params = setQueryString($('#searchForm').serializeObject());
+        let params = setQueryString($searchForm.serializeObject());
         if($(this).hasClass('on')) {
             showHideSpinner(true, $('#wrap'));
             // console.log(params);
@@ -175,7 +183,7 @@ $(document).ready(() => {
     });
 
     // 페이지 당 표시할 사고건수 수정 시
-    $mapWrap.find('#searchLayer').find('.page-size').on('change', function() {
+    $searchLayer.find('.page-size').on('change', function() {
         searchAccidentList(null, 'desc');
     });
 
@@ -242,8 +250,8 @@ $(document).ready(() => {
             if(chart != null) chart.destroy();
 
             if(id == 'daily') {
-                const start = $('#searchForm').find('input[name="startDate"]').val();
-                const end =  $('#searchForm').find('input[name="endDate"]').val();
+                const start = $searchForm.find('input[name="startDate"]').val();
+                const end =  $searchForm.find('input[name="endDate"]').val();
 
                 if($graphLayer.find('#inputOccuDateWrap').find('input').val() == '') {
                     $graphLayer.find('#inputOccuDateWrap').find('input[name="startDate"]').val(start);
@@ -300,11 +308,10 @@ $(document).ready(() => {
     $mapWrap.find('.oinfo').click(function() {
         $(this).toggleClass('on');
     });
-    /*********** click, onchange 등 초기 바인딩 셋팅 ***********/
 
     // 검색
     const searchAccidentList = (searchCondition, orderBy) => {
-        const searchParams = searchCondition? searchCondition : $('#searchForm').serializeObject();
+        const searchParams = searchCondition? searchCondition : $searchForm.serializeObject();
         var queryString = setQueryString(searchParams);
         // console.log(queryString);
 
@@ -325,7 +332,7 @@ $(document).ready(() => {
 
         // 페이징 파라미터
         let page = searchParams.page ? searchParams.page : 1;
-        let size = $mapWrap.find('#searchLayer').find('.page-size').val();
+        let size = $searchLayer.find('.page-size').val();
         let offset = (page - 1) * size;
 
         searchParams.use = true;
@@ -337,10 +344,10 @@ $(document).ready(() => {
         searchParams.endDate = searchParams.endDate.replace(/-/gi, '');
 
         //validate
-        const $startDate = $('#searchForm').find('input[name="startDate"]');
-        const $endDate = $('#searchForm').find('input[name="endDate"]');
-        const $startTime = $('#searchForm').find('input[name="startTime"]');
-        const $endTime = $('#searchForm').find('input[name="endTime"]');
+        const $startDate = $searchForm.find('input[name="startDate"]');
+        const $endDate = $searchForm.find('input[name="endDate"]');
+        const $startTime = $searchForm.find('input[name="startTime"]');
+        const $endTime = $searchForm.find('input[name="endTime"]');
 
         if(!validateDateObject($startDate) || !validateDateObject($endDate)) {
             alert('날짜 형식이 잘못되었습니다.');
@@ -402,7 +409,7 @@ $(document).ready(() => {
 
     // 페이징
     const makePagination = (searchCondition, totalCount) => {
-        const paginationDiv = $('#searchLayer').find('.pagination');
+        const paginationDiv = $searchLayer.find('.pagination');
 
         if (searchCondition.page != 1) {
         return;
@@ -521,7 +528,7 @@ function controlLayerVisible(layerId, visible) {
 
 // graph parameter setting
 function setGraphParams(graphId) {
-    const param = $('#searchForm').serializeObject();
+    const param = $searchForm.serializeObject();
 
     if(graphId == 'daily') {
         const $startDate = $('#graphLayerWrap').find('.daily[name="startDate"]');
