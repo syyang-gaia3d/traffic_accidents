@@ -176,10 +176,10 @@ const footer = (tooltipItems) => {
         data = tooltipItem.dataset.data;
 
         data.forEach(function(element) {
-            total += element;
+            total += Number(element);
         });
 
-        raw = tooltipItem.raw;
+        raw = Number(tooltipItem.raw);
     });
 
     return Math.floor((raw / total) * 100) + '%';
