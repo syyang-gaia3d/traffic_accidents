@@ -102,6 +102,26 @@ export default function InitMap(policy) {
 
   layers.push(baseLayerEmd);
 
+  var baseLayerCgg = new ol.layer.Tile({
+    id : layerInitCgg,
+    visible : layerInitCggVisible,
+    source : new ol.source.TileWMS({
+      url: geoserverDataUrl + '/' + geoserverDataWorkspace + '/wms',
+      params: {
+        'VERSION' : '1.1.1',
+        tiled: true,
+        // CQL_FILTER: queryString,
+        srs: coordinate,
+        layers: [geoserverDataWorkspace + ":" + 'cgg'],
+        // env: env,
+        // STYLES : [geoserverDataWorkspace + "_" + geometryType]
+      },
+      crossOrigin: 'anonymous'
+    })
+  });
+
+  layers.push(baseLayerCgg);
+
   var baseLayerSido = new ol.layer.Tile({
     id : layerInitSido,
     visible : layerInitSidoVisible,
@@ -121,26 +141,6 @@ export default function InitMap(policy) {
   });
 
   layers.push(baseLayerSido);
-
-  var baseLayerCgg = new ol.layer.Tile({
-    id : layerInitCgg,
-    visible : layerInitCggVisible,
-    source : new ol.source.TileWMS({
-      url: geoserverDataUrl + '/' + geoserverDataWorkspace + '/wms',
-      params: {
-        'VERSION' : '1.1.1',
-        tiled: true,
-        // CQL_FILTER: queryString,
-        srs: coordinate,
-        layers: [geoserverDataWorkspace + ":" + 'cgg'],
-        // env: env,
-        // STYLES : [geoserverDataWorkspace + "_" + geometryType]
-      },
-        crossOrigin: 'anonymous'
-    })
-  });
-
-  layers.push(baseLayerCgg);
 
 	// 거리 측정 벡터 레이어
 	const measureLayer = new ol.layer.Vector({
