@@ -148,7 +148,7 @@ $(document).ready(() => {
 
     // cluster on/off
     $mapWrap.find('#cluster').click(function() {
-        $(this).toggleClass('on');
+        $(this).addClass('on');
 
         let params = setQueryString($searchForm.serializeObject());
         if($(this).hasClass('on')) {
