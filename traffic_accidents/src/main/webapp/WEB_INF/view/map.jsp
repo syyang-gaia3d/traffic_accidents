@@ -186,8 +186,8 @@
 				</div>
 				<ul class="sectionHeader">
 					<div id="inputOccuDateWrap" style="display:none;float:left;margin-bottom:10px;">
-						<input type="text" name="startDate" size="14" maxlength="8" class="hhi date calendar daily" autocomplete="off"> ~
-						<input type="text" name="endDate" size="14" maxlength="8" class="hhi date calendar daily" autocomplete="off">
+						<input type="text" name="startDate" size="14" maxlength="10" class="hhi date calendar daily" autocomplete="off"> ~
+						<input type="text" name="endDate" size="14" maxlength="10" class="hhi date calendar daily" autocomplete="off">
 					</div>
 					<div id="radioOccuYearWrap" style="display:none;float:left;margin-bottom:10px;">
 						<input type="radio" class="monthly" name="occuYear" value="2016"> 2016
