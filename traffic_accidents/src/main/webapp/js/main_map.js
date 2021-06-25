@@ -244,6 +244,7 @@ export default function InitMap(policy) {
               accidentInfoItem.find('.slightly-injured').text(info.sinjpsn);
               accidentInfoItem.find('.violation').text(info.violtCn);
               accidentInfoItem.find('.address').text(info.address);
+              accidentInfoItem.find('.location').text('(' + info.x + ', ' + info.y + ')');
               // 사고종류
               accidentInfoItem.find('input[name="drnkg"]').attr('checked', info.drnkg != null? true:false);
               accidentInfoItem.find('input[name="kid"]').attr('checked', info.kid != null? true:false);
